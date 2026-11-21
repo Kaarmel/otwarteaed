@@ -48,7 +48,7 @@ Zadanie HackNation 2026 „Misja AED – Dane na ratunek” (Ministerstwo Cyfryz
 - Bez łamania prawa (scenariusz zamkniętego AED pomijamy).
 - Karty (naklejki) są poza punktacją, ale zostają na gdzieaed.pl.
 - Całe XLSX, MD5 i CSV piszemy sami, bez bibliotek.
-- NIE kopiujemy kodu dewelopera (GreenParkPotockiego). Wzorować się wolno. Nie cytujemy go, bo to prywatny kod klienta.
+- NIE kopiujemy kodu dewelopera (prywatny kod klienta). Wzorować się wolno. Nie cytujemy go.
 - XSD nie leży w repo; test pobiera go do `.cache/` z https://dane.gov.pl/static/xml/otwarte_dane_latest.xsd.
 - Bez orła, godła, flagi i barw narodowych.
 - Domenę można później przenieść na ministerstwo.
@@ -87,7 +87,7 @@ npm test                                   # 73 testy (node --test "test/*.test.
 npm run zbierz -- --offline --bez-zapytan  # powtarzalna przebudowa danych (bez sieci)
 sh skrypty/strony.sh                       # buduje dist/otwarteaed i dist/gdzieaed
 # deploy (Cloudflare Pages):
-set -a; . ~/.config/cloudflare/otwarteaed.env; set +a; export CLOUDFLARE_ACCOUNT_ID=9e9a6eb713d934cd91b11dcbc95ec24a
+set -a; . ~/.config/cloudflare/otwarteaed.env; set +a; export CLOUDFLARE_ACCOUNT_ID=…  # identyfikator konta: w ~/.config/cloudflare/otwarteaed.env
 npx -y wrangler@4 pages deploy dist/otwarteaed --project-name otwarteaed --branch main --commit-dirty=true
 npx -y wrangler@4 pages deploy dist/gdzieaed  --project-name gdzieaed  --branch main --commit-dirty=true
 # podgląd lokalny: python3 -m http.server 8791 (port 8765 zajęty przez inny projekt)
@@ -96,6 +96,22 @@ npx -y wrangler@4 pages deploy dist/gdzieaed  --project-name gdzieaed  --branch 
 - Zrzuty 390 px robimy przez stronę z iframe, bo headless Chrome ma minimalne okno ok. 485 px.
 - Klucze Cloudflare i OVH leżą w `~/.config/`, POZA Google Drive. Nigdy nie trafiają do repo.
 - Global API Key tylko w ostateczności (użyty raz do DNS za zgodą użytkownika).
+
+## Stan 21.11, 20:40
+
+Gotowe:
+- Tabela wymagań: README, slajd 2, otwarteaed.pl/materialy.
+- Prezentacja: 18 slajdów z dowodami (XSD/MD5, formaty, Lighthouse, 390 px), slajdem o AI i kampanią.
+- Kampania dla dysponentów: `kampania/dla_dysponentow/`.
+- ZTM Gdańsk jako 6. źródło.
+- `docs/api.md`.
+- Wdrożone obie strony. `main` = `feat/hub`.
+
+Czeka na decyzję użytkownika:
+- Repo publiczne: czyste repo z jednym commitem? Historia zawiera nazwę klienta i ID konta CF.
+- Pola formularza HackTribe.
+- Aktualizacja: codzienny cron (sekret CF w GitHub) albo zmiana deklaracji `daily`.
+- Token API Warszawy.
 
 ## Do zrobienia (kolejność)
 

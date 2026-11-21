@@ -261,7 +261,7 @@ Dokładne nazwy plików i katalogów; algorytm podobieństwa nazw i progi; wygl�
 
 **Terminy:** draft o 18:00 (najpóźniej 20:00), wersja finalna do 9:00 w niedzielę 22.11 (najpóźniej 11:00).
 
-**Mechanizm dane.gov.pl, tak jak działa dziś u dewelopera (sprawdzone na żywym wdrożeniu GreenParkPotockiego):**
+**Mechanizm dane.gov.pl, tak jak działa dziś u dewelopera (sprawdzone na żywym wdrożeniu dewelopera):**
 - Dostawca wystawia pod stałym adresem plik `*.xml` w przestrzeni nazw `urn:otwarte-dane:harvester:1.13` i obok plik `*.md5` (sam skrót MD5 małymi literami; według „Przewodnika automatycznego dodawania danych XML” MC v1.02, rozdz. III pkt 3, adres to adres XML z rozszerzeniem `.md5`).
 - Dostawca składa do MC wniosek z adresem XML. Portal cyklicznie czyta `.md5`; gdy się zmieni, pobiera XML i importuje zbiory i zasoby (stałe `extIdent`).
 - Zasoby to pliki CSV z datą w nazwie (`availability=local`: portal pobiera kopię).
