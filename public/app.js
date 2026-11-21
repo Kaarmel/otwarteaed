@@ -1,6 +1,5 @@
 'use strict';
-/* global L, QRCode, availability, distanceM, walkingMinutes, closest, shard */
-const KOLOR = ['#8C979E', '#00794A', '#D98E04', '#3E4448']; // 0 godziny nieznane, 1 24/7, 2 w godzinach, 3 prywatny
+/* global L, QRCode, availability, distanceM, walkingMinutes, closest, shard, KOLOR */ // KOLOR z aed.js
 const OSM = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATR = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const PROG_PINEZEK = 14; // od tego przybliżenia pełne pinezki zamiast kropek
@@ -23,19 +22,20 @@ const ikona = (kolor, nr) => L.divIcon({className: '', html: pinezka(kolor, nr),
 const IKONY = KOLOR.map(k => ikona(k));
 
 function godzinyPl(h) {
-  if (!h) return 'Godziny nieznane';
+  if (!h) return 'Brak danych o godzinach';
   if (h.trim() === '24/7') return 'Całą dobę';
   const d = {Mo: 'pn', Tu: 'wt', We: 'śr', Th: 'czw', Fr: 'pt', Sa: 'sob', Su: 'ndz', PH: 'święta'};
   return h.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH)\b/g, x => d[x]).replace(/\boff\b/g, 'nieczynne').replace(/;\s*/g, ', ').replace(/,(?=\S)/g, ', ');
 }
 function znacznik(p, d) {
   if (p[2] === 3) return '<span class="stan">Prywatny</span>';
+  if (p[2] === 0) return '<span class="stan open">Brak danych — przyjęto: dostępny</span>';
   const a = availability(d?.opening_hours);
   return a === 'open' ? '<span class="stan open">Dostępny teraz</span>'
     : a === 'closed' ? '<span class="stan closed">Teraz zamknięty</span>' : '<span class="stan">Godziny ?</span>';
 }
 const nazwa = (p, d) => d?.name || p[4] || 'Defibrylator AED';
-const gdzie = d => (d?.location_description || d?.address || '').slice(0, 140);
+const gdzie = d => [d?.location_description, d?.address].filter(Boolean).join(' · ').slice(0, 180);
 
 /* ---------- zakładki ---------- */
 function zakladka() {
@@ -198,10 +198,10 @@ async function zbudujKarte() {
     <section class="k-adres"><small>Podaj dyspozytorowi adres:</small><div>${nazwaMiejsca ? esc(nazwaMiejsca) + '<br>' : ''}${esc(adres)}</div></section>
     <section class="k-alarm"><div class="glowny"><b>112</b><span>Numer<br>alarmowy</span></div><div><b>999</b>Pogotowie</div><div><b>998</b>Straż</div><div><b>997</b>Policja</div></section>
     <section class="k-kroki">${KROKI.map(([t, s, svg], i) => `<div><svg viewBox="0 0 64 64" fill="none" stroke="#15201B" stroke-width="3.5" stroke-linecap="round">${svg}</svg><b>${i + 1}. ${t}</b><span>${s}</span></div>`).join('')}</section>
-    <footer class="k-stopka"><div class="qr" id="k-qr"></div><div><b>Aktualna mapa AED: otwarteaed.pl</b><br>
+    <footer class="k-stopka"><div class="qr" id="k-qr"></div><div><b>Aktualna mapa AED: gdzieaed.pl</b><br>
       Karta z ${dzis}. Godziny i dostępność mogą się zmienić. Karta nie zastępuje szkolenia z pierwszej pomocy.<br>
       Dane: © współtwórcy OpenStreetMap (ODbL) i źródła miejskie.</div></footer>`;
-  new QRCode($('#k-qr'), {text: `https://otwarteaed.pl/#znajdz?lat=${miejsce.lat.toFixed(5)}&lon=${miejsce.lon.toFixed(5)}`, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M});
+  new QRCode($('#k-qr'), {text: `https://gdzieaed.pl/#znajdz?lat=${miejsce.lat.toFixed(5)}&lon=${miejsce.lon.toFixed(5)}`, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M});
 
   kartaMapa?.remove();
   kartaMapa = L.map('k-mapa', {zoomControl: false, fadeAnimation: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false, zoomSnap: 0.25});
@@ -237,11 +237,12 @@ $('#k-drukuj').onclick = () => print();
 /* ---------- dane ---------- */
 async function statystyki() {
   const ile = s => P.filter(p => p[2] === s).length;
-  const z = await fetch('dane/zrodla.json').then(r => r.json()).catch(() => ({sources: []}));
+  const z = await fetch('dane/zrodla.json').then(r => r.json()).catch(() => ({zrodla: []}));
+  const zr = (z.zrodla || []).filter(s => s.rekordow);
   const kafel = (liczba, opis, kolor) => `<div class="kafel"><b>${liczba.toLocaleString('pl-PL')}</b><span>${kolor ? `<i class="kropka ${kolor}"></i>` : ''}${opis}</span></div>`;
   $('#kafle').innerHTML = kafel(P.length, 'AED na mapie') + kafel(ile(1), 'całodobowo', 'k1') + kafel(ile(2), 'w godzinach', 'k2')
-    + kafel(ile(0), 'godziny nieznane', 'k0') + kafel(z.sources.length, 'źródeł danych');
-  $('#zrodla tbody').innerHTML = z.sources.map(s => `<tr><td><a href="${esc(s.source_url)}">${esc(s.name)}</a></td><td>${s.records.toLocaleString('pl-PL')}</td><td><a href="${esc(s.license_url)}">${esc(s.license)}</a></td></tr>`).join('');
+    + kafel(ile(0), 'brak danych, przyjęto: dostępny', 'k0') + kafel(ile(3), 'prywatne', 'k3') + kafel(zr.length, 'źródeł danych');
+  $('#zrodla tbody').innerHTML = zr.map(s => `<tr><td><a href="${esc(s.url_zrodla)}">${esc(s.nazwa)}</a></td><td>${s.rekordow.toLocaleString('pl-PL')}</td><td><a href="${esc(s.licencja_url)}">${esc(s.licencja)}</a></td></tr>`).join('');
 }
 
 /* ---------- start ---------- */

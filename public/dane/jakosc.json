@@ -1,1 +1,95 @@
-{"generated_at":"2026-11-21T12:04:32Z","records":18375,"flagged_records":12067,"flag_occurrences":14800,"map_bytes":928567,"data_as_of":"2026-11-21T15:55:45Z","flag_descriptions":{"coordinates_swapped":"Zamieniono lat/lon: tylko odwrócona para mieściła się w obwiedni Polski.","outside_poland":"Współrzędne poza przybliżoną obwiednią Polski (nie jest to test granicy państwa).","missing_coordinates":"Brak poprawnej liczbowej pary współrzędnych WGS84.","same_coordinates_different_addresses":"Identyczne współrzędne, różne niepuste adresy.","missing_opening_hours":"Brak deklaracji godzin dostępności.","restricted_access":"Źródło deklaruje access=private lub access=no.","duplicate_candidate":"Inny rekord z innego źródła w odległości poniżej 30 m; bez scalania.","outside_declared_city":"Rekord Marki ponad 50 km od centrum Marek; wymaga weryfikacji."},"by_source":{"osm":{"records":18301,"flagged_records":11993,"flag_occurrences":14663,"flags":{"duplicate_candidate":50,"missing_opening_hours":11520,"restricted_access":3093}},"krosno":{"records":21,"flagged_records":21,"flag_occurrences":42,"flags":{"duplicate_candidate":20,"missing_opening_hours":21,"same_coordinates_different_addresses":1}},"przemysl":{"records":21,"flagged_records":21,"flag_occurrences":37,"flags":{"duplicate_candidate":16,"missing_opening_hours":21}},"marki":{"records":8,"flagged_records":8,"flag_occurrences":24,"flags":{"coordinates_swapped":7,"duplicate_candidate":5,"missing_opening_hours":8,"outside_declared_city":1,"same_coordinates_different_addresses":3}},"legionowo":{"records":24,"flagged_records":24,"flag_occurrences":34,"flags":{"duplicate_candidate":10,"missing_opening_hours":24}}}}
+{
+ "data": "2026-11-21",
+ "obserwacji": 18375,
+ "aed": 18326,
+ "aed_z_kilku_zrodel": 48,
+ "aed_na_mapie": 18326,
+ "potwierdzone_przez_dysponenta": 73,
+ "z_adresem": 18022,
+ "status": {
+  "24/7": 3798,
+  "brak_danych": 8917,
+  "godziny": 2518,
+  "ograniczony": 3093
+ },
+ "srednia_ocena": 99.4,
+ "zrodla": {
+  "krosno": {
+   "nazwa": "Urząd Miasta Krosna",
+   "obserwacji": 21,
+   "flagi": {
+    "te_same_wspolrzedne_rozne_adresy": 1,
+    "brak_danych_dostepnosci": 21,
+    "adres_przyblizony": 3
+   },
+   "srednia_ocena": 98.3,
+   "komunikat": "1 rekordów ma te same współrzędne co inne miejsce — prosimy o sprawdzenie. 21 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "legionowo": {
+   "nazwa": "Urząd Miasta Legionowo",
+   "obserwacji": 24,
+   "flagi": {
+    "brak_danych_dostepnosci": 24,
+    "adres_przyblizony": 1
+   },
+   "srednia_ocena": 99.8,
+   "komunikat": "24 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "marki": {
+   "nazwa": "Urząd Miasta Marki",
+   "obserwacji": 8,
+   "flagi": {
+    "zamienione_osie": 7,
+    "brak_danych_dostepnosci": 8,
+    "te_same_wspolrzedne_rozne_adresy": 3
+   },
+   "srednia_ocena": 88.1,
+   "komunikat": "Zamienione osie współrzędnych w 7 z 8 rekordów — naprawiliśmy je automatycznie. 3 rekordów ma te same współrzędne co inne miejsce — prosimy o sprawdzenie. 8 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "osm": {
+   "nazwa": "OpenStreetMap",
+   "obserwacji": 18301,
+   "flagi": {
+    "brak_danych_dostepnosci": 8892,
+    "adres_przyblizony": 1730,
+    "brak_adresu": 268
+   },
+   "srednia_ocena": 99.4,
+   "komunikat": "8892 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "przemysl": {
+   "nazwa": "Urząd Miejski w Przemyślu",
+   "obserwacji": 21,
+   "flagi": {
+    "brak_danych_dostepnosci": 21,
+    "adres_przyblizony": 3
+   },
+   "srednia_ocena": 99.3,
+   "komunikat": "21 rekordów bez godzin dostępności — warto je dopisać."
+  }
+ },
+ "opisy_flag": {
+  "brak_wspolrzednych": "Brak poprawnych współrzędnych — rekordu nie ma na mapie.",
+  "poza_polska": "Współrzędne poza obrysem Polski.",
+  "te_same_wspolrzedne_rozne_adresy": "Te same współrzędne przy różnych adresach (prawdopodobnie kopia z szablonu).",
+  "brak_adresu": "Nie udało się ustalić adresu (PRG ani źródło).",
+  "mozliwy_duplikat": "Inny rekord z innego źródła jest bardzo blisko — możliwy duplikat, nie scalono.",
+  "adres_przyblizony": "Najbliższy punkt adresowy PRG jest dalej niż 50 m.",
+  "zamienione_osie": "Szerokość i długość były zamienione — naprawiono automatycznie.",
+  "wspolrzedne_z_prg": "Współrzędne ustalone z adresu (geokodowanie PRG).",
+  "pl1992": "Współrzędne w układzie PL-1992 przeliczone na WGS84.",
+  "brak_danych_dostepnosci": "Brak godzin i zasad dostępu — przyjęto: dostępny (informacja, nie obniża oceny)."
+ },
+ "wagi_flag": {
+  "brak_wspolrzednych": 60,
+  "poza_polska": 50,
+  "te_same_wspolrzedne_rozne_adresy": 20,
+  "brak_adresu": 10,
+  "mozliwy_duplikat": 10,
+  "adres_przyblizony": 5,
+  "zamienione_osie": 5,
+  "wspolrzedne_z_prg": 5,
+  "pl1992": 0,
+  "brak_danych_dostepnosci": 0
+ }
+}

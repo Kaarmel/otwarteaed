@@ -1,7 +1,7 @@
 // Test logiki strony: node test_aed.mjs
 import {createRequire} from 'module';
 import assert from 'assert/strict';
-const {availability: a, distanceM, walkingMinutes, closest, shard} = createRequire(import.meta.url)('./public/aed.js');
+const {availability: a, distanceM, walkingMinutes, closest, shard, KOLOR} = createRequire(import.meta.url)('./public/aed.js');
 const sob = new Date('2026-11-21T11:00:00+01:00'), pon = new Date('2026-11-23T09:00:00+01:00'), noc = new Date('2026-11-24T02:00:00+01:00');
 assert.equal(a('24/7', sob), 'open');
 assert.equal(a(null, sob), 'unknown');
@@ -18,6 +18,9 @@ assert.ok(Math.abs(distanceM(50.0413, 21.999, 50.0413, 22.0130) - 1000) < 15);
 assert.equal(walkingMinutes(350), 5);
 const pts = [[22, 50, 3, 'osm:node/1', ''], [22.001, 50, 1, 'osm:node/2', ''], [22.01, 50, 0, 'osm:node/3', '']];
 assert.deepEqual(closest(pts, 50, 22, 2).map(x => x.p[3]), ['osm:node/2', 'osm:node/3']); // prywatny pominięty
-assert.equal(shard('osm:node/477958354'), '54');
-assert.equal(shard('krosno:7'), '07');
+assert.equal(shard('PL-AED-3f9c1a7b2d'), '2d');
+assert.equal(KOLOR[0], KOLOR[1]);           // brak danych = przyjęto dostępny = zielony
+assert.equal(KOLOR[1], '#00A651');
+assert.equal(KOLOR[3], '#E8590C');           // prywatny = pomarańczowy
+assert.notEqual(KOLOR[2], KOLOR[1]);
 console.log('OK aed.js');

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Najbliższy defibrylator AED – otwarteaed.pl</title>
+<title>Najbliższy defibrylator AED – gdzieaed.pl</title>
 <meta name="description" content="Mapa 18 tys. defibrylatorów AED w Polsce. Najbliższy AED, godziny dostępności, karta do wydrukowania dla firm. W nagłym wypadku dzwoń 112.">
 <meta name="theme-color" content="#00794A">
 <link rel="icon" href="aed.svg" type="image/svg+xml">
@@ -27,7 +27,7 @@
 </svg>
 
 <header class="pasek">
-  <a class="logo" href="#znajdz" aria-label="otwarteaed.pl – strona główna"><svg><use href="#i-aed"/></svg><span>otwarteaed<b>.pl</b></span></a>
+  <a class="logo" href="#znajdz" aria-label="gdzieaed.pl – strona główna"><svg><use href="#i-aed"/></svg><span>gdzieaed<b>.pl</b></span></a>
   <nav class="zakladki" aria-label="Sekcje">
     <a href="#znajdz" data-t="znajdz"><svg><use href="#i-pin"/></svg><span>Znajdź</span></a>
     <a href="#dla-firm" data-t="dla-firm"><svg><use href="#i-druk"/></svg><span>Karta<span class="dl"> do druku</span></span></a>
@@ -40,7 +40,7 @@
 <main id="znajdz" class="widok">
   <div id="mapa" role="application" aria-label="Mapa defibrylatorów AED"></div>
   <ul class="legenda" aria-label="Legenda">
-    <li><i class="k1"></i>24/7</li><li><i class="k2"></i>W godzinach</li><li><i class="k0"></i>Godziny ?</li><li><i class="k3"></i>Prywatny</li>
+    <li><i class="k1"></i>24/7 lub brak danych</li><li><i class="k2"></i>W godzinach</li><li><i class="k3"></i>Prywatny</li>
   </ul>
   <div class="dol">
     <section id="arkusz" class="arkusz" hidden aria-live="polite"></section>
@@ -74,17 +74,17 @@
     <h1>Otwarte dane AED</h1>
     <div class="kafle" id="kafle"></div>
     <div class="pobierz">
-      <a href="dane/aed.csv" download><svg><use href="#i-plik"/></svg>CSV</a>
-      <a href="dane/aed.geojson" download><svg><use href="#i-plik"/></svg>GeoJSON</a>
+      <a href="https://otwarteaed.pl/dane/aed.csv" download><svg><use href="#i-plik"/></svg>CSV</a>
+      <a href="https://otwarteaed.pl/dane/aed.geojson" download><svg><use href="#i-plik"/></svg>GeoJSON</a>
       <a href="dane/jakosc.json" download><svg><use href="#i-plik"/></svg>Raport jakości</a>
       <a href="dane/zrodla.json" download><svg><use href="#i-plik"/></svg>Źródła</a>
     </div>
     <table class="zrodla" id="zrodla"><thead><tr><th>Źródło</th><th>AED</th><th>Licencja</th></tr></thead><tbody></tbody></table>
     <details><summary>Pola w pliku</summary>
-      <p><code>aed_id</code>, <code>name</code>, <code>lat</code>, <code>lon</code> (WGS84), <code>address</code>, <code>access</code>, <code>opening_hours</code> (składnia OSM), <code>indoor</code>, <code>location_description</code>, <code>operator</code>, <code>source</code>, <code>source_record_id</code>, <code>source_url</code>, <code>license</code>, <code>retrieved_at</code>, <code>quality_flags</code>. Brak danych to <code>null</code> albo <code>unknown</code>, nigdy domyślnie „24/7”.</p>
+      <p>Wzorcowy zakres danych otwarte AED: <code>aed_id</code>, <code>szerokosc</code>, <code>dlugosc</code> (WGS84), adres z PRG z kodem TERYT, <code>godziny</code>, <code>dostep</code>, <code>status_dostepnosci</code>, <code>potwierdzenie</code>, <code>zrodla</code>, <code>ocena_jakosci</code> i inne. Pełny opis i plik XLSX: <a href="https://otwarteaed.pl/#wzorzec">otwarteaed.pl</a>. Brak danych o godzinach oznacza: przyjęto, że AED jest dostępny.</p>
     </details>
     <details><summary>Licencja i ograniczenia</summary>
-      <p>Całość na licencji ODbL 1.0 (wymóg OpenStreetMap), źródła miejskie zachowują swoje atrybucje. Punkt na mapie to deklaracja w źródle, a nie sprawdzony w terenie, działający defibrylator.</p>
+      <p>Zbiór zintegrowany na licencji ODbL 1.0 (wymóg OpenStreetMap), źródła gmin zachowują swoje licencje i atrybucje. Adresy: PRG, GUGiK. Punkt na mapie to deklaracja w źródle, a nie sprawdzony w terenie, działający defibrylator.</p>
     </details>
   </div>
 </main>

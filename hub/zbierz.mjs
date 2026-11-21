@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Harvester otwarte AED: profile źródeł → pobranie/odczyt → normalizacja → adresy PRG → scalanie → jakość → pliki wynikowe.
 // Użycie: node hub/zbierz.mjs [--offline] [--bez-zapytan] [--wyjscie otwarteaed/dane] [--data RRRR-MM-DD] [--baza-url https://otwarteaed.pl/dane/]
-import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, dirname, isAbsolute } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +11,7 @@ import { normalizujWiersz } from "./normalizuj.mjs";
 import { uzupelnijAdresy, ATRYBUCJA_PRG } from "./adresy.mjs";
 import { scal } from "./scal.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne, raportJakosci, OPISY } from "./jakosc.mjs";
-import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe } from "./eksport.mjs";
+import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow } from "./eksport.mjs";
 import { md5 } from "./md5.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -125,6 +125,9 @@ zapisz("SHA256SUMS", pliki.map((f) => createHash("sha256").update(readFileSync(j
 if (wyj === join(ROOT, "otwarteaed/dane")) {
   writeFileSync(join(ROOT, "otwarteaed/profile.json"), JSON.stringify([...zrodlaProfile, ...szablony]));
   mkdirSync(join(ROOT, "public/dane"), { recursive: true });
-  copyFileSync(join(wyj, "aed_mapa.json"), join(ROOT, "public/dane/aed_mapa.json"));
+  for (const f of ["aed_mapa.json", "zrodla.json", "jakosc.json"]) copyFileSync(join(wyj, f), join(ROOT, "public/dane", f));
+  const katSz = join(ROOT, "public/dane/szczegoly");
+  rmSync(katSz, { recursive: true, force: true }); mkdirSync(katSz, { recursive: true });
+  for (const [k, v] of Object.entries(doSzczegolow(aed))) writeFileSync(join(katSz, k + ".json"), JSON.stringify(v));
 }
 log(`gotowe: ${obserwacje.length} obserwacji → ${aed.length} AED (${raport.aed_z_kilku_zrodel} z kilku źródeł), ${wyj}`);

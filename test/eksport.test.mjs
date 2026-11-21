@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { arkuszeWzorcowe, doCSV, doXML, doIndeksuMapy, doGeoJSON } from "../hub/eksport.mjs";
+import { arkuszeWzorcowe, doCSV, doXML, doIndeksuMapy, doGeoJSON, doSzczegolow } from "../hub/eksport.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne } from "../hub/jakosc.mjs";
 import { md5 } from "../hub/md5.mjs";
 import { writeFileSync, mkdtempSync } from "node:fs";
@@ -30,6 +30,14 @@ test("CSV: cytowanie RFC 4180, kropka dziesiętna, 6 miejsc, listy przez średni
 test("CSV: neutralizacja formuł z danych zewnętrznych, telefony i liczby bez zmian", () => {
   const csv = doCSV([{ a: '=HYPERLINK("http://zly")', b: "@SUM(1)", c: "+48 17 772 09 09", d: "-5", e: "-cmd" }], ["a", "b", "c", "d", "e"]);
   assert.equal(csv.split("\n")[1], '"\'=HYPERLINK(""http://zly"")",\'@SUM(1),+48 17 772 09 09,-5,\'-cmd');
+  const c2 = doCSV([{ a: "-1+cmd|' /C calc'!A0", b: '+1+HYPERLINK("x")', c: "+48 22 781 10 03; +48 22 228 73 77" }], ["a", "b", "c"]);
+  assert.equal(c2.split("\n")[1], "'-1+cmd|' /C calc'!A0,\"'+1+HYPERLINK(\"\"x\"\")\",+48 22 781 10 03; +48 22 228 73 77");
+});
+
+test("szczegóły dla mapy gdzieaed: podział po 2 ostatnich znakach aed_id", () => {
+  const s = doSzczegolow([{ aed_id: "PL-AED-00000000ab", szerokosc: 50.15, dlugosc: 21.96, nazwa_obiektu: "Urząd", lokalizacja_opis: "hol", ulica: "Rynek", numer: "1A", miejscowosc: "Głogów Małopolski", godziny: "24/7", operator: "Gmina", potwierdzenie: "dysponent", liczba_zrodel: 2 }]);
+  assert.deepEqual(Object.keys(s), ["ab"]);
+  assert.deepEqual(s.ab["PL-AED-00000000ab"], { name: "Urząd", location_description: "hol", address: "Rynek 1A, Głogów Małopolski", opening_hours: "24/7", operator: "Gmina", potwierdzenie: "dysponent", liczba_zrodel: 2 });
 });
 
 test("indeks mapy: kody statusu 0 brak danych, 1 24/7, 2 godziny, 3 ograniczony", () => {

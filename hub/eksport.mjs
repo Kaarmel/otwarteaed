@@ -25,7 +25,7 @@ function komorka(p, v) {
   else if (typeof v === "object") v = JSON.stringify(v);
   v = String(v);
   // Ochrona przed wstrzyknięciem formuł (dane z zewnątrz otwierane w arkuszu); "+48 …" i "-5" zostają bez zmian.
-  if (/^[=@\t\r]|^[+-](?=[^\d\s(])/.test(v)) v = "'" + v;
+  if (/^[=+\-@\t\r]/.test(v) && /[^\d\s+;,.()\/-]/.test(v)) v = "'" + v;
   return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
 }
 export function doCSV(rekordy, pola) {
@@ -84,4 +84,16 @@ export function doXMLDysponenta({ dysponent, dataDate, nazwaCSV, slug }) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<p:datasets xmlns:p="urn:otwarte-dane:harvester:1.13"><dataset status="published"><extIdent>${`aed_${slug}`.slice(0, 36)}</extIdent>${pl_en("title", `Defibrylatory AED — ${dysponent.nazwa}`, `AED defibrillators — ${dysponent.nazwa}`)}${pl_en("description",
     `Lokalizacje automatycznych defibrylatorów zewnętrznych (AED), których dysponentem jest ${dysponent.nazwa}. Dane potwierdzone przez dysponenta, w wzorcowym zakresie danych otwarte AED.`,
     `Locations of AED defibrillators operated by ${dysponent.nazwa}, confirmed by the operator, in the otwarte AED model schema.`)}<url>${x(baza)}</url><updateFrequency>irregular</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><dbOrCopyrightedLicenseChosen>${lic}</dbOrCopyrightedLicenseChosen></conditions><resources>${r}</resources><tags>${tagi}</tags>${flagi(false)}</dataset></p:datasets>\n`;
+}
+
+// Szczegóły dla mapy gdzieaed.pl: pliki szczegoly/<2 ostatnie znaki aed_id>.json, pobierane tylko dla klikniętych punktów.
+export function doSzczegolow(aed) {
+  const wynik = {};
+  for (const a of aed) {
+    if (a.szerokosc === null || a.szerokosc === undefined) continue;
+    const adres = [[a.ulica, a.numer].filter(Boolean).join(" "), a.miejscowosc].filter(Boolean).join(", ") || a.adres_zrodlowy || null;
+    (wynik[a.aed_id.slice(-2)] ||= {})[a.aed_id] = { name: a.nazwa_obiektu ?? null, location_description: a.lokalizacja_opis ?? null, address: adres,
+      opening_hours: a.godziny ?? null, operator: a.operator ?? null, potwierdzenie: a.potwierdzenie, liczba_zrodel: a.liczba_zrodel };
+  }
+  return wynik;
 }

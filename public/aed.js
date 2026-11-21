@@ -66,6 +66,8 @@ function closest(points, lat, lon, count = 3) {
 }
 
 // Plik szczegółów: ostatnie 2 cyfry identyfikatora rekordu źródła (jak w importuj.py).
-function shard(id) { return id.split(':').slice(1).join(':').split('/').pop().slice(-2).padStart(2, '0'); }
+function shard(id) { return String(id).slice(-2); } // plik szczegoly/<2 ostatnie znaki aed_id>.json
+// Kolory statusu: 0 brak danych (przyjęto: dostępny) i 1 całodobowo = zielony, 2 ograniczone godziny = żółty, 3 prywatny = pomarańczowy.
+const KOLOR = ['#00A651', '#00A651', '#E6B800', '#E8590C'];
 
-if (typeof module !== 'undefined') module.exports = {availability, distanceM, walkingMinutes, closest, shard};
+if (typeof module !== 'undefined') module.exports = {availability, distanceM, walkingMinutes, closest, shard, KOLOR};

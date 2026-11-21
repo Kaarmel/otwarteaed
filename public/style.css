@@ -2,7 +2,7 @@
 :root {
   --zielen: #00794A; --zielen-ciemna: #005A37; --czerwien: #C8102E;
   --tusz: #15201B; --papier: #FFFFFF; --mgla: #EEF3F0; --linia: #D2DCD6; --szary: #5E6B65;
-  --k0: #8C979E; --k1: #00794A; --k2: #D98E04; --k3: #3E4448;
+  --k0: #00A651; --k1: #00A651; --k2: #E6B800; --k3: #E8590C; --wylaczony: #8C979E;
   --r: 10px; --cien: 0 2px 10px rgb(21 32 27 / .18);
   color-scheme: light;
 }
@@ -68,7 +68,7 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-
 .tabliczka svg { font-size: 44px; border-radius: 9px; outline: 2px solid #fff; outline-offset: -1px; }
 .tabliczka:hover { background: var(--zielen-ciemna); }
 .tabliczka:active { transform: translateY(1px); }
-.tabliczka:disabled { background: var(--k0); cursor: not-allowed; box-shadow: none; }
+.tabliczka:disabled { background: var(--wylaczony); cursor: not-allowed; box-shadow: none; }
 .tabliczka[aria-busy="true"] span::after { content: "…"; }
 
 .szukaj { display: flex; background: var(--papier); border-radius: var(--r); box-shadow: var(--cien); overflow: hidden; }
