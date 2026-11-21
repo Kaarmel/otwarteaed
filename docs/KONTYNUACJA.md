@@ -22,14 +22,14 @@ Zadanie HackNation 2026 „Misja AED – Dane na ratunek” (Ministerstwo Cyfryz
 | Materiał | Stan | Gdzie |
 |---|---|---|
 | Tytuł i opis | gotowe | `docs/opis_projektu.md` |
-| Prezentacja ≥ 5 slajdów (zrzuty, kroki użytkownika, ograniczenia) | **do zrobienia** | zrzuty w `docs/zrzuty/` |
+| Prezentacja ≥ 5 slajdów (zrzuty, kroki użytkownika, ograniczenia) | gotowe (13 slajdów) | `docs/prezentacja.pdf` (źródło: `docs/prezentacja.html`) |
 | Prototyp | gotowe, na żywo | https://otwarteaed.pl, https://gdzieaed.pl |
 | XLSX ze wzorcowym zakresem danych | gotowe | `otwarteaed/dane/wzorcowy_zakres_danych.xlsx` |
 | Kod źródłowy | gotowe | repo, gałąź `feat/hub` (repo PRYWATNE do wysyłki) |
 | Logo JPG/PNG/PDF/SVG | gotowe | `kampania/logo/` |
 | Księga znaku PDF | gotowe | `kampania/ksiega_znaku.pdf` |
 | Oświadczenie o AI (§2 pkt 8) | gotowe | `docs/oswiadczenie_ai.md` |
-| Naklejki A6 PDF (dodatek) | do zrobienia | wzór na str. 7 księgi znaku |
+| Naklejki A6 PDF (dodatek) | gotowe (4 wzory + arkusz A4) | `kampania/naklejki.pdf` |
 
 ## Decyzje użytkownika (obowiązują)
 
