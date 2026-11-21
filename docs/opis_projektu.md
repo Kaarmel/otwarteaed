@@ -109,7 +109,7 @@ Kampania zachęca dysponentów (gminy, PSP i OSP, instytucje) do publikowania **
 
 ## Weryfikowalność
 
-- **70 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
+- **73 testy automatyczne** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
   - wykrywanie profilu;
   - CSV z Marek;
   - przeliczenie PL-1992;

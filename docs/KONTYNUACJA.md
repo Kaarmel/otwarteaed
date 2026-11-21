@@ -83,7 +83,7 @@ Zadanie HackNation 2026 „Misja AED – Dane na ratunek” (Ministerstwo Cyfryz
 ## Polecenia
 
 ```sh
-npm test                                   # 70 testów (node --test "test/*.test.mjs"), plus node --test test_aed.mjs
+npm test                                   # 73 testy (node --test "test/*.test.mjs"), plus node --test test_aed.mjs
 npm run zbierz -- --offline --bez-zapytan  # powtarzalna przebudowa danych (bez sieci)
 sh skrypty/strony.sh                       # buduje dist/otwarteaed i dist/gdzieaed
 # deploy (Cloudflare Pages):
