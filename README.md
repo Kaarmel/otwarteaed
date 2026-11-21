@@ -3,7 +3,7 @@
 Hub danych o defibrylatorach AED dla dane.gov.pl (**otwarteaed.pl**) i mapa dla mieszkańców (**gdzieaed.pl**). Opis: [docs/opis_projektu.md](docs/opis_projektu.md) · ograniczenia: [docs/ograniczenia.md](docs/ograniczenia.md) · AI: [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md).
 
 ```sh
-npm test                        # 68 testów (Node 22+, xmllint)
+npm test                        # 70 testów (Node 22+, xmllint)
 node hub/zbierz.mjs --offline   # zbiór z zamrożonych danych w wejscie/ → otwarteaed/dane/
 node hub/zbierz.mjs             # najnowsze zasoby z dane.gov.pl + nowe adresy z PRG
 npm run strony                  # dist/otwarteaed i dist/gdzieaed
