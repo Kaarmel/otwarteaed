@@ -15,7 +15,7 @@ const [profile, schemat, jakosc] = await Promise.all([
 if (jakosc) {
   const ustaw = (k, v) => document.querySelectorAll(`[data-l="${k}"]`).forEach((e) => (e.textContent = v));
   ustaw("aed", fmt.format(jakosc.aed));
-  ustaw("adres", Math.round((jakosc.z_adresem / jakosc.aed) * 100) + "%");
+  ustaw("adres", Math.round((jakosc.z_adresem / jakosc.aed_na_mapie) * 100) + "%");
   ustaw("zrodla", Object.keys(jakosc.zrodla).length);
   ustaw("scalone", fmt.format(jakosc.aed_z_kilku_zrodel));
   ustaw("data", new Date(jakosc.data).toLocaleDateString("pl-PL", { day: "numeric", month: "long", year: "numeric" }));

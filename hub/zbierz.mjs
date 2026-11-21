@@ -52,6 +52,8 @@ for (const p of zrodlaProfile) {
   if (!pobrane) { log(p.id, "brak danych — źródło pominięte w tym przebiegu"); continue; }
   const { bajty, skad } = pobrane;
   const r = await czytajPlik(bajty, skad, p.format);
+  // filtr: np. z bazy pojazdów ZTM tylko pojazdy z AED
+  if (p.filtr) r.wiersze = r.wiersze.filter((w) => String(w[p.filtr.kolumna]) === String(p.filtr.rowne));
   const [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
   const profil = { ...p, data_pobrania: DATA };
   const nowe = r.wiersze.map((wiersz, i) => normalizujWiersz(wiersz, profil, w.mapowanie, i));

@@ -101,3 +101,16 @@ test("adres źródłowy składany z kilku kolumn, id z indeksu, gdy brak kolumny
   assert.equal(o.szerokosc, 52.395198);
   assert.ok(o.przeksztalcenia.includes("przecinek→kropka"));
 });
+
+test("AED w pojeździe: bez współrzędnych to nie błąd (flaga informacyjna), wartości stałe z profilu", async () => {
+  const { normalizujWiersz } = await import("../hub/normalizuj.mjs");
+  const { ocenJakosc } = await import("../hub/jakosc.mjs");
+  const profil = { id: "ztm", potwierdzenie: "dysponent", mobilny: "tak", id_kolumna: "vehicleCode", wartosci_stale: { miejscowosc: "Gdańsk" } };
+  const o = normalizujWiersz({ vehicleCode: "1001", transportationType: "Tramwaj", carrirer: "GAiT" }, profil, { nazwa_obiektu: ["transportationType", "vehicleCode"], operator: "carrirer" }, 0);
+  assert.equal(o.obs_id, "ztm:1001");
+  assert.equal(o.nazwa_obiektu, "Tramwaj 1001");
+  assert.equal(o.miejscowosc, "Gdańsk");
+  assert.equal(o.mobilny, "tak");
+  assert.ok(o.flagi.includes("mobilny_bez_pozycji") && !o.flagi.includes("brak_wspolrzednych"));
+  assert.equal(ocenJakosc(o).ocena_jakosci, 100);
+});

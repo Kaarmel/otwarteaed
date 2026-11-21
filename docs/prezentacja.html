@@ -103,7 +103,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <tr><td>WCAG, responsywność, UX</td><td>Lighthouse dostępność 100/100 na obu stronach; widoki 390 px</td><td>10</td></tr>
       <tr><td>Zakres wykorzystania AI (regulamin, §2 pkt 8)</td><td>osobny slajd i oswiadczenie_ai.md</td><td>17</td></tr>
       <tr class="gr"><td colspan="3">2. Wyzwanie</td></tr>
-      <tr><td>Dane z wielu źródeł w jednym zbiorze; wzorcowy zakres</td><td>harvester: 5 źródeł → 18 326 AED; 39 pól; kreator dla dysponentów</td><td>4–9</td></tr>
+      <tr><td>Dane z wielu źródeł w jednym zbiorze; wzorcowy zakres</td><td>harvester: 6 źródeł → 18 604 AED, w tym 278 w pojazdach; 39 pól; kreator</td><td>4–9</td></tr>
       <tr><td>Nazwa akcji, hasło, logotyp, księga znaku; zachęta dla dysponentów</td><td>„otwarte AED”, „Każda minuta ma adres.”; odznaka, posty, list, plan z miernikami</td><td>11–13</td></tr>
     </tbody>
   </table>
@@ -116,7 +116,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
   <h1>W Polsce nie ma jednej listy defibrylatorów</h1>
   <div class="siatka" style="grid-template-columns:repeat(3,1fr);margin-bottom:72px">
     <div><div class="duza" style="font-size:120px">18 301</div><p style="margin-top:14px">punktów AED w OpenStreetMap, <b>99,4% bez adresu</b>. Dane społeczności, niepotwierdzone przez dysponentów.</p></div>
-    <div><div class="duza" style="font-size:120px">74</div><p style="margin-top:14px">rekordy od 4 gmin na dane.gov.pl, <b>każdy plik w innym układzie</b>. Nie da się ich po prostu połączyć.</p></div>
+    <div><div class="duza" style="font-size:120px">74</div><p style="margin-top:14px">rekordy od 4 gmin na dane.gov.pl, <b>każdy plik w innym układzie</b>, a do tego 278 pojazdów z AED w bazie ZTM Gdańsk i lista Warszawy dostępna tylko z tokenem.</p></div>
     <div><div class="duza" style="font-size:120px">7 z 8</div><p style="margin-top:14px">par współrzędnych w pliku Marek ma <b>zamienione osie</b>. Punkty lądują setki kilometrów od urzędu.</p></div>
   </div>
   <div class="siatka" style="grid-template-columns:repeat(4,1fr);gap:28px">
@@ -140,6 +140,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="zr"><b>Krosno</b><span>21 · CSV</span></div>
       <div class="zr"><b>Przemyśl</b><span>21 · GeoJSON</span></div>
       <div class="zr"><b>Marki</b><span>8 · CSV w kolumnie</span></div>
+      <div class="zr"><b>ZTM Gdańsk</b><span>278 pojazdów · JSON</span></div>
       <div class="zr nowe"><b>+ Twoja gmina</b><span style="color:var(--zt)">kreator</span></div>
       <p class="mal" style="margin:6px 0 0">Źródło = plik JSON z adresem (także URL z datą w nazwie albo zbiór dane.gov.pl), licencją i dopasowaniem kolumn.</p>
     </div>
@@ -159,7 +160,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="wy"><b>dane.gov.pl</b><span>XML + MD5 do automatycznego importu, CSV UTF-8 z datą w nazwie</span></div>
       <div class="wy"><b>Jury i analitycy</b><span>XLSX z arkuszami AED, Obserwacje, Źródła, Jakość, Słownik pól; GeoJSON</span></div>
       <div class="wy"><b>gdzieaed.pl</b><span>mapa, najbliższy AED, karta A4 dla firm</span></div>
-      <div class="wy" style="background:#DDF5E7"><b style="color:var(--zt)">18 375 → 18 326</b><span>obserwacji → AED · 98% z adresem PRG · 48 potwierdzonych przez kilka źródeł</span></div>
+      <div class="wy" style="background:#DDF5E7"><b style="color:var(--zt)">18 653 → 18 604</b><span>obserwacji → AED · 18 326 na mapie (98% z adresem PRG) · 278 w pojazdach · 48 potwierdzonych przez kilka źródeł</span></div>
     </div>
   </div>
   <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>4</span></div>
@@ -175,7 +176,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>Plik .md5 obok XML.</b> Portal pobiera dane ponownie tylko wtedy, gdy zmieni się suma.</li>
       <li><b>CSV UTF-8 z datą w nazwie</b> (<span class="c">aed_2026-11-21.csv</span>), stałe identyfikatory extIdent do 36 znaków, historia wersji.</li>
       <li><b>Kategoria HEAL</b>, aktualizacja codzienna, tytuły i opisy po polsku i angielsku.</li>
-      <li><b>Licencje i atrybucja źródeł</b> w warunkach zbioru. Osobny zbiór „od dysponentów” bez OSM na CC BY 4.0.</li>
+      <li><b>Licencje i atrybucja źródeł</b> w warunkach zbioru. Rekomendujemy jako główny zbiór „od dysponentów” (CC BY 4.0, bez OSM); zbiór z OSM osobno, na warunkach ODbL.</li>
       <li><b>Ten sam mechanizm automatycznego zasilania</b>, z którego od 2025 r. korzystają deweloperzy (instrukcja COI). Gmina dostaje z kreatora własny XML, MD5 i CSV.</li>
     </ul>
     <div>
@@ -199,6 +200,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <h3 style="margin-top:34px">Słowniki zamiast wolnego tekstu</h3>
       <p class="mal" style="margin-bottom:10px"><b style="color:var(--t)">status_dostepnosci:</b> <span class="kropka" style="background:var(--z)"></span>24/7 · <span class="kropka" style="background:var(--z)"></span>brak_danych · <span class="kropka" style="background:var(--y)"></span>godziny · <span class="kropka" style="background:var(--o)"></span>ograniczony</p>
       <p class="mal"><b style="color:var(--t)">potwierdzenie:</b> dysponent · spolecznosc · brak</p>
+      <p class="mal"><b style="color:var(--t)">brak_danych ≠ 24/7:</b> osobna wartość, pole godzin zostaje puste. Zielony kolor to ustalenie z mentorami MC: AED publiczny z założenia jest dostępny.</p>
       <div class="karta" style="margin-top:30px"><b style="color:var(--g)">wzorcowy_zakres_danych.xlsx</b><p class="mal" style="margin:6px 0 0">arkusze Pola, Słowniki, Szablony, Przykład (prawdziwe rekordy). Szablony do pobrania jako CSV i XLSX.</p></div>
     </div>
     <div class="siatka" style="grid-template-columns:1fr 1fr;gap:32px;align-content:start">
@@ -363,7 +365,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
         <thead><tr><th>Miernik</th><th>Dziś</th><th>Cel 12 mies.*</th></tr></thead>
         <tbody>
           <tr><td>Zbiory dysponentów o AED na dane.gov.pl</td><td><b>6</b></td><td>100 gmin i KG PSP</td></tr>
-          <tr><td>AED potwierdzone przez dysponenta</td><td><b>73</b> z 18 326</td><td>5000</td></tr>
+          <tr><td>AED potwierdzone przez dysponenta</td><td><b>351</b> z 18 604</td><td>5000</td></tr>
           <tr><td>Ocena jakości plików dysponentów</td><td><b>85–99,8</b></td><td>≥ 95 każdy</td></tr>
           <tr><td>Strony i BIP z odznaką</td><td><b>0</b></td><td>100</td></tr>
         </tbody>
@@ -392,7 +394,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       </ol>
     </div>
     <div class="persona"><h3>Ministerstwo (dane.gov.pl)</h3><p>Pobiera otwarteaed.pl/dane/dane_gov_pl.xml. Gdy zmieni się suma .md5, importuje nowe zasoby z datą w nazwie.</p></div>
-    <div class="persona"><h3>Służby ratownicze</h3><p>Dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy ratownicze mogą pobierać aed.csv lub aed.geojson z kodami TERYT (integrację trzeba uzgodnić z operatorem systemu).</p></div>
+    <div class="persona"><h3>Służby ratownicze</h3><p>Dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy (np. SWD PRM) pobierają aed.geojson z kodami TERYT pod stałym adresem, bez klucza (docs/api.md). Integrację uzgadnia się z operatorem systemu.</p></div>
     <div class="persona"><h3>Mieszkaniec i firma</h3><p>Mieszkaniec klika „Najbliższy AED” na gdzieaed.pl i dzwoni 112. Firma drukuje kartę A4 z najbliższymi AED i krokami pierwszej pomocy.</p></div>
     <div class="persona"><h3>Analityk lub jury</h3><p>Pobiera CSV albo XLSX. Każdą wartość sprawdzi w aed_obserwacje.csv, a pliki w SHA256SUMS.</p></div>
   </div>
@@ -473,7 +475,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
   <p class="k">16<b style="color:#fff">;</b> Weryfikowalność</p>
   <h1>Każdą liczbę można sprawdzić</h1>
   <div class="siatka" style="grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:60px">
-    <div><div class="duza" style="color:#fff">74</div><p style="color:#C9D6EE;margin-top:12px">testy automatyczne, także na prawdziwych plikach z dane.gov.pl</p></div>
+    <div><div class="duza" style="color:#fff">75</div><p style="color:#C9D6EE;margin-top:12px">testy automatyczne, także na prawdziwych plikach z dane.gov.pl</p></div>
     <div><div class="duza" style="color:#fff">2×</div><p style="color:#C9D6EE;margin-top:12px">ten sam wynik: dwa przebiegi dają identyczne sumy SHA256SUMS</p></div>
     <div><div class="duza" style="color:#fff">0</div><p style="color:#C9D6EE;margin-top:12px">zewnętrznych bibliotek w hubie: własny XLSX, MD5 i przeliczenie PL-1992</p></div>
     <div><div class="duza" style="color:#7FE0A8">100%</div><p style="color:#C9D6EE;margin-top:12px">rekordów z pochodzeniem: źródła, adres_zrodlo, konflikty, surowy oryginał</p></div>

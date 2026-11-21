@@ -131,8 +131,10 @@ export function normalizujWiersz(wiersz, profil, mapowanie, indeks) {
   o.dostep = mapujDostep(wartosc(wiersz, mapowanie.dostep));
   o.wewnatrz = mapujTakNie(wartosc(wiersz, mapowanie.wewnatrz));
   o.mobilny = mapowanie.mobilny ? mapujTakNie(wartosc(wiersz, mapowanie.mobilny)) : (profil.mobilny ?? "nie");
+  for (const [k, v] of Object.entries(profil.wartosci_stale || {})) o[k] ??= v;
   o.status_dostepnosci = statusDostepnosci({ godziny: o.godziny, dostep: o.dostep });
-  o.flagi = [...wsp.flagi];
+  // AED w pojeździe nie ma stałej pozycji: to nie błąd danych, tylko inna kategoria (nie trafia na mapę).
+  o.flagi = o.mobilny === "tak" ? wsp.flagi.map((f) => (f === "brak_wspolrzednych" ? "mobilny_bez_pozycji" : f)) : [...wsp.flagi];
   o.przeksztalcenia = [...wsp.przeksztalcenia];
   o.surowe = wiersz;
   return o;

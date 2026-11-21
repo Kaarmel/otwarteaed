@@ -16,9 +16,9 @@ test("zbierz offline: komplet plików, nic nie ginie, wynik powtarzalny", { time
   uruchom(a); uruchom(b);
   for (const f of ["aed.csv", "aed_2026-11-21.csv", "aed_obserwacje.csv", "aed_dysponenci.csv", "aed.geojson", "aed.xlsx", "aed_mapa.json", "jakosc.json", "zrodla.json", "dane_gov_pl.xml", "dane_gov_pl.md5", "SHA256SUMS", "wzorcowy_zakres_danych.xlsx"])
     readFileSync(join(a, f));
-  assert.equal(wiersze(join(a, "aed_obserwacje.csv")), 18375);
+  assert.equal(wiersze(join(a, "aed_obserwacje.csv")), 18375 + 278); // 278 pojazdów ZTM Gdańsk z AED
   const n = wiersze(join(a, "aed.csv"));
-  assert.ok(n > 18000 && n < 18375, String(n));
+  assert.ok(n > 18000 && n < 18653, String(n));
   assert.equal(readFileSync(join(a, "SHA256SUMS"), "utf8"), readFileSync(join(b, "SHA256SUMS"), "utf8"));
   const marki = parsujCSV(readFileSync(join(a, "aed_obserwacje.csv"), "utf8"), ",").filter((w) => w[0].startsWith("marki:") && w.join(",").includes("zamiana osi"));
   assert.equal(marki.length, 7);

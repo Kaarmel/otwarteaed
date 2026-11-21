@@ -18,6 +18,7 @@ Nie ma jednej listy defibrylatorów w Polsce.
   - Przemyśl: GeoJSON;
   - Marki: cały wiersz CSV w jednej kolumnie, 7 z 8 par współrzędnych zamienionych;
   - Legionowo: kody TERC i SIMC.
+- **ZTM w Gdańsku** w bazie pojazdów oznacza 278 autobusów i tramwajów z AED, bez stałej lokalizacji. **Warszawa** udostępnia listę tylko przez API z tokenem.
 - **Każdy wydawca robi to inaczej**, więc danych nie da się po prostu połączyć.
 
 ## Rozwiązanie
@@ -90,7 +91,7 @@ Nic nie trafia na nasz serwer.
 - **Naklejki A6** (`kampania/naklejki.pdf`): „Masz AED? Pokaż go.”, „AED jest w środku”, „Najbliższy AED”, „Ktoś upadł i nie oddycha?”.
 - **Mierniki liczy hub** przy każdym przebiegu (`zrodla.json`, `jakosc.json`):
   - liczba dysponentów publikujących dane;
-  - liczba AED potwierdzonych przez dysponenta (dziś 73 z 18 326);
+  - liczba AED potwierdzonych przez dysponenta (dziś 351 z 18 604);
   - jakość plików od dysponentów.
 - **Zasada:** zachęcamy, nie zmuszamy. Dane potwierdza dysponent, więc kampania nie zachęca do zgłaszania cudzych urządzeń. Propozycja dla PSP i OSP jest w `docs/propozycja_psp_osp.md`.
 
@@ -106,12 +107,15 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 
 | | |
 |---|---:|
-| Obserwacje z 5 źródeł | 18 375 |
-| AED po scaleniu | 18 326 |
+| Obserwacje z 6 źródeł | 18 653 |
+| AED po scaleniu | 18 604 |
+| — na mapie (stała lokalizacja) | 18 326 |
+| — w pojazdach (ZTM Gdańsk) | 278 |
 | AED potwierdzone przez kilka źródeł | 48 |
-| AED z adresem (PRG) | 18 022 (98%) |
-| Całodobowe / brak danych (przyjęto: dostępne) / ograniczone godziny / prywatne | 3798 / 8917 / 2518 / 3093 |
-| Średnia ocena jakości | 99.4 |
+| AED potwierdzone przez dysponenta | 351 |
+| AED na mapie z adresem (PRG) | 18 022 (98%) |
+| Całodobowe / brak danych (przyjęto: dostępne) / ograniczone godziny / prywatne | 3798 / 9195 / 2518 / 3093 |
+| Średnia ocena jakości | 99,4 |
 
 ## Kroki użytkowników
 
@@ -122,14 +126,14 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
   4. Pobiera CSV, XML i MD5 i wystawia je na swojej stronie (np. w BIP).
   5. Składa wniosek do MC o automatyczne pobieranie. Od tej chwili portal i hub pobierają dane same.
 - **Ministerstwo, czyli portal dane.gov.pl:** pobiera `https://otwarteaed.pl/dane/dane_gov_pl.xml`. Gdy zmieni się `.md5`, importuje nowe zasoby z datą w nazwie.
-- **Służby ratownicze:** dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy ratownicze mogą pobierać `aed.csv` lub `aed.geojson` z kodami TERYT. Integrację trzeba uzgodnić z operatorem systemu.
+- **Służby ratownicze:** dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy ratownicze mogą pobierać `aed.csv` lub `aed.geojson` z kodami TERYT pod stałymi adresami z CORS ([api.md](api.md)). Integrację trzeba uzgodnić z operatorem systemu.
 - **Mieszkaniec:** otwiera gdzieaed.pl i klika „Najbliższy AED” albo wpisuje adres, a potem idzie trasą pieszą. Dzwoni 112.
 - **Firma:** generuje na gdzieaed.pl kartę A4 z najbliższymi AED, adresem do podania dyspozytorowi i krokami pierwszej pomocy.
 - **Analityk:** pobiera CSV lub XLSX i może sprawdzić każdą wartość w `aed_obserwacje.csv` oraz sumy w `SHA256SUMS`.
 
 ## Weryfikowalność
 
-- **74 testy automatyczne** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
+- **75 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
   - wykrywanie profilu;
   - CSV z Marek;
   - przeliczenie PL-1992;

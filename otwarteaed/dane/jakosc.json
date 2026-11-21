@@ -1,14 +1,14 @@
 {
  "data": "2026-11-21",
- "obserwacji": 18375,
- "aed": 18326,
+ "obserwacji": 18653,
+ "aed": 18604,
  "aed_z_kilku_zrodel": 48,
  "aed_na_mapie": 18326,
- "potwierdzone_przez_dysponenta": 73,
+ "potwierdzone_przez_dysponenta": 351,
  "z_adresem": 18022,
  "status": {
   "24/7": 3798,
-  "brak_danych": 8917,
+  "brak_danych": 9195,
   "godziny": 2518,
   "ograniczony": 3093
  },
@@ -67,6 +67,16 @@
    },
    "srednia_ocena": 99.3,
    "komunikat": "21 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "ztm_gdansk": {
+   "nazwa": "ZTM w Gdańsku — pojazdy z AED",
+   "obserwacji": 278,
+   "flagi": {
+    "mobilny_bez_pozycji": 278,
+    "brak_danych_dostepnosci": 278
+   },
+   "srednia_ocena": 100,
+   "komunikat": "278 rekordów bez godzin dostępności — warto je dopisać."
   }
  },
  "opisy_flag": {
@@ -80,7 +90,8 @@
   "zamienione_osie": "Szerokość i długość były zamienione — naprawiono automatycznie.",
   "wspolrzedne_z_prg": "Współrzędne ustalone z adresu (geokodowanie PRG).",
   "pl1992": "Współrzędne w układzie PL-1992 przeliczone na WGS84.",
-  "brak_danych_dostepnosci": "Brak godzin i zasad dostępu — przyjęto: dostępny (informacja, nie obniża oceny)."
+  "brak_danych_dostepnosci": "Brak godzin i zasad dostępu — przyjęto: dostępny (informacja, nie obniża oceny).",
+  "mobilny_bez_pozycji": "AED w pojeździe (np. autobus, tramwaj): bez stałej lokalizacji, nie ma go na mapie (informacja, nie obniża oceny)."
  },
  "wagi_flag": {
   "daleko_od_pozostalych": 25,
@@ -93,6 +104,7 @@
   "zamienione_osie": 5,
   "wspolrzedne_z_prg": 5,
   "pl1992": 0,
-  "brak_danych_dostepnosci": 0
+  "brak_danych_dostepnosci": 0,
+  "mobilny_bez_pozycji": 0
  }
 }

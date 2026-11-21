@@ -162,6 +162,30 @@
    }
   },
   {
+   "id": "ztm_gdansk",
+   "nazwa": "ZTM w Gdańsku — pojazdy z AED",
+   "potwierdzenie": "dysponent",
+   "licencja": "CC-BY-4.0",
+   "licencja_url": "https://creativecommons.org/licenses/by/4.0/",
+   "atrybucja": "Zarząd Transportu Miejskiego w Gdańsku (dane pobrane 2026-11-21)",
+   "url_zrodla": "https://dane.gov.pl/pl/dataset/1803",
+   "data_danych": "2026-11-21",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/ztm_gdansk_pojazdy.json",
+   "sha256_wejscia": "886e715080474649273c9c284c549c7f02d6b1c1e71c41f0f32faf56f8e0e5e5",
+   "rekordow": 278,
+   "format": "json",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.588,
+   "mapowanie": {
+    "operator": "carrirer",
+    "nazwa_obiektu": [
+     "transportationType",
+     "vehicleCode"
+    ]
+   }
+  },
+  {
    "id": "prg",
    "nazwa": "PRG — punkty adresowe (GUGiK, usługa UUG)",
    "atrybucja": "Adresy: Państwowy Rejestr Granic i punkty adresowe, GUGiK",

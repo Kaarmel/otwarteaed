@@ -1,0 +1,36 @@
+{
+  "id": "ztm_gdansk",
+  "nazwa": "ZTM w Gdańsku — pojazdy z AED",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "dysponent",
+  "licencja": "CC-BY-4.0",
+  "licencja_url": "https://creativecommons.org/licenses/by/4.0/",
+  "atrybucja": "Zarząd Transportu Miejskiego w Gdańsku (dane pobrane 2026-11-21)",
+  "url_zrodla": "https://dane.gov.pl/pl/dataset/1803",
+  "data_danych": "2026-11-21",
+  "pobierz": {
+    "plik": "wejscie/ztm_gdansk_pojazdy.json",
+    "url": "https://files.cloudgdansk.pl/d/otwarte-dane/ztm/baza-pojazdow.json?v=2"
+  },
+  "filtr": {
+    "kolumna": "aed",
+    "rowne": true
+  },
+  "mobilny": "tak",
+  "wartosci_stale": {
+    "lokalizacja_opis": "w pojeździe komunikacji miejskiej ZTM w Gdańsku (AED dostępny w czasie kursu)",
+    "miejscowosc": "Gdańsk"
+  },
+  "id_kolumna": "vehicleCode",
+  "kolumny": {
+    "operator": [
+      "carrirer"
+    ]
+  },
+  "mapowanie_stale": {
+    "nazwa_obiektu": [
+      "transportationType",
+      "vehicleCode"
+    ]
+  }
+}

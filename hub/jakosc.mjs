@@ -1,6 +1,6 @@
 // Flagi jakości z wagami, ocena 0–100 i raport dla każdego źródła. Brak danych o dostępności ma wagę 0 (przyjęto: dostępny).
 export const WAGI = { daleko_od_pozostalych: 25, brak_wspolrzednych: 60, poza_polska: 50, te_same_wspolrzedne_rozne_adresy: 20, brak_adresu: 10, mozliwy_duplikat: 10,
-  adres_przyblizony: 5, zamienione_osie: 5, wspolrzedne_z_prg: 5, pl1992: 0, brak_danych_dostepnosci: 0 };
+  adres_przyblizony: 5, zamienione_osie: 5, wspolrzedne_z_prg: 5, pl1992: 0, brak_danych_dostepnosci: 0, mobilny_bez_pozycji: 0 };
 
 export const OPISY = {
   daleko_od_pozostalych: "Punkt leży daleko od pozostałych z tej samej listy — sprawdź współrzędne (np. kopia z szablonu innej gminy).",
@@ -14,6 +14,7 @@ export const OPISY = {
   wspolrzedne_z_prg: "Współrzędne ustalone z adresu (geokodowanie PRG).",
   pl1992: "Współrzędne w układzie PL-1992 przeliczone na WGS84.",
   brak_danych_dostepnosci: "Brak godzin i zasad dostępu — przyjęto: dostępny (informacja, nie obniża oceny).",
+  mobilny_bez_pozycji: "AED w pojeździe (np. autobus, tramwaj): bez stałej lokalizacji, nie ma go na mapie (informacja, nie obniża oceny).",
 };
 
 export function ocenJakosc(r) {
@@ -65,7 +66,7 @@ export function raportJakosci(aed, obserwacje, profile, data) {
     aed_z_kilku_zrodel: ile((a) => a.liczba_zrodel > 1),
     aed_na_mapie: ile((a) => a.szerokosc !== null && a.szerokosc !== undefined),
     potwierdzone_przez_dysponenta: ile((a) => a.potwierdzenie === "dysponent"),
-    z_adresem: ile((a) => a.ulica || a.miejscowosc),
+    z_adresem: ile((a) => a.szerokosc !== null && a.szerokosc !== undefined && (a.ulica || a.miejscowosc)), // tylko AED ze stałą lokalizacją
     status: Object.fromEntries(["24/7", "brak_danych", "godziny", "ograniczony"].map((s) => [s, ile((a) => a.status_dostepnosci === s)])),
     srednia_ocena: Math.round((aed.reduce((s, a) => s + a.ocena_jakosci, 0) / Math.max(1, aed.length)) * 10) / 10,
     zrodla, opisy_flag: OPISY, wagi_flag: WAGI,
