@@ -28,3 +28,12 @@ test("plik xlsx jest poprawnym archiwum zip", async () => {
   const out = execFileSync("unzip", ["-t", f]).toString();
   assert.match(out, /No errors detected/);
 });
+
+test("xlsx: szerokości kolumn i zamrożony nagłówek (czytelny w Excelu)", async () => {
+  const { czytajZip } = await import("../hub/xlsx.mjs");
+  const z = await czytajZip(await zapisXLSX(arkusze));
+  const s = new TextDecoder().decode(z["xl/worksheets/sheet1.xml"]);
+  assert.match(s, /<pane ySplit="1"[^>]*state="frozen"/);
+  assert.match(s, /<col min="2" max="2" width="\d+"/);
+  assert.ok(s.indexOf("<sheetViews>") < s.indexOf("<cols>") && s.indexOf("<cols>") < s.indexOf("<sheetData>"));
+});

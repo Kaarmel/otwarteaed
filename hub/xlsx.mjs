@@ -78,17 +78,23 @@ const unesc = (s) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quo
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d)).replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&amp;/g, "&");
 const kolumna = (i) => { let s = ""; for (i++; i; i = Math.floor((i - 1) / 26)) s = String.fromCharCode(65 + ((i - 1) % 26)) + s; return s; };
 
+// Szerokość kolumn z treści (maks. 50 znaków), zamrożony wiersz nagłówka; w małych arkuszach (słowniki, opisy pól) zawijanie tekstu.
 function arkuszXML(wiersze) {
+  const zawijaj = wiersze.length <= 500;
+  const szer = [];
+  for (const w of wiersze.slice(0, 500)) w.forEach((v, c) => { szer[c] = Math.max(szer[c] || 8, Math.min(50, String(v ?? "").length + 2)); });
+  const cols = szer.length ? `<cols>${szer.map((s, c) => `<col min="${c + 1}" max="${c + 1}" width="${s}" customWidth="1"/>`).join("")}</cols>` : "";
+  const widok = '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>';
   const rows = wiersze.map((w, r) => {
     const cells = w.map((v, c) => {
       if (v === null || v === undefined || v === "") return "";
-      const ref = kolumna(c) + (r + 1), s = r === 0 ? ' s="1"' : "";
+      const ref = kolumna(c) + (r + 1), s = r === 0 ? ' s="1"' : zawijaj ? ' s="2"' : "";
       if (typeof v === "number" && Number.isFinite(v)) return `<c r="${ref}"${s}><v>${v}</v></c>`;
       return `<c r="${ref}"${s} t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`;
     }).join("");
     return `<row r="${r + 1}">${cells}</row>`;
   }).join("");
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${rows}</sheetData></worksheet>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">${widok}${cols}<sheetData>${rows}</sheetData></worksheet>`;
 }
 
 export async function zapisXLSX(arkusze) {
@@ -98,7 +104,7 @@ export async function zapisXLSX(arkusze) {
     { nazwa: "_rels/.rels", dane: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${ns}/package/2006/relationships"><Relationship Id="rId1" Type="${ns}/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>` },
     { nazwa: "xl/workbook.xml", dane: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="${ns}/spreadsheetml/2006/main" xmlns:r="${ns}/officeDocument/2006/relationships"><sheets>${arkusze.map((a, i) => `<sheet name="${esc(a.nazwa.slice(0, 31))}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join("")}</sheets></workbook>` },
     { nazwa: "xl/_rels/workbook.xml.rels", dane: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${ns}/package/2006/relationships">${arkusze.map((_, i) => `<Relationship Id="rId${i + 1}" Type="${ns}/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join("")}<Relationship Id="rId${arkusze.length + 1}" Type="${ns}/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>` },
-    { nazwa: "xl/styles.xml", dane: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${ns}/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="2"><xf/><xf fontId="1" applyFont="1"/></cellXfs></styleSheet>` },
+    { nazwa: "xl/styles.xml", dane: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${ns}/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFDDE6F3"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="3"><xf/><xf fontId="1" fillId="2" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf></cellXfs></styleSheet>` },
     ...arkusze.map((a, i) => ({ nazwa: `xl/worksheets/sheet${i + 1}.xml`, dane: arkuszXML(a.wiersze) })),
   ];
   return zapiszZip(pliki);
