@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test \"test/*.test.mjs\"",
-    "zbierz": "node hub/zbierz.mjs"
+    "zbierz": "node hub/zbierz.mjs",
+    "strony": "sh skrypty/strony.sh"
   }
 }

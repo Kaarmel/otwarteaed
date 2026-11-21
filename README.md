@@ -1,4 +1,21 @@
-# otwarteaed.pl
+# otwarte AED
+
+Hub danych o defibrylatorach AED dla dane.gov.pl (**otwarteaed.pl**) i mapa dla mieszkańców (**gdzieaed.pl**). Opis: [docs/opis_projektu.md](docs/opis_projektu.md) · ograniczenia: [docs/ograniczenia.md](docs/ograniczenia.md) · AI: [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md).
+
+```sh
+npm test                        # 68 testów (Node 22+, xmllint)
+node hub/zbierz.mjs --offline   # zbiór z zamrożonych danych w wejscie/ → otwarteaed/dane/
+node hub/zbierz.mjs             # najnowsze zasoby z dane.gov.pl + nowe adresy z PRG
+npm run strony                  # dist/otwarteaed i dist/gdzieaed
+python3 -m http.server 8000     # http://localhost:8000/otwarteaed/ i /public/
+```
+
+W nagłym wypadku dzwoń 112. To nie jest urzędowa ewidencja AED.
+
+---
+
+## Archiwum: opis wersji sprzed hakatonu
+
 
 Niezależny, otwarty zbiór danych o defibrylatorach AED w Polsce. Importer w Pythonie (tylko stdlib), raport jakości i statyczna strona z wyszukiwaniem AED oraz generatorem karty A4. Bez frameworków i backendu. Nie jest urzędową ewidencją ani potwierdzeniem sprawności lub dostępności urządzenia. W nagłym wypadku dzwoń 112.
 
