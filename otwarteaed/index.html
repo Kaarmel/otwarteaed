@@ -67,12 +67,14 @@
       <h3>Wgraj plik</h3>
       <label class="upusc" for="plik"><input type="file" id="plik" accept=".csv,.xlsx,.json,.geojson,.kml,.txt"><span>Upuść plik CSV, XLSX, GeoJSON lub KML albo kliknij, aby wybrać</span></label>
       <form id="formUrl" class="url"><label for="url">albo podaj adres pliku w internecie</label><div><input type="url" id="url" placeholder="https://…/defibrylatory.csv"><button class="przycisk" type="submit">Wczytaj</button></div></form>
+      <p class="male"><button class="przycisk" type="button" id="przyklad">Wypróbuj na prawdziwym pliku Marek z dane.gov.pl</button></p>
       <p class="male">Nie masz pliku? Pobierz szablon: <a href="dane/szablony/szablon_mam_wspolrzedne.xlsx" download>mam współrzędne</a> albo <a href="dane/szablony/szablon_mam_adresy.xlsx" download>mam tylko adresy</a>.</p>
     </li>
     <li id="k2" hidden>
       <h3>Sprawdź dopasowanie kolumn</h3>
       <p id="rozpoznano" class="rozpoznano"></p>
       <table class="mapowanie"><thead><tr><th scope="col">Pole wzorca</th><th scope="col">Kolumna z Twojego pliku</th></tr></thead><tbody id="mapowanie"></tbody></table>
+      <details><summary>Pokaż pozostałe pola</summary><table class="mapowanie"><tbody id="mapowanieReszta"></tbody></table></details>
       <button class="przycisk" id="przelicz" type="button">Zastosuj dopasowanie</button>
     </li>
     <li id="k3" hidden>
@@ -109,7 +111,7 @@
 
 <footer class="stopka">
   <p><strong>W nagłym wypadku dzwoń 112.</strong> otwarte AED to otwarty projekt społeczny, nie urzędowa ewidencja AED.</p>
-  <p>Dane: © współtwórcy OpenStreetMap (ODbL 1.0) · Urząd Miasta Krosna · Urząd Miejski w Przemyślu · Urząd Miasta Marki · Urząd Miasta Legionowo · adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).</p>
+  <p>Dane: © współtwórcy OpenStreetMap (ODbL 1.0) · Urząd Miasta Krosna · Urząd Miejski w Przemyślu · Urząd Miasta Marki (CC BY 4.0, także plik przykładowy w kreatorze) · Urząd Miasta Legionowo · adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).</p>
 </footer>
 </body>
 </html>

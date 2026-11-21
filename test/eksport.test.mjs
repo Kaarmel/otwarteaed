@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { arkuszeWzorcowe, doCSV, doXML, doIndeksuMapy, doGeoJSON, doSzczegolow } from "../hub/eksport.mjs";
-import { ocenJakosc, oznaczWspolneWspolrzedne } from "../hub/jakosc.mjs";
+import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace } from "../hub/jakosc.mjs";
 import { md5 } from "../hub/md5.mjs";
 import { writeFileSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -65,6 +65,24 @@ test("te same współrzędne przy różnych adresach są oznaczane (kopia z szab
     { obs_id: "krosno:1", szerokosc: 49.7188, dlugosc: 21.7203, adres_zrodlowy: "Jasna, Krosno", flagi: [] }];
   oznaczWspolneWspolrzedne(o);
   assert.ok(o[0].flagi.includes("te_same_wspolrzedne_rozne_adresy"));
+});
+
+test("punkt daleko od pozostałych na liście lokalnej jest oznaczany (Marki z współrzędnymi Krosna)", () => {
+  const p = (id, s, d) => ({ obs_id: id, szerokosc: s, dlugosc: d, flagi: [] });
+  const marki = [p("m:1", 52.3267, 21.1076), p("m:2", 52.324, 21.0982), p("m:3", 52.317, 21.1041), p("m:7", 49.7188, 21.7203), p("m:8", 52.3254, 21.1082)];
+  oznaczOdstajace(marki);
+  assert.deepEqual(marki.filter((o) => o.flagi.includes("daleko_od_pozostalych")).map((o) => o.obs_id), ["m:7"]);
+  const kraj = [p("a", 54.3, 18.6), p("b", 50.06, 19.94), p("c", 52.23, 21.01), p("d", 51.1, 17.03)];
+  oznaczOdstajace(kraj);
+  assert.equal(kraj.filter((o) => o.flagi.length).length, 0);
+});
+
+test("komunikaty jakości z poprawną odmianą", async () => {
+  const { raportJakosci } = await import("../hub/jakosc.mjs");
+  const k = (n, f) => raportJakosci([], Array.from({ length: n }, (_, i) => ({ obs_id: "x:" + i, zrodlo: "x", flagi: [f] })), [{ id: "x", nazwa: "X" }], "d").zrodla.x.komunikat;
+  assert.equal(k(3, "te_same_wspolrzedne_rozne_adresy"), "3 rekordy mają te same współrzędne co inne miejsce — prosimy o sprawdzenie.");
+  assert.equal(k(5, "te_same_wspolrzedne_rozne_adresy"), "5 rekordów ma te same współrzędne co inne miejsce — prosimy o sprawdzenie.");
+  assert.equal(k(1, "daleko_od_pozostalych"), "1 rekord leży daleko od pozostałych — sprawdź współrzędne.");
 });
 
 const meta = { dataDate: "2026-11-21", bazaUrl: "https://otwarteaed.pl/dane/", historia: ["2026-11-20", "2026-11-21"], zrodla: [{ atrybucja: "© współtwórcy OpenStreetMap", licencja: "ODbL-1.0" }, { atrybucja: "Urząd Miasta Krosna", licencja: "CC0-1.0" }] };

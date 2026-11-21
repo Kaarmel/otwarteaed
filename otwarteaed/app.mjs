@@ -43,10 +43,14 @@ async function uruchom() {
   $("#rozpoznano").innerHTML = `Rozpoznano: <strong>${esc(top.nazwa)}</strong> (${Math.round(top.wynik * 100)}% zgodności). ${fmt.format(w.plik.wiersze.length)} wierszy, kodowanie ${w.plik.meta.kodowanie}.`;
   const kolumny = w.plik.naglowki;
   const pola = schemat.pola.filter((p) => p.szablony || ["szerokosc", "dlugosc", "adres_zrodlowy"].includes(p.nazwa));
-  $("#mapowanie").innerHTML = pola.map((p) => {
+  const WAZNE = new Set(["nazwa_obiektu", "szerokosc", "dlugosc", "numer", "miejscowosc"]);
+  const wiersz = (p) => {
     const m = w.mapowanie[p.nazwa], wart = typeof m === "string" ? m : "";
     return `<tr><td><label for="m-${p.nazwa}">${esc(NAZWY[p.nazwa])}</label> <code>${p.nazwa}</code></td><td><select id="m-${p.nazwa}" data-pole="${p.nazwa}"><option value="">— brak —</option>${kolumny.map((k) => `<option${k === wart ? " selected" : ""} value="${esc(k)}">${esc(k.trim() || "(bez nazwy)")}</option>`).join("")}${m && typeof m !== "string" ? '<option selected value="__zlozone">(złożone z kilku kolumn)</option>' : ""}</select></td></tr>`;
-  }).join("");
+  };
+  const glowne = pola.filter((p) => WAZNE.has(p.nazwa) || w.mapowanie[p.nazwa]), reszta = pola.filter((p) => !glowne.includes(p));
+  $("#mapowanie").innerHTML = glowne.map(wiersz).join("");
+  $("#mapowanieReszta").innerHTML = reszta.map(wiersz).join("");
   const z = Object.values(w.raport.zrodla)[0];
   komunikat.textContent = z ? `Średnia ocena jakości: ${z.srednia_ocena}/100. ${z.komunikat}` : "Plik nie zawiera rekordów.";
   $("#podglad").innerHTML = w.obserwacje.slice(0, 20).map((o) => {
@@ -62,7 +66,7 @@ function pobierz(nazwa, tresc, typ) {
   a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
-async function wczytaj(bajty, nazwa) { stan = { ...stan, bajty, nazwa, mapowanie: null }; await uruchom(); $("#k2").scrollIntoView({ behavior: "smooth", block: "start" }); }
+async function wczytaj(bajty, nazwa, przewin = true) { stan = { ...stan, bajty, nazwa, mapowanie: null }; await uruchom(); if (przewin) $("#k2").scrollIntoView({ behavior: "smooth", block: "start" }); }
 $("#plik").addEventListener("change", async (e) => { const f = e.target.files[0]; if (f) await wczytaj(new Uint8Array(await f.arrayBuffer()), f.name); });
 const upusc = $(".upusc");
 upusc.addEventListener("dragover", (e) => { e.preventDefault(); upusc.classList.add("nad"); });
@@ -79,6 +83,13 @@ $("#przelicz").addEventListener("click", async () => {
   document.querySelectorAll("#mapowanie select").forEach((s) => { if (s.value === "__zlozone") return; if (s.value) m[s.dataset.pole] = s.value; else delete m[s.dataset.pole]; });
   stan.mapowanie = m; await uruchom();
 });
+async function przyklad(przewin = true) {
+  const b = new Uint8Array(await (await fetch("przyklady/marki_dane_gov_pl.csv")).arrayBuffer());
+  $("#dNazwa").value = "Urząd Miasta Marki"; $("#dUrl").value = "https://marki.pl/aed/";
+  await wczytaj(b, "marki_dane_gov_pl.csv", przewin);
+}
+$("#przyklad").addEventListener("click", () => przyklad());
+if (location.hash === "#przyklad") przyklad(false);
 $("#dysponent").addEventListener("change", () => stan.bajty && uruchom());
 $("#pobierzCSV").addEventListener("click", () => pobierz(stan.wynik.pliki.nazwaCSV, stan.wynik.pliki.csv, "text/csv;charset=utf-8"));
 $("#pobierzXML").addEventListener("click", () => { const n = stan.wynik.pliki.nazwaCSV.replace(/\.csv$/, ""); pobierz(n + ".xml", stan.wynik.pliki.xml, "application/xml"); pobierz(n + ".md5", stan.wynik.pliki.md5, "text/plain"); });

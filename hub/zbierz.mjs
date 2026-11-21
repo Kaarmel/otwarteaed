@@ -10,7 +10,7 @@ import { wykryjProfil } from "./wykryj.mjs";
 import { normalizujWiersz } from "./normalizuj.mjs";
 import { uzupelnijAdresy, ATRYBUCJA_PRG } from "./adresy.mjs";
 import { scal } from "./scal.mjs";
-import { ocenJakosc, oznaczWspolneWspolrzedne, raportJakosci, OPISY } from "./jakosc.mjs";
+import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci, OPISY } from "./jakosc.mjs";
 import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow } from "./eksport.mjs";
 import { md5 } from "./md5.mjs";
 
@@ -50,7 +50,9 @@ for (const p of zrodlaProfile) {
   const r = await czytajPlik(bajty, skad, p.format);
   const [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
   const profil = { ...p, data_pobrania: DATA };
-  r.wiersze.forEach((wiersz, i) => obserwacje.push(normalizujWiersz(wiersz, profil, w.mapowanie, i)));
+  const nowe = r.wiersze.map((wiersz, i) => normalizujWiersz(wiersz, profil, w.mapowanie, i));
+  oznaczOdstajace(nowe);
+  obserwacje.push(...nowe);
   zrodlaInfo.push({ id: p.id, nazwa: p.nazwa, potwierdzenie: p.potwierdzenie, licencja: p.licencja, licencja_url: p.licencja_url, atrybucja: p.atrybucja,
     url_zrodla: p.url_zrodla, data_danych: p.data_danych, data_pobrania: DATA, plik: skad.startsWith("http") ? skad : p.pobierz.plik,
     sha256_wejscia: createHash("sha256").update(bajty).digest("hex"), rekordow: r.wiersze.length, format: r.format, kodowanie: r.meta.kodowanie,

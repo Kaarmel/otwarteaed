@@ -3,7 +3,7 @@ import { czytajPlik } from "../hub/czytaj.mjs";
 import { wykryjProfil } from "../hub/wykryj.mjs";
 import { normalizujWiersz } from "../hub/normalizuj.mjs";
 import { uzupelnijAdresy } from "../hub/adresy.mjs";
-import { ocenJakosc, oznaczWspolneWspolrzedne, raportJakosci } from "../hub/jakosc.mjs";
+import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci } from "../hub/jakosc.mjs";
 import { doCSV, doXMLDysponenta } from "../hub/eksport.mjs";
 import { md5 } from "../hub/md5.mjs";
 
@@ -22,6 +22,7 @@ export async function przebiegKreatora({ bajty, nazwa, profile, schemat, dyspone
     id_kolumna: bazowy.rodzaj === "zrodlo" ? bazowy.id_kolumna : undefined, data_danych: data, data_pobrania: data };
   const obserwacje = plik.wiersze.map((w, i) => normalizujWiersz(w, profil, map, i));
   oznaczWspolneWspolrzedne(obserwacje);
+  oznaczOdstajace(obserwacje);
   await uzupelnijAdresy(obserwacje, baza, { fetch });
   for (const o of obserwacje) Object.assign(o, ocenJakosc(o));
   const raport = raportJakosci(obserwacje, obserwacje, [profil], data);

@@ -23,7 +23,7 @@
     "adres_przyblizony": 3
    },
    "srednia_ocena": 98.3,
-   "komunikat": "1 rekordów ma te same współrzędne co inne miejsce — prosimy o sprawdzenie. 21 rekordów bez godzin dostępności — warto je dopisać."
+   "komunikat": "1 rekord ma te same współrzędne co inne miejsce — prosimy o sprawdzenie. 21 rekordów bez godzin dostępności — warto je dopisać."
   },
   "legionowo": {
    "nazwa": "Urząd Miasta Legionowo",
@@ -33,7 +33,7 @@
     "adres_przyblizony": 1
    },
    "srednia_ocena": 99.8,
-   "komunikat": "24 rekordów bez godzin dostępności — warto je dopisać."
+   "komunikat": "24 rekordy bez godzin dostępności — warto je dopisać."
   },
   "marki": {
    "nazwa": "Urząd Miasta Marki",
@@ -41,10 +41,11 @@
    "flagi": {
     "zamienione_osie": 7,
     "brak_danych_dostepnosci": 8,
-    "te_same_wspolrzedne_rozne_adresy": 3
+    "te_same_wspolrzedne_rozne_adresy": 3,
+    "daleko_od_pozostalych": 1
    },
-   "srednia_ocena": 88.1,
-   "komunikat": "Zamienione osie współrzędnych w 7 z 8 rekordów — naprawiliśmy je automatycznie. 3 rekordów ma te same współrzędne co inne miejsce — prosimy o sprawdzenie. 8 rekordów bez godzin dostępności — warto je dopisać."
+   "srednia_ocena": 85,
+   "komunikat": "Zamienione osie współrzędnych w 7 z 8 rekordów — naprawiliśmy je automatycznie. 3 rekordy mają te same współrzędne co inne miejsce — prosimy o sprawdzenie. 1 rekord leży daleko od pozostałych — sprawdź współrzędne. 8 rekordów bez godzin dostępności — warto je dopisać."
   },
   "osm": {
    "nazwa": "OpenStreetMap",
@@ -55,7 +56,7 @@
     "brak_adresu": 268
    },
    "srednia_ocena": 99.4,
-   "komunikat": "8892 rekordów bez godzin dostępności — warto je dopisać."
+   "komunikat": "8892 rekordy bez godzin dostępności — warto je dopisać."
   },
   "przemysl": {
    "nazwa": "Urząd Miejski w Przemyślu",
@@ -69,6 +70,7 @@
   }
  },
  "opisy_flag": {
+  "daleko_od_pozostalych": "Punkt leży daleko od pozostałych z tej samej listy — sprawdź współrzędne (np. kopia z szablonu innej gminy).",
   "brak_wspolrzednych": "Brak poprawnych współrzędnych — rekordu nie ma na mapie.",
   "poza_polska": "Współrzędne poza obrysem Polski.",
   "te_same_wspolrzedne_rozne_adresy": "Te same współrzędne przy różnych adresach (prawdopodobnie kopia z szablonu).",
@@ -81,6 +83,7 @@
   "brak_danych_dostepnosci": "Brak godzin i zasad dostępu — przyjęto: dostępny (informacja, nie obniża oceny)."
  },
  "wagi_flag": {
+  "daleko_od_pozostalych": 25,
   "brak_wspolrzednych": 60,
   "poza_polska": 50,
   "te_same_wspolrzedne_rozne_adresy": 20,
