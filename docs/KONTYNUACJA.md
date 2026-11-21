@@ -107,6 +107,12 @@ Gotowe:
 - `docs/api.md`.
 - Wdrożone obie strony. `main` = `feat/hub`.
 
+Automatyczna aktualizacja:
+- `.github/workflows/aktualizacja.yml` uruchamia się co 2 godziny (cron `7 */2 * * *`) i ręcznie (`gh workflow run aktualizacja.yml`).
+- Sekrety w GitHub: CLOUDFLARE_API_TOKEN (wygasa ok. 27.11), CLOUDFLARE_ACCOUNT_ID; opcjonalnie WARSZAWA_API_TOKEN.
+- Stan między przebiegami (baza PRG, historia, pliki z datą) trzyma actions/cache. CI niczego nie commituje.
+- Naprawiony błąd: zbiór Legionowa „Zdrowie” ma też wykaz aptek. Teraz brane są tylko zasoby z „defibryl”/„AED” w tytule, a do tego działa bezpiecznik zgodności z profilem.
+
 Czeka na decyzję użytkownika:
 - Repo publiczne: czyste repo z jednym commitem? Historia zawiera nazwę klienta i ID konta CF.
 - Pola formularza HackTribe.
