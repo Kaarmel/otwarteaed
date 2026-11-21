@@ -80,3 +80,17 @@ export function scal(obserwacje, { progM = 30, progScal = 0.5, progSzary = 0.3 }
     return a;
   }).sort((x, y) => (x.aed_id < y.aed_id ? -1 : 1));
 }
+
+// Stałe aed_id między przebiegami. ids: obs_id → aed_id z poprzednich przebiegów (aktualizowane w miejscu).
+// AED zachowuje identyfikator, dopóki ma choć jedną znaną obserwację, także gdy dojdą dane dysponenta o wyższym priorytecie.
+export function zachowajIdentyfikatory(aed, ids) {
+  const zajete = new Set();
+  for (const a of aed) {
+    const znany = a.zrodla.map((o) => ids[o]).find((x) => x && !zajete.has(x));
+    if (znany) a.aed_id = znany;
+    while (zajete.has(a.aed_id)) a.aed_id = "PL-AED-" + md5(a.aed_id).slice(0, 10);
+    zajete.add(a.aed_id);
+    for (const o of a.zrodla) ids[o] = a.aed_id;
+  }
+  return aed;
+}

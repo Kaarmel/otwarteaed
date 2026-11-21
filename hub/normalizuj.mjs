@@ -1,3 +1,4 @@
+import { md5 } from "./md5.mjs";
 // Normalizacja: liczby, współrzędne (przecinek, DMS, zamiana osi, PL-1992), daty, dostępność, wiersz → obserwacja.
 export const OBWIEDNIA_PL = { minLat: 49.0, maxLat: 54.84, minLon: 14.12, maxLon: 24.15 };
 export const wPolsce = (lat, lon) => lat >= OBWIEDNIA_PL.minLat && lat <= OBWIEDNIA_PL.maxLat && lon >= OBWIEDNIA_PL.minLon && lon <= OBWIEDNIA_PL.maxLon;
@@ -136,6 +137,8 @@ export function normalizujWiersz(wiersz, profil, mapowanie, indeks) {
   for (const r of profil.reguly || []) if (String(wiersz[r.gdy.kolumna]) === String(r.gdy.rowne)) Object.assign(o, r.ustaw);
   o.status_dostepnosci = statusDostepnosci({ godziny: o.godziny, dostep: o.dostep });
   // AED w pojeździe nie ma stałej pozycji: to nie błąd danych, tylko inna kategoria (nie trafia na mapę).
+  // źródło bez identyfikatorów (np. Legionowo): identyfikator z treści rekordu, odporny na zmianę kolejności wierszy
+  if (idZr === null) o.obs_id = `${profil.id}:h${md5([o.nazwa_obiektu, o.adres_zrodlowy, o.szerokosc?.toFixed(5), o.dlugosc?.toFixed(5)].join("|")).slice(0, 8)}`;
   o.flagi = o.mobilny === "tak" ? wsp.flagi.map((f) => (f === "brak_wspolrzednych" ? "mobilny_bez_pozycji" : f)) : [...wsp.flagi];
   o.przeksztalcenia = [...wsp.przeksztalcenia];
   o.surowe = wiersz;

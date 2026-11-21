@@ -10,7 +10,7 @@ import { czytajPlik } from "./czytaj.mjs";
 import { wykryjProfil } from "./wykryj.mjs";
 import { normalizujWiersz } from "./normalizuj.mjs";
 import { uzupelnijAdresy, ATRYBUCJA_PRG } from "./adresy.mjs";
-import { scal } from "./scal.mjs";
+import { scal, zachowajIdentyfikatory } from "./scal.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci, OPISY } from "./jakosc.mjs";
 import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow } from "./eksport.mjs";
 import { md5 } from "./md5.mjs";
@@ -97,6 +97,8 @@ for (const p of zrodlaProfile) {
   }
   const profil = { ...p, data_pobrania: DATA };
   const nowe = r.wiersze.map((wiersz, i) => normalizujWiersz(wiersz, profil, w.mapowanie, i));
+  const widziane = new Map(); // identyczne wiersze w jednym źródle dostają przyrostek -2, -3…
+  for (const o of nowe) { const n = (widziane.get(o.obs_id) || 0) + 1; widziane.set(o.obs_id, n); if (n > 1) o.obs_id += "-" + n; }
   oznaczOdstajace(nowe);
   obserwacje.push(...nowe);
   zrodlaInfo.push({ id: p.id, nazwa: p.nazwa, potwierdzenie: p.potwierdzenie, licencja: p.licencja, licencja_url: p.licencja_url, atrybucja: p.atrybucja,
@@ -115,6 +117,15 @@ if (s.zapytan) { mkdirSync(dirname(plikBazy), { recursive: true }); writeFileSyn
 
 for (const o of obserwacje) Object.assign(o, ocenJakosc(o));
 const aed = scal(obserwacje);
+// Stałe identyfikatory AED między przebiegami: AED zachowuje aed_id, dopóki ma choć jedną znaną obserwację,
+// także gdy dojdą dane dysponenta o wyższym priorytecie (baza/identyfikatory.json: obs_id → aed_id).
+const plikId = join(ROOT, "baza/identyfikatory.json");
+const ids = existsSync(plikId) ? JSON.parse(readFileSync(plikId, "utf8")) : {};
+const idyPrzed = JSON.stringify(ids);
+zachowajIdentyfikatory(aed, ids);
+aed.sort((x, y) => (x.aed_id < y.aed_id ? -1 : x.aed_id > y.aed_id ? 1 : 0));
+const idyPo = JSON.stringify(Object.fromEntries(Object.entries(ids).sort()));
+if (idyPo !== idyPrzed) { mkdirSync(dirname(plikId), { recursive: true }); writeFileSync(plikId, idyPo); }
 for (const a of aed) { Object.assign(a, ocenJakosc(a)); a.data_pobrania = DATA; }
 
 const POLA = schemat.pola.map((p) => p.nazwa);

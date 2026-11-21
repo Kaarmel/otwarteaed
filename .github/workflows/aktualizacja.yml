@@ -24,13 +24,27 @@ jobs:
         with:
           path: |
             baza/adresy_prg.json
+            baza/identyfikatory.json
             otwarteaed/dane
           key: stan-${{ github.run_id }}
           restore-keys: stan-
+      - name: Zapamiętaj ostatni wdrożony raport
+        run: cp otwarteaed/dane/jakosc.json /tmp/poprzedni_jakosc.json
+      - name: xmllint
+        run: command -v xmllint || (sudo apt-get update -qq && sudo apt-get install -y -qq libxml2-utils)
       - name: Zbierz dane
         env:
           WARSZAWA_API_TOKEN: ${{ secrets.WARSZAWA_API_TOKEN }}
         run: node hub/zbierz.mjs
+      - name: Walidacja i autonaprawa
+        # Wynik musi przejść kontrolę (XSD portalu, MD5, spójność plików, brak spadku > 10%).
+        # Jeśli nie przejdzie: przebudowa z ostatnich sprawdzonych plików wejściowych i druga kontrola.
+        # Jeśli i ta nie przejdzie, krok kończy się błędem i nic nie jest wdrażane: strony zostają w ostatniej dobrej wersji.
+        run: |
+          if node hub/sprawdz.mjs --poprzedni /tmp/poprzedni_jakosc.json; then exit 0; fi
+          echo "::warning::Wynik nie przeszedł kontroli — przebudowa z ostatnich sprawdzonych plików wejściowych"
+          node hub/zbierz.mjs --offline
+          node hub/sprawdz.mjs
       - name: Zbuduj strony
         run: sh skrypty/strony.sh
       - name: Wdróż na Cloudflare Pages
@@ -40,11 +54,12 @@ jobs:
         run: |
           npx -y wrangler@4 pages deploy dist/otwarteaed --project-name otwarteaed --branch main --commit-dirty=true
           npx -y wrangler@4 pages deploy dist/gdzieaed --project-name gdzieaed --branch main --commit-dirty=true
-      - name: Zapisz stan
-        if: always()
+      - name: Zapisz stan (tylko po udanym wdrożeniu)
+        if: success()
         uses: actions/cache/save@v4
         with:
           path: |
             baza/adresy_prg.json
+            baza/identyfikatory.json
             otwarteaed/dane
           key: stan-${{ github.run_id }}

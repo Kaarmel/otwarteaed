@@ -58,3 +58,16 @@ test("nic nie ginie, identyfikatory deterministyczne", () => {
   assert.deepEqual(a1.map((a) => a.aed_id).sort(), a2.map((a) => a.aed_id).sort());
   assert.match(a1[0].aed_id, /^PL-AED-[0-9a-f]{10}$/);
 });
+
+test("aed_id zostaje ten sam, gdy do punktu z OSM dojdą dane dysponenta", async () => {
+  const { scal, zachowajIdentyfikatory } = await import("../hub/scal.mjs");
+  const osm = { obs_id: "osm:node/1", zrodlo: "osm", potwierdzenie: "spolecznosc", szerokosc: 52.1, dlugosc: 21.0, flagi: [] };
+  const ids = {};
+  const [przed] = zachowajIdentyfikatory(scal([osm]), ids);
+  const gmina = { obs_id: "gmina:7", zrodlo: "gmina", potwierdzenie: "dysponent", szerokosc: 52.10001, dlugosc: 21.00001, flagi: [] };
+  const po = zachowajIdentyfikatory(scal([{ ...osm }, gmina]), ids);
+  assert.equal(po.length, 1);
+  assert.deepEqual(po[0].zrodla, ["gmina:7", "osm:node/1"]);
+  assert.equal(po[0].aed_id, przed.aed_id);
+  assert.equal(ids["gmina:7"], przed.aed_id);
+});

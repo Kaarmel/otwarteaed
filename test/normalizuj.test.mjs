@@ -93,10 +93,13 @@ test("pierwsza niepusta kolumna z listy (OSM: opis po polsku albo ogólny)", () 
   assert.equal(o.lokalizacja_opis, "przy wejściu");
 });
 
-test("adres źródłowy składany z kilku kolumn, id z indeksu, gdy brak kolumny", () => {
+test("adres źródłowy składany z kilku kolumn; bez kolumny ID identyfikator z treści (odporny na kolejność wierszy)", () => {
   const o = normalizujWiersz({ ul: "Piłsudskiego", nr: "41", m: "Legionowo", szer: "52,395198", dl: "20,931382" },
     { ...profil, id_kolumna: undefined }, { adres_zrodlowy: ["ul", "nr", "m"], szerokosc: "szer", dlugosc: "dl" }, 4);
-  assert.equal(o.obs_id, "test:5");
+  assert.match(o.obs_id, /^test:h[0-9a-f]{8}$/);
+  const o2 = normalizujWiersz({ ul: "Piłsudskiego", nr: "41", m: "Legionowo", szer: "52,395198", dl: "20,931382" },
+    { ...profil, id_kolumna: undefined }, { adres_zrodlowy: ["ul", "nr", "m"], szerokosc: "szer", dlugosc: "dl" }, 17);
+  assert.equal(o2.obs_id, o.obs_id);
   assert.equal(o.adres_zrodlowy, "Piłsudskiego 41 Legionowo");
   assert.equal(o.szerokosc, 52.395198);
   assert.ok(o.przeksztalcenia.includes("przecinek→kropka"));
