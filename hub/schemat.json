@@ -1,0 +1,455 @@
+{
+  "wersja": "1.0",
+  "nazwa": "Wzorcowy zakres danych o defibrylatorach AED — otwarte AED",
+  "data": "2026-11-21",
+  "pola": [
+    {
+      "nazwa": "aed_id",
+      "grupa": "Identyfikacja",
+      "opis": "Stały identyfikator AED w zbiorze otwarte AED (nadaje hub).",
+      "typ": "tekst",
+      "wymagane": true,
+      "format": "PL-AED-xxxxxxxxxx",
+      "przyklad": "PL-AED-3f9c1a7b2d"
+    },
+    {
+      "nazwa": "zrodla",
+      "grupa": "Identyfikacja",
+      "opis": "Identyfikatory rekordów źródłowych, z których powstał rekord (rozdzielone średnikiem).",
+      "typ": "lista",
+      "wymagane": true,
+      "przyklad": "krosno:12;osm:node/123"
+    },
+    {
+      "nazwa": "liczba_zrodel",
+      "grupa": "Identyfikacja",
+      "opis": "Ile źródeł potwierdza ten AED.",
+      "typ": "liczba",
+      "wymagane": false,
+      "przyklad": 2
+    },
+    {
+      "nazwa": "potwierdzenie",
+      "grupa": "Identyfikacja",
+      "opis": "Kto potwierdza dane: dysponent (urząd, właściciel), społeczność (OSM) lub brak.",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "dysponent",
+        "spolecznosc",
+        "brak"
+      ],
+      "przyklad": "dysponent"
+    },
+    {
+      "nazwa": "szerokosc",
+      "grupa": "Położenie",
+      "opis": "Szerokość geograficzna WGS84, kropka dziesiętna, 6 miejsc.",
+      "typ": "liczba",
+      "wymagane": true,
+      "format": "49.000000–54.840000",
+      "przyklad": 50.150947,
+      "osm": "lat",
+      "szablony": {
+        "mam_wspolrzedne": "wymagane",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "dlugosc",
+      "grupa": "Położenie",
+      "opis": "Długość geograficzna WGS84, kropka dziesiętna, 6 miejsc.",
+      "typ": "liczba",
+      "wymagane": true,
+      "format": "14.120000–24.150000",
+      "przyklad": 21.962414,
+      "osm": "lon",
+      "szablony": {
+        "mam_wspolrzedne": "wymagane",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "lokalizacja_opis",
+      "grupa": "Położenie",
+      "opis": "Gdzie dokładnie jest urządzenie: piętro, ściana, kapsuła.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "W kapsule na ścianie ratusza, przy wejściu głównym",
+      "osm": "defibrillator:location",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "wewnatrz",
+      "grupa": "Położenie",
+      "opis": "Czy AED jest wewnątrz budynku.",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "tak",
+        "nie",
+        "brak_danych"
+      ],
+      "przyklad": "nie",
+      "osm": "indoor",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "poziom",
+      "grupa": "Położenie",
+      "opis": "Kondygnacja (0 = parter).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "0",
+      "osm": "level",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "ulica",
+      "grupa": "Adres",
+      "opis": "Ulica (z PRG, gdy dostępna).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Rynek",
+      "osm": "addr:street",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "numer",
+      "grupa": "Adres",
+      "opis": "Numer porządkowy budynku.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "1A",
+      "osm": "addr:housenumber",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "wymagane"
+      }
+    },
+    {
+      "nazwa": "kod_pocztowy",
+      "grupa": "Adres",
+      "opis": "Kod pocztowy.",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "NN-NNN",
+      "przyklad": "36-060",
+      "osm": "addr:postcode",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "miejscowosc",
+      "grupa": "Adres",
+      "opis": "Miejscowość.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Głogów Małopolski",
+      "osm": "addr:city",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "wymagane"
+      }
+    },
+    {
+      "nazwa": "gmina",
+      "grupa": "Adres",
+      "opis": "Gmina (z PRG).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Głogów Małopolski"
+    },
+    {
+      "nazwa": "powiat",
+      "grupa": "Adres",
+      "opis": "Powiat (z PRG).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "rzeszowski"
+    },
+    {
+      "nazwa": "wojewodztwo",
+      "grupa": "Adres",
+      "opis": "Województwo (z PRG).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "podkarpackie"
+    },
+    {
+      "nazwa": "teryt_gmina",
+      "grupa": "Adres",
+      "opis": "Kod TERYT gminy (6 znaków).",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "NNNNNN",
+      "przyklad": "181606"
+    },
+    {
+      "nazwa": "simc",
+      "grupa": "Adres",
+      "opis": "Identyfikator miejscowości SIMC.",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "NNNNNNN",
+      "przyklad": "0974328",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "ulic",
+      "grupa": "Adres",
+      "opis": "Identyfikator ulicy ULIC.",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "NNNNN",
+      "przyklad": "19253"
+    },
+    {
+      "nazwa": "adres_zrodlo",
+      "grupa": "Adres",
+      "opis": "Skąd pochodzi adres: PRG (GUGiK) lub źródło.",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "PRG",
+        "zrodlo",
+        "brak"
+      ],
+      "przyklad": "PRG"
+    },
+    {
+      "nazwa": "adres_odleglosc_m",
+      "grupa": "Adres",
+      "opis": "Odległość AED od punktu adresowego PRG w metrach.",
+      "typ": "liczba",
+      "wymagane": false,
+      "przyklad": 5.9
+    },
+    {
+      "nazwa": "adres_zrodlowy",
+      "grupa": "Adres",
+      "opis": "Adres dosłownie ze źródła (bez zmian).",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Rynek 1, 36-060 Głogów Małopolski"
+    },
+    {
+      "nazwa": "godziny",
+      "grupa": "Dostępność",
+      "opis": "Godziny dostępności w składni opening_hours albo dosłownie ze źródła. Puste = brak danych.",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "opening_hours",
+      "przyklad": "24/7",
+      "osm": "opening_hours",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "dostep",
+      "grupa": "Dostępność",
+      "opis": "Kto może użyć AED.",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "publiczny",
+        "klienci",
+        "ograniczony",
+        "brak_danych"
+      ],
+      "przyklad": "publiczny",
+      "osm": "access",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "status_dostepnosci",
+      "grupa": "Dostępność",
+      "opis": "Pole pochodne: 24/7, brak_danych (przyjęto: dostępny), godziny (ograniczone godziny), ograniczony (prywatny).",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "24/7",
+        "brak_danych",
+        "godziny",
+        "ograniczony"
+      ],
+      "przyklad": "24/7"
+    },
+    {
+      "nazwa": "nazwa_obiektu",
+      "grupa": "Obiekt",
+      "opis": "Nazwa miejsca lub obiektu, w którym jest AED.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Urząd Miejski w Głogowie Małopolskim",
+      "osm": "name",
+      "szablony": {
+        "mam_wspolrzedne": "wymagane",
+        "mam_adresy": "wymagane"
+      }
+    },
+    {
+      "nazwa": "operator",
+      "grupa": "Obiekt",
+      "opis": "Dysponent lub zarządca urządzenia.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Gmina Głogów Małopolski",
+      "osm": "operator",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "telefon",
+      "grupa": "Obiekt",
+      "opis": "Telefon kontaktowy do obiektu.",
+      "typ": "tekst",
+      "wymagane": false,
+      "format": "+48 NNN NNN NNN",
+      "przyklad": "+48 17 772 09 09",
+      "osm": "phone",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "data_weryfikacji",
+      "grupa": "Sprawność",
+      "opis": "Kiedy dysponent ostatnio sprawdził urządzenie.",
+      "typ": "data",
+      "wymagane": false,
+      "format": "RRRR-MM-DD",
+      "przyklad": "2026-11-21",
+      "osm": "check_date",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "termin_elektrod",
+      "grupa": "Sprawność",
+      "opis": "Data ważności elektrod.",
+      "typ": "data",
+      "wymagane": false,
+      "format": "RRRR-MM-DD",
+      "przyklad": "2028-03-31",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "termin_baterii",
+      "grupa": "Sprawność",
+      "opis": "Data ważności baterii.",
+      "typ": "data",
+      "wymagane": false,
+      "format": "RRRR-MM-DD",
+      "przyklad": "2029-06-30",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "mobilny",
+      "grupa": "Sprawność",
+      "opis": "Czy AED jest w pojeździe (np. autobus, radiowóz).",
+      "typ": "slownik",
+      "wymagane": false,
+      "slownik": [
+        "tak",
+        "nie"
+      ],
+      "przyklad": "nie",
+      "szablony": {
+        "mam_wspolrzedne": "opcjonalne",
+        "mam_adresy": "opcjonalne"
+      }
+    },
+    {
+      "nazwa": "licencja",
+      "grupa": "Metryczka",
+      "opis": "Licencja danych źródła.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "CC-BY-4.0"
+    },
+    {
+      "nazwa": "atrybucja",
+      "grupa": "Metryczka",
+      "opis": "Wymagane oznaczenie źródła.",
+      "typ": "tekst",
+      "wymagane": false,
+      "przyklad": "Urząd Miasta Krosna"
+    },
+    {
+      "nazwa": "data_danych",
+      "grupa": "Metryczka",
+      "opis": "Dane na dzień (według źródła).",
+      "typ": "data",
+      "wymagane": false,
+      "format": "RRRR-MM-DD",
+      "przyklad": "2026-09-14"
+    },
+    {
+      "nazwa": "data_pobrania",
+      "grupa": "Metryczka",
+      "opis": "Kiedy hub pobrał dane.",
+      "typ": "data",
+      "wymagane": false,
+      "format": "RRRR-MM-DD",
+      "przyklad": "2026-11-21"
+    },
+    {
+      "nazwa": "flagi_jakosci",
+      "grupa": "Metryczka",
+      "opis": "Flagi jakości rozdzielone średnikiem.",
+      "typ": "lista",
+      "wymagane": false,
+      "przyklad": "zamienione_osie;adres_przyblizony"
+    },
+    {
+      "nazwa": "ocena_jakosci",
+      "grupa": "Metryczka",
+      "opis": "Ocena jakości rekordu 0–100 (brak godzin nie obniża oceny).",
+      "typ": "liczba",
+      "wymagane": false,
+      "przyklad": 95
+    },
+    {
+      "nazwa": "konflikty",
+      "grupa": "Metryczka",
+      "opis": "Wartości odrzucone przy scalaniu: pole: wartość (źródło), rozdzielone średnikiem.",
+      "typ": "lista",
+      "wymagane": false,
+      "przyklad": "godziny: 24/7 (osm:node/1)"
+    }
+  ]
+}
