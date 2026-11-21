@@ -132,6 +132,8 @@ export function normalizujWiersz(wiersz, profil, mapowanie, indeks) {
   o.wewnatrz = mapujTakNie(wartosc(wiersz, mapowanie.wewnatrz));
   o.mobilny = mapowanie.mobilny ? mapujTakNie(wartosc(wiersz, mapowanie.mobilny)) : (profil.mobilny ?? "nie");
   for (const [k, v] of Object.entries(profil.wartosci_stale || {})) o[k] ??= v;
+  // reguły źródła, np. Warszawa: device_availability = "Tak" oznacza dostęp całodobowy
+  for (const r of profil.reguly || []) if (String(wiersz[r.gdy.kolumna]) === String(r.gdy.rowne)) Object.assign(o, r.ustaw);
   o.status_dostepnosci = statusDostepnosci({ godziny: o.godziny, dostep: o.dostep });
   // AED w pojeździe nie ma stałej pozycji: to nie błąd danych, tylko inna kategoria (nie trafia na mapę).
   o.flagi = o.mobilny === "tak" ? wsp.flagi.map((f) => (f === "brak_wspolrzednych" ? "mobilny_bez_pozycji" : f)) : [...wsp.flagi];

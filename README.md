@@ -64,6 +64,6 @@ Jak dodać nowe źródło danych (także plik z datą w nazwie): [docs/jak_dodac
 
 ## Licencje danych
 
-Zbiór zintegrowany zawiera dane © współtwórców OpenStreetMap (ODbL 1.0) oraz dane gmin: Krosno, Przemyśl, Legionowo (CC0 1.0), Marki (CC BY 4.0). Adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).
+Zbiór zintegrowany zawiera dane © współtwórców OpenStreetMap (ODbL 1.0) oraz dane dysponentów: Krosno, Przemyśl, Legionowo (CC0 1.0), Marki, ZTM w Gdańsku (CC BY 4.0), m.st. Warszawa — Stołeczne Centrum Bezpieczeństwa (CC BY). Adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).
 
 W nagłym wypadku dzwoń 112. To nie jest urzędowa ewidencja AED.

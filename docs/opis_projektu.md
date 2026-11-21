@@ -18,7 +18,7 @@ Nie ma jednej listy defibrylatorów w Polsce.
   - Przemyśl: GeoJSON;
   - Marki: cały wiersz CSV w jednej kolumnie, 7 z 8 par współrzędnych zamienionych;
   - Legionowo: kody TERC i SIMC.
-- **ZTM w Gdańsku** w bazie pojazdów oznacza 278 autobusów i tramwajów z AED, bez stałej lokalizacji. **Warszawa** udostępnia listę tylko przez API z tokenem.
+- **ZTM w Gdańsku** w bazie pojazdów oznacza 278 autobusów i tramwajów z AED, bez stałej lokalizacji. **Warszawa** udostępnia 708 AED tylko przez API z tokenem. Hub pobiera je, a token jest trzymany jako sekret poza repozytorium.
 - **Każdy wydawca robi to inaczej**, więc danych nie da się po prostu połączyć.
 
 ## Rozwiązanie
@@ -91,7 +91,7 @@ Nic nie trafia na nasz serwer.
 - **Naklejki A6** (`kampania/naklejki.pdf`): „Masz AED? Pokaż go.”, „AED jest w środku”, „Najbliższy AED”, „Ktoś upadł i nie oddycha?”.
 - **Mierniki liczy hub** przy każdym przebiegu (`zrodla.json`, `jakosc.json`):
   - liczba dysponentów publikujących dane;
-  - liczba AED potwierdzonych przez dysponenta (dziś 351 z 18 604);
+  - liczba AED potwierdzonych przez dysponenta (dziś 1059 z 19 071);
   - jakość plików od dysponentów.
 - **Zasada:** zachęcamy, nie zmuszamy. Dane potwierdza dysponent, więc kampania nie zachęca do zgłaszania cudzych urządzeń. Propozycja dla PSP i OSP jest w `docs/propozycja_psp_osp.md`.
 
@@ -107,15 +107,15 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 
 | | |
 |---|---:|
-| Obserwacje z 6 źródeł | 18 653 |
-| AED po scaleniu | 18 604 |
-| — na mapie (stała lokalizacja) | 18 326 |
+| Obserwacje z 7 źródeł | 19 361 |
+| AED po scaleniu | 19 071 |
+| — na mapie (stała lokalizacja) | 18 793 |
 | — w pojazdach (ZTM Gdańsk) | 278 |
-| AED potwierdzone przez kilka źródeł | 48 |
-| AED potwierdzone przez dysponenta | 351 |
-| AED na mapie z adresem (PRG) | 18 022 (98%) |
-| Całodobowe / brak danych (przyjęto: dostępne) / ograniczone godziny / prywatne | 3798 / 9195 / 2518 / 3093 |
-| Średnia ocena jakości | 99,4 |
+| AED potwierdzone przez kilka źródeł | 289 |
+| AED potwierdzone przez dysponenta | 1059 |
+| AED na mapie z adresem (PRG) | 18 490 (98%) |
+| Całodobowe / brak danych (przyjęto: dostępne) / ograniczone godziny / prywatne | 3863 / 9135 / 2919 / 3154 |
+| Średnia ocena jakości | 99,3 |
 
 ## Kroki użytkowników
 

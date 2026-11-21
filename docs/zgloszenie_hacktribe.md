@@ -43,9 +43,9 @@ Dodatkowo mapa gdzieaed.pl pokazuje mieszkańcom i firmom najbliższy AED na tyc
 Zrobione podczas HackNation 2026:
 
 - **Hub:**
-  - 18653 obserwacji z 6 źródeł → 18604 AED, w tym 18326 na mapie i 278 w pojazdach;
+  - 19 361 obserwacji z 7 źródeł → 19 071 AED, w tym 18 793 na mapie i 278 w pojazdach;
   - 98% AED na mapie ma adres z PRG;
-  - 351 AED potwierdzonych przez dysponenta.
+  - 1059 AED potwierdzonych przez dysponenta.
 - **XML dla dane.gov.pl:** przechodzi walidację oficjalnym XSD 1.13 portalu.
 - **Kreator dla gmin** z przykładem na prawdziwym pliku Marek.
 - **Wzorcowy zakres danych** w XLSX.

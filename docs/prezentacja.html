@@ -45,7 +45,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
 /* przepływ */
 .flow{display:grid;grid-template-columns:420px 70px 1fr 70px 430px;align-items:stretch}
 .flow .kol{display:flex;flex-direction:column;gap:14px;justify-content:center}
-.zr{background:#fff;border:2px solid var(--b);border-radius:14px;padding:12px 20px;font-size:22px;display:flex;justify-content:space-between;gap:12px}
+.zr{background:#fff;border:2px solid var(--b);border-radius:14px;padding:9px 20px;font-size:22px;display:flex;justify-content:space-between;gap:12px}
 .zr span{color:var(--m)}
 .zr.nowe{border-style:dashed;border-color:var(--z);color:var(--zt)}
 .strz{display:grid;place-items:center;color:var(--g)}
@@ -103,7 +103,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <tr><td>WCAG, responsywność, UX</td><td>Lighthouse dostępność 100/100 na obu stronach; widoki 390 px</td><td>10</td></tr>
       <tr><td>Zakres wykorzystania AI (regulamin, §2 pkt 8)</td><td>osobny slajd i oswiadczenie_ai.md</td><td>17</td></tr>
       <tr class="gr"><td colspan="3">2. Wyzwanie</td></tr>
-      <tr><td>Dane z wielu źródeł w jednym zbiorze; wzorcowy zakres</td><td>harvester: 6 źródeł → 18 604 AED, w tym 278 w pojazdach; 39 pól; kreator</td><td>4–9</td></tr>
+      <tr><td>Dane z wielu źródeł w jednym zbiorze; wzorcowy zakres</td><td>harvester: 7 źródeł → 19 071 AED, w tym 278 w pojazdach; 39 pól; kreator</td><td>4–9</td></tr>
       <tr><td>Nazwa akcji, hasło, logotyp, księga znaku; zachęta dla dysponentów</td><td>„otwarte AED”, „Każda minuta ma adres.”; odznaka, posty, list, plan z miernikami</td><td>11–13</td></tr>
     </tbody>
   </table>
@@ -116,7 +116,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
   <h1>W Polsce nie ma jednej listy defibrylatorów</h1>
   <div class="siatka" style="grid-template-columns:repeat(3,1fr);margin-bottom:72px">
     <div><div class="duza" style="font-size:120px">18 301</div><p style="margin-top:14px">punktów AED w OpenStreetMap, <b>99,4% bez adresu</b>. Dane społeczności, niepotwierdzone przez dysponentów.</p></div>
-    <div><div class="duza" style="font-size:120px">74</div><p style="margin-top:14px">rekordy od 4 gmin na dane.gov.pl, <b>każdy plik w innym układzie</b>, a do tego 278 pojazdów z AED w bazie ZTM Gdańsk i lista Warszawy dostępna tylko z tokenem.</p></div>
+    <div><div class="duza" style="font-size:120px">74</div><p style="margin-top:14px">rekordy od 4 gmin na dane.gov.pl, <b>każdy plik w innym układzie</b>, a do tego 708 AED Warszawy dostępnych tylko przez API z tokenem i 278 pojazdów z AED w bazie ZTM Gdańsk.</p></div>
     <div><div class="duza" style="font-size:120px">7 z 8</div><p style="margin-top:14px">par współrzędnych w pliku Marek ma <b>zamienione osie</b>. Punkty lądują setki kilometrów od urzędu.</p></div>
   </div>
   <div class="siatka" style="grid-template-columns:repeat(4,1fr);gap:28px">
@@ -140,6 +140,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="zr"><b>Krosno</b><span>21 · CSV</span></div>
       <div class="zr"><b>Przemyśl</b><span>21 · GeoJSON</span></div>
       <div class="zr"><b>Marki</b><span>8 · CSV w kolumnie</span></div>
+      <div class="zr"><b>Warszawa</b><span>708 · API z tokenem</span></div>
       <div class="zr"><b>ZTM Gdańsk</b><span>278 pojazdów · JSON</span></div>
       <div class="zr nowe"><b>+ Twoja gmina</b><span style="color:var(--zt)">kreator</span></div>
       <p class="mal" style="margin:6px 0 0">Źródło = plik JSON z adresem (także URL z datą w nazwie albo zbiór dane.gov.pl), licencją i dopasowaniem kolumn.</p>
@@ -160,7 +161,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="wy"><b>dane.gov.pl</b><span>XML + MD5 do automatycznego importu, CSV UTF-8 z datą w nazwie</span></div>
       <div class="wy"><b>Jury i analitycy</b><span>XLSX z arkuszami AED, Obserwacje, Źródła, Jakość, Słownik pól; GeoJSON</span></div>
       <div class="wy"><b>gdzieaed.pl</b><span>mapa, najbliższy AED, karta A4 dla firm</span></div>
-      <div class="wy" style="background:#DDF5E7"><b style="color:var(--zt)">18 653 → 18 604</b><span>obserwacji → AED · 18 326 na mapie (98% z adresem PRG) · 278 w pojazdach · 48 potwierdzonych przez kilka źródeł</span></div>
+      <div class="wy" style="background:#DDF5E7"><b style="color:var(--zt)">19 361 → 19 071</b><span>obserwacji → AED · 18 793 na mapie (98% z adresem PRG) · 278 w pojazdach · 289 potwierdzonych przez kilka źródeł</span></div>
     </div>
   </div>
   <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>4</span></div>
@@ -365,8 +366,8 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
         <thead><tr><th>Miernik</th><th>Dziś</th><th>Cel 12 mies.*</th></tr></thead>
         <tbody>
           <tr><td>Zbiory dysponentów o AED na dane.gov.pl</td><td><b>6</b></td><td>100 gmin i KG PSP</td></tr>
-          <tr><td>AED potwierdzone przez dysponenta</td><td><b>351</b> z 18 604</td><td>5000</td></tr>
-          <tr><td>Ocena jakości plików dysponentów</td><td><b>85–99,8</b></td><td>≥ 95 każdy</td></tr>
+          <tr><td>AED potwierdzone przez dysponenta</td><td style="white-space:nowrap"><b>1059</b> z 19&nbsp;071</td><td>5000</td></tr>
+          <tr><td>Ocena jakości plików dysponentów</td><td><b>85–100</b></td><td>≥ 95 każdy</td></tr>
           <tr><td>Strony i BIP z odznaką</td><td><b>0</b></td><td>100</td></tr>
         </tbody>
       </table>
@@ -407,7 +408,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
   <p class="k">13<b>;</b> Dodatkowo: gdzieaed.pl</p>
   <h1>Te same dane dla mieszkańców i firm</h1>
   <div class="siatka" style="grid-template-columns:1150px 1fr;gap:56px">
-    <div class="zrzut" style="height:718px"><img src="zrzuty/p_gdzieaed_mapa.png" alt="Mapa gdzieaed.pl z 18 326 AED" style="object-position:center"></div>
+    <div class="zrzut" style="height:718px"><img src="zrzuty/p_gdzieaed_mapa.png" alt="Mapa gdzieaed.pl z AED w Polsce" style="object-position:center"></div>
     <div>
       <p style="margin-bottom:12px"><span class="kropka" style="background:var(--z)"></span><b>24/7 lub brak danych</b></p>
       <p style="margin-bottom:12px"><span class="kropka" style="background:var(--y)"></span><b>W określonych godzinach</b></p>

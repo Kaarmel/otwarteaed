@@ -1,18 +1,18 @@
 {
  "data": "2026-11-21",
- "obserwacji": 18653,
- "aed": 18604,
- "aed_z_kilku_zrodel": 48,
- "aed_na_mapie": 18326,
- "potwierdzone_przez_dysponenta": 351,
- "z_adresem": 18022,
+ "obserwacji": 19361,
+ "aed": 19071,
+ "aed_z_kilku_zrodel": 289,
+ "aed_na_mapie": 18793,
+ "potwierdzone_przez_dysponenta": 1059,
+ "z_adresem": 18490,
  "status": {
-  "24/7": 3798,
-  "brak_danych": 9195,
-  "godziny": 2518,
-  "ograniczony": 3093
+  "24/7": 3863,
+  "brak_danych": 9135,
+  "godziny": 2919,
+  "ograniczony": 3154
  },
- "srednia_ocena": 99.4,
+ "srednia_ocena": 99.3,
  "zrodla": {
   "krosno": {
    "nazwa": "Urząd Miasta Krosna",
@@ -67,6 +67,17 @@
    },
    "srednia_ocena": 99.3,
    "komunikat": "21 rekordów bez godzin dostępności — warto je dopisać."
+  },
+  "warszawa": {
+   "nazwa": "Urząd m.st. Warszawy — Stołeczne Centrum Bezpieczeństwa",
+   "obserwacji": 708,
+   "flagi": {
+    "brak_danych_dostepnosci": 2,
+    "adres_przyblizony": 1,
+    "te_same_wspolrzedne_rozne_adresy": 4
+   },
+   "srednia_ocena": 99.9,
+   "komunikat": "4 rekordy mają te same współrzędne co inne miejsce — prosimy o sprawdzenie. 2 rekordy bez godzin dostępności — warto je dopisać."
   },
   "ztm_gdansk": {
    "nazwa": "ZTM w Gdańsku — pojazdy z AED",

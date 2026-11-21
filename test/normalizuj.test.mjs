@@ -114,3 +114,13 @@ test("AED w pojeździe: bez współrzędnych to nie błąd (flaga informacyjna),
   assert.ok(o.flagi.includes("mobilny_bez_pozycji") && !o.flagi.includes("brak_wspolrzednych"));
   assert.equal(ocenJakosc(o).ocena_jakosci, 100);
 });
+
+test("reguły źródła: Warszawa device_availability=Tak → 24/7", async () => {
+  const { normalizujWiersz } = await import("../hub/normalizuj.mjs");
+  const p = { id: "warszawa", reguly: [{ gdy: { kolumna: "device_availability", rowne: "Tak" }, ustaw: { godziny: "24/7" } }] };
+  const m = { szerokosc: "__lat", dlugosc: "__lon", godziny: "device_access_description" };
+  const a = normalizujWiersz({ __lat: 52.2, __lon: 21.0, device_availability: "Tak", device_access_description: "Dostęp swobodny." }, p, m, 0);
+  const b = normalizujWiersz({ __lat: 52.2, __lon: 21.0, device_availability: "Nie", device_access_description: "pn-pt 8-16" }, p, m, 1);
+  assert.equal(a.status_dostepnosci, "24/7");
+  assert.equal(b.status_dostepnosci, "godziny");
+});

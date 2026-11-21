@@ -7,7 +7,7 @@
   "licencja_url": "https://creativecommons.org/licenses/by/4.0/",
   "atrybucja": "m.st. Warszawa, Stołeczne Centrum Bezpieczeństwa (dane.um.warszawa.pl)",
   "url_zrodla": "https://dane.um.warszawa.pl/pl/catalogue/7bc32ffc-c2ac-4d32-83c9-b6f7a0b38de8",
-  "data_danych": null,
+  "data_danych": "2026-11-21",
   "obszar": [
     52.09,
     20.85,
@@ -19,7 +19,8 @@
       "url": "https://dane.um.warszawa.pl/api/action/get_scb_lokalizacja_defibrylatorow",
       "metoda": "POST",
       "token_env": "WARSZAWA_API_TOKEN"
-    }
+    },
+    "plik": "wejscie/warszawa_aed.json"
   },
   "id_kolumna": "defibrillator_id",
   "kolumny": {
@@ -61,5 +62,16 @@
       "location_postcode",
       "location_city"
     ]
-  }
+  },
+  "reguly": [
+    {
+      "gdy": {
+        "kolumna": "device_availability",
+        "rowne": "Tak"
+      },
+      "ustaw": {
+        "godziny": "24/7"
+      }
+    }
+  ]
 }
