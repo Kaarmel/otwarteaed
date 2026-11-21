@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><title>otwarte AED — naklejki A6</title>
+<style>
+@font-face{font-family:A;font-weight:400;src:url(../otwarteaed/fonts/atkinson-latin-400-normal.woff2)}@font-face{font-family:A;font-weight:400;src:url(../otwarteaed/fonts/atkinson-latin-ext-400-normal.woff2);unicode-range:U+0100-02AF}
+@font-face{font-family:A;font-weight:700;src:url(../otwarteaed/fonts/atkinson-latin-700-normal.woff2)}@font-face{font-family:A;font-weight:700;src:url(../otwarteaed/fonts/atkinson-latin-ext-700-normal.woff2);unicode-range:U+0100-02AF}
+@page{size:105mm 148mm;margin:0}
+@page arkusz{size:210mm 297mm;margin:0}
+*{box-sizing:border-box}html{font:10pt/1.35 A,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}body{margin:0}
+.a6{width:105mm;height:148mm;break-after:page;overflow:hidden}
+.arkusz{page:arkusz;width:210mm;height:297mm;display:grid;grid-template-columns:105mm 105mm;grid-template-rows:148.5mm 148.5mm;position:relative;break-before:page}
+.arkusz .n{border-radius:0}
+.arkusz::before,.arkusz::after{content:"";position:absolute;background:repeating-linear-gradient(90deg,#999 0 2mm,transparent 2mm 4mm)}
+.arkusz::before{left:0;right:0;top:148.5mm;height:.2mm}
+.arkusz::after{top:0;bottom:0;left:105mm;width:.2mm;background:repeating-linear-gradient(180deg,#999 0 2mm,transparent 2mm 4mm)}
+.n{width:100%;height:100%;padding:9mm 8.5mm 8mm;display:flex;flex-direction:column;justify-content:space-between}
+.granat{background:#0B3D91;color:#fff}.zielen{background:#1A1A1A;color:#fff}.zielen .h{color:#7FE0A8}.biala{background:#fff;color:#16202E;border:.4mm solid #D5DCE6}
+.logo{width:52mm;display:block}
+.h{font-size:26pt;font-weight:700;line-height:1.05;margin-bottom:5mm}
+.h2{font-size:15pt;font-weight:700;line-height:1.1;margin-bottom:2mm}
+.biala .h2{color:#00753A}
+.pole{display:flex;align-items:flex-end;gap:2.5mm;font-size:16pt;font-weight:700;margin-top:4mm}
+.linia{display:inline-block;width:22mm;border-bottom:.5mm solid currentColor;height:9mm}
+.linia.dluga{width:86mm}.linia.krotka{width:30mm;height:6mm}
+.strz{margin-left:auto;font-size:17pt;letter-spacing:1.5mm}
+.opis-pola{font-size:7.5pt;opacity:.8;margin-top:1mm}
+.z{background:#00A651;color:#fff;border-radius:2mm;padding:2.6mm 3.5mm;font-weight:700;font-size:12pt}
+.stopka{font-size:8pt;margin-top:2.5mm;color:#C9D6EE}.stopka.ciem{color:#4A5568}
+.wyb{display:flex;align-items:flex-end;gap:3mm;font-size:13pt;margin-top:3.5mm}
+.kw{display:inline-block;width:6mm;height:6mm;border:.5mm solid #0B3D91;border-radius:1mm}
+.t{font-size:12pt;margin:0;color:#E6F4EC}
+.kroki{margin:0;padding-left:5mm;font-size:11pt}.kroki li{margin-bottom:2.2mm}
+</style></head><body>
+<div class="a6"><div class="n granat">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h">Najbliższy AED</div>
+  <div class="pole"><span class="linia"></span><span>m</span><span class="strz">← ↑ → ↓</span></div>
+  <div class="opis-pola">odległość i kierunek (zakreśl)</div>
+  <div class="pole"><span class="linia dluga"></span></div>
+  <div class="opis-pola">gdzie dokładnie, np. recepcja, parter</div></div>
+  <div><div class="z">Zatrzymanie krążenia? Dzwoń 112.</div><div class="stopka">Mapa wszystkich AED: <b>gdzieaed.pl</b></div></div>
+</div></div>
+<div class="a6"><div class="n biala">
+  <img src="logo/otwarte-aed-poziome.svg" alt="otwarte AED" class="logo">
+  <div><div class="h" style="color:#0B3D91">AED jest<br>w środku</div>
+  <div class="wyb"><span class="kw"></span>całą dobę</div>
+  <div class="wyb"><span class="kw"></span>w godzinach <span class="linia krotka"></span></div></div>
+  <div><div class="h2">Każda minuta ma adres.</div><div class="stopka ciem">Zatrzymanie krążenia? Dzwoń 112 · gdzieaed.pl</div></div>
+</div></div>
+<div class="a6"><div class="n zielen">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h">Masz AED?<br>Pokaż go.</div>
+  <p class="t">Opublikuj dane o swoim defibrylatorze na dane.gov.pl. Na <b>otwarteaed.pl</b> zajmie to kilka minut.</p></div>
+  <div><div class="h2">Każda minuta ma adres.</div><div class="stopka">Dla gmin, szkół, firm, OSP i instytucji</div></div>
+</div></div>
+<div class="a6"><div class="n granat">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h" style="font-size:21pt">Ktoś upadł<br>i nie oddycha?</div>
+  <ol class="kroki"><li><b>Dzwoń 112</b> albo poproś o to kogoś.</li><li><b>Uciskaj klatkę piersiową</b>, mocno i szybko.</li><li><b>Niech ktoś przyniesie AED.</b> Urządzenie samo mówi, co robić.</li></ol></div>
+  <div><div class="z">Najbliższy AED: gdzieaed.pl</div></div>
+</div></div>
+<div class="arkusz"><div class="n granat">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h">Najbliższy AED</div>
+  <div class="pole"><span class="linia"></span><span>m</span><span class="strz">← ↑ → ↓</span></div>
+  <div class="opis-pola">odległość i kierunek (zakreśl)</div>
+  <div class="pole"><span class="linia dluga"></span></div>
+  <div class="opis-pola">gdzie dokładnie, np. recepcja, parter</div></div>
+  <div><div class="z">Zatrzymanie krążenia? Dzwoń 112.</div><div class="stopka">Mapa wszystkich AED: <b>gdzieaed.pl</b></div></div>
+</div><div class="n biala">
+  <img src="logo/otwarte-aed-poziome.svg" alt="otwarte AED" class="logo">
+  <div><div class="h" style="color:#0B3D91">AED jest<br>w środku</div>
+  <div class="wyb"><span class="kw"></span>całą dobę</div>
+  <div class="wyb"><span class="kw"></span>w godzinach <span class="linia krotka"></span></div></div>
+  <div><div class="h2">Każda minuta ma adres.</div><div class="stopka ciem">Zatrzymanie krążenia? Dzwoń 112 · gdzieaed.pl</div></div>
+</div><div class="n zielen">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h">Masz AED?<br>Pokaż go.</div>
+  <p class="t">Opublikuj dane o swoim defibrylatorze na dane.gov.pl. Na <b>otwarteaed.pl</b> zajmie to kilka minut.</p></div>
+  <div><div class="h2">Każda minuta ma adres.</div><div class="stopka">Dla gmin, szkół, firm, OSP i instytucji</div></div>
+</div><div class="n granat">
+  <img src="logo/otwarte-aed-poziome-negatyw.svg" alt="otwarte AED" class="logo">
+  <div><div class="h" style="font-size:21pt">Ktoś upadł<br>i nie oddycha?</div>
+  <ol class="kroki"><li><b>Dzwoń 112</b> albo poproś o to kogoś.</li><li><b>Uciskaj klatkę piersiową</b>, mocno i szybko.</li><li><b>Niech ktoś przyniesie AED.</b> Urządzenie samo mówi, co robić.</li></ol></div>
+  <div><div class="z">Najbliższy AED: gdzieaed.pl</div></div>
+</div></div>
+</body></html>
