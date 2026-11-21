@@ -74,10 +74,11 @@
   <ol class="kroki">
     <li id="k1">
       <h3>Wgraj plik</h3>
-      <label class="upusc" for="plik"><input type="file" id="plik" accept=".csv,.xlsx,.json,.geojson,.kml,.txt"><span>Upuść plik CSV, XLSX, GeoJSON lub KML albo kliknij, aby wybrać</span></label>
+      <label class="upusc" for="plik"><input type="file" id="plik" accept=".csv,.xlsx,.json,.geojson,.kml,.txt"><span>Przeciągnij tutaj plik Excel (XLSX), CSV, GeoJSON lub KML albo kliknij, aby wybrać</span></label>
       <form id="formUrl" class="url"><label for="url">albo podaj adres pliku w internecie</label><div><input type="url" id="url" placeholder="https://…/defibrylatory.csv"><button class="przycisk" type="submit">Wczytaj</button></div></form>
       <p class="male"><button class="przycisk" type="button" id="przyklad">Wypróbuj na prawdziwym pliku Marek z dane.gov.pl</button></p>
-      <p class="male">Nie masz pliku? Pobierz szablon: <a href="dane/szablony/szablon_mam_wspolrzedne.xlsx" download>mam współrzędne</a> albo <a href="dane/szablony/szablon_mam_adresy.xlsx" download>mam tylko adresy</a>.</p>
+      <p class="male"><strong>Przykład do sprawdzenia:</strong> pobierz <a href="przyklady/marki_dane_gov_pl.xlsx" download>marki_dane_gov_pl.xlsx</a> (prawdziwy plik Excel z dane.gov.pl, z błędami: cały wiersz w jednej kolumnie, zamienione osie) i przeciągnij go do pola wyżej.</p>
+      <p class="male">Nie masz jeszcze listy? Pobierz szablon Excel: <a href="dane/szablony/szablon_mam_wspolrzedne.xlsx" download>mam współrzędne</a> albo <a href="dane/szablony/szablon_mam_adresy.xlsx" download>mam tylko adresy</a>.</p>
     </li>
     <li id="k2" hidden>
       <h3>Sprawdź dopasowanie kolumn</h3>
@@ -107,6 +108,15 @@
 <section id="jakosc" aria-labelledby="h-jakosc">
   <p class="dla">Dla dysponentów i ministerstwa: co warto poprawić w każdym źródle</p>
   <h2 id="h-jakosc">Jakość źródeł</h2>
+  <div class="wiarygodnosc">
+    <h3>Skąd wiadomo, że dane są prawdziwe</h3>
+    <ul>
+      <li><strong>Tylko zarejestrowane źródła.</strong> Hub pobiera dane z opisanych źródeł (dane.gov.pl, API miast, OpenStreetMap), a nie od anonimowych osób.</li>
+      <li><strong>Publikuje sam dysponent.</strong> Kreator tylko przygotowuje pliki. Na dane.gov.pl trafiają ze strony lub BIP urzędu, przez wniosek do ministerstwa.</li>
+      <li><strong>Każdy rekord mówi, kto go potwierdził:</strong> dysponent albo społeczność OpenStreetMap. Przy scalaniu wygrywa dysponent, a odrzucone wartości widać w polu „konflikty”.</li>
+      <li><strong>Kontrola przed każdą publikacją.</strong> Plik dla dane.gov.pl musi przejść schemat portalu, sumę MD5 i porównanie z poprzednią wersją. Jeśli nie przejdzie, zostaje ostatnia dobra wersja.</li>
+    </ul>
+  </div>
   <p>Ocena 0–100 dla każdego rekordu. Brak godzin dostępności nie obniża oceny: przyjmujemy, że AED jest dostępny.</p>
   <div class="przewin"><table class="jakosc"><thead><tr><th scope="col">Źródło</th><th scope="col">Rekordów</th><th scope="col">Ocena</th><th scope="col">Co warto poprawić</th></tr></thead><tbody id="tabJakosc"></tbody></table></div>
 </section>
@@ -122,8 +132,8 @@
 <section id="kampania" aria-labelledby="h-kampania">
   <p class="dla">Dla dysponentów AED i ich komunikacji: urzędów, straży, szkół, firm</p>
   <h2 id="h-kampania">Kampania „otwarte AED”</h2>
-  <p class="wstep" style="margin-bottom:8px"><strong>Każda minuta ma adres.</strong> Dla dysponentów: <strong>„Pokaż swój AED. Opublikuj dane na dane.gov.pl.”</strong></p>
-  <p>Zachęcamy gminy, PSP i OSP, szkoły, szpitale i firmy do publikowania potwierdzonych danych o swoich defibrylatorach. Nikogo nie zmuszamy i nie prosimy o zgłaszanie cudzych urządzeń. Postęp kampanii liczy hub: ilu dysponentów publikuje i ile AED potwierdzili.</p>
+  <p class="wstep" style="margin-bottom:8px"><strong>Każda minuta ma adres.</strong> Dla dysponentów: <strong>„Pokaż swój AED. Opublikuj potwierdzone dane na dane.gov.pl.”</strong></p>
+  <p>Nieaktualny punkt na mapie to stracone minuty. Dlatego kampania nie zbiera zgłoszeń od przypadkowych osób: zachęca gminy, PSP i OSP, szkoły, szpitale i firmy, żeby same opublikowały potwierdzone dane o swoich defibrylatorach. Tylko dysponent wie, gdzie wisi jego AED i kiedy jest dostępny. Nikogo nie zmuszamy. Postęp kampanii liczy hub: ilu dysponentów publikuje i ile AED potwierdzili.</p>
   <div class="kampania-siatka">
     <figure><img src="materialy/dla_dysponentow/post-1-masz-aed.png" alt="Post: Masz AED? Pokaż go. Opublikuj dane o swoim defibrylatorze na dane.gov.pl." width="1080" height="1080" loading="lazy"><figcaption>Post „Masz AED? Pokaż go.”</figcaption></figure>
     <figure><img src="materialy/dla_dysponentow/post-2-trzy-kroki.png" alt="Post: Dane o AED w 3 krokach — wgraj plik, sprawdź podgląd, opublikuj na dane.gov.pl." width="1080" height="1080" loading="lazy"><figcaption>Post „Dane o AED w 3 krokach”</figcaption></figure>

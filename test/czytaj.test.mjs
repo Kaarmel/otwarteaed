@@ -79,3 +79,11 @@ test("JSON jako lista obiektów GeoJSON bez FeatureCollection (API Warszawy, tak
     assert.equal(r.wiersze[0].__lon, 21.0148748892902);
   }
 });
+
+test("XLSX z całymi wierszami CSV w jednej kolumnie (Marki, zasób 68355) jest rozpakowany", async () => {
+  const { czytajPlik } = await import("../hub/czytaj.mjs");
+  const r = await czytajPlik(new Uint8Array(readFileSync(new URL("../wejscie/dane_resource_68355.xlsx", import.meta.url))), "marki.xlsx");
+  assert.equal(r.wiersze.length, 8);
+  assert.ok(r.naglowki.includes("Długość geograficzna") && r.naglowki.includes(" Numer Id"));
+  assert.equal(r.wiersze[0][" Numer Id"], "1");
+});

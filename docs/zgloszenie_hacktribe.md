@@ -29,7 +29,7 @@ otwarte AED to hub danych (harvester) i kampania, które razem zbierają dane o 
    Rozpoznaje układ pliku, ujednolica współrzędne (przecinek, stopnie, PL-1992, zamienione osie) i dodaje adres oraz TERYT z rejestru PRG. Scala duplikaty bez utraty danych, a każdemu rekordowi daje ocenę jakości. Publikuje jeden zbiór w CSV UTF-8, XLSX i GeoJSON oraz plik XML z MD5. XML jest zgodny z oficjalnym schematem dane.gov.pl, więc portal może pobierać dane automatycznie. Dane odświeżają się co 2 godziny.
 2. **Wzorcowy zakres danych:** 39 pól, słowniki wartości i dwa proste szablony dla gmin („mam współrzędne” i „mam tylko adresy”), w XLSX.
 3. **Kreator na otwarteaed.pl:** gmina, PSP/OSP albo szkoła wgrywa swój plik i widzi błędy oraz adresy z PRG. Potem pobiera gotowe CSV, XML i MD5 do publikacji. Plik nie opuszcza komputera.
-4. **Kampania „otwarte AED”** z hasłem „Każda minuta ma adres.” jest skierowana do dysponentów („Pokaż swój AED. Opublikuj dane na dane.gov.pl.”). Obejmuje:
+4. **Kampania „otwarte AED”** z hasłem „Każda minuta ma adres.” jest skierowana do dysponentów („Pokaż swój AED. Opublikuj potwierdzone dane na dane.gov.pl.”). Obejmuje:
    - logo i księgę znaku;
    - odznakę do BIP;
    - posty, list do gmin i naklejki;

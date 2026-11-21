@@ -126,6 +126,11 @@ export async function czytajPlik(bajty, nazwa = "", format = {}) {
     const niepuste = ark.wiersze.filter((w) => w.some((x) => x !== null && x !== ""));
     const [nag = [], ...dane] = niepuste;
     const naglowki = nag.map((x) => (x === null ? "" : String(x)));
+    // arkusz z jedną kolumną, w której zapisano całe wiersze CSV (np. Marki na dane.gov.pl): rozpakowujemy jak CSV
+    if (naglowki.length === 1 && /[,;\t]/.test(naglowki[0]) && dane.every((w) => w.length <= 1)) {
+      const csv = czytajCSV([naglowki[0], ...dane.map((w) => (w[0] === null || w[0] === undefined ? "" : String(w[0])))].join("\n"));
+      return { format: "xlsx", ...csv, meta: { ...csv.meta, kodowanie: "utf-8", arkusz: ark.nazwa, zagniezdzony: true } };
+    }
     return { format: "xlsx", naglowki, wiersze: tabela(naglowki, dane), meta: { kodowanie: "utf-8", arkusz: ark.nazwa } };
   }
   const { tekst, kodowanie } = dekoduj(bajty);

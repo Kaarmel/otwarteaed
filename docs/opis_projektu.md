@@ -80,7 +80,7 @@ Nic nie trafia na nasz serwer.
 
 ### 4. Kampania „otwarte AED” dla dysponentów
 
-- **Nazwa akcji:** otwarte AED. **Hasło:** „Każda minuta ma adres.” **Hasło dla dysponentów:** „Pokaż swój AED. Opublikuj dane na dane.gov.pl.”
+- **Nazwa akcji:** otwarte AED. **Hasło:** „Każda minuta ma adres.” **Hasło dla dysponentów:** „Pokaż swój AED. Opublikuj potwierdzone dane na dane.gov.pl.”
 - **Logo:** średnik, czyli separator kolumn w pliku CSV, z kropką w kształcie serca i ogonkiem w kształcie błyskawicy wyładowania. Wersje SVG, PNG, JPG i PDF są w `kampania/logo/`.
 - **Księga znaku** (`kampania/ksiega_znaku.pdf`): koncepcja, wersje znaku, kolorystyka z kontrastami, pole ochronne, minimalne rozmiary, niedozwolone użycie, zastosowania.
 - **Materiały dla dysponentów** (`kampania/dla_dysponentow/`):

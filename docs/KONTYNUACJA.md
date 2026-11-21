@@ -43,7 +43,7 @@ Zadanie HackNation 2026 „Misja AED – Dane na ratunek” (Ministerstwo Cyfryz
 - 2 logiczne szablony dla gmin: „mam współrzędne” i „mam tylko adresy”, z automatycznym wykrywaniem.
 - Duplikaty scalamy inteligentnie, nic nie ginie (obserwacje zostają w `aed_obserwacje.csv`).
 - Adresy z PRG (GUGiK UUG) dla całej Polski, z bazą `baza/adresy_prg.json`.
-- Kampania NIE może brzmieć „wrzuć AED”, bo dane potwierdza dysponent. Hasło dla dysponentów: „Pokaż swój AED. Opublikuj dane na dane.gov.pl.” Nie zmuszamy ludzi.
+- Kampania NIE może brzmieć „wrzuć AED”, bo dane potwierdza dysponent. Hasło dla dysponentów: „Pokaż swój AED. Opublikuj potwierdzone dane na dane.gov.pl.” Nie zmuszamy ludzi.
 - Propozycja: PSP zobowiązuje OSP do publikacji lokalizacji AED (`docs/propozycja_psp_osp.md`).
 - Bez łamania prawa (scenariusz zamkniętego AED pomijamy).
 - Karty (naklejki) są poza punktacją, ale zostają na gdzieaed.pl.
