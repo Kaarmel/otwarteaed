@@ -19,7 +19,9 @@ function naAdres(r) {
 }
 
 async function pobierz(url, fetch, limitMs) {
-  const res = await fetch(url, { signal: AbortSignal.timeout(limitMs), headers: { "User-Agent": "otwarteaed-hub/1.0 (+https://otwarteaed.pl)" } });
+  // W przeglądarce bez własnych nagłówków (uniknięcie zapytania wstępnego CORS); w Node przedstawiamy się usłudze.
+  const naglowki = typeof window === "undefined" ? { "User-Agent": "otwarteaed-hub/1.0 (+https://otwarteaed.pl)" } : undefined;
+  const res = await fetch(url, { signal: AbortSignal.timeout(limitMs), headers: naglowki });
   if (!res.ok) throw new Error("HTTP " + res.status);
   return res.json();
 }

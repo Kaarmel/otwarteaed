@@ -123,6 +123,7 @@ zbierzPliki(wyj);
 zapisz("SHA256SUMS", pliki.map((f) => createHash("sha256").update(readFileSync(join(wyj, f))).digest("hex") + "  " + f).join("\n") + "\n");
 
 if (wyj === join(ROOT, "otwarteaed/dane")) {
+  writeFileSync(join(ROOT, "otwarteaed/profile.json"), JSON.stringify([...zrodlaProfile, ...szablony]));
   mkdirSync(join(ROOT, "public/dane"), { recursive: true });
   copyFileSync(join(wyj, "aed_mapa.json"), join(ROOT, "public/dane/aed_mapa.json"));
 }

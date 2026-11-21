@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>otwarte AED — jeden zbiór danych o defibrylatorach w Polsce</title>
+<meta name="description" content="Hub danych o AED: zbiera listy defibrylatorów z gmin, instytucji i OpenStreetMap, ujednolica je i publikuje w formacie dane.gov.pl (CSV, XML, XLSX).">
+<link rel="icon" href="sygnet.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styl.css">
+<script type="module" src="app.mjs"></script>
+</head>
+<body>
+<a class="pomin" href="#tresc">Przejdź do treści</a>
+<header class="naglowek">
+  <a class="marka" href="./" aria-label="otwarte AED — strona główna"><img src="sygnet.svg" alt="" width="40" height="40"><span>otwarte<b aria-hidden="true">;</b>AED</span></a>
+  <nav aria-label="Główna">
+    <a href="#dane">Pobierz dane</a>
+    <a href="#kreator">Dodaj dane gminy</a>
+    <a href="#jakosc">Jakość źródeł</a>
+    <a href="#wzorzec">Wzorcowy zakres</a>
+    <a href="https://gdzieaed.pl">Mapa AED</a>
+  </nav>
+</header>
+
+<main id="tresc">
+<section class="start" aria-labelledby="h-start">
+  <h1 id="h-start">Jeden zbiór danych o&nbsp;AED dla całej Polski</h1>
+  <p class="wstep">Zbieramy listy defibrylatorów od gmin, instytucji i z OpenStreetMap. Każdy plik sprowadzamy do jednego wzorca, uzupełniamy adresy z państwowego rejestru PRG i publikujemy tak, jak wymaga dane.gov.pl.</p>
+  <figure class="przemiana" aria-label="Przykład: prawdziwy wiersz z pliku gminy przed i po ujednoliceniu">
+    <div><span class="etykieta">Plik gminy na dane.gov.pl</span><code>"52.326697, 21.107557,""Defibrylator"",""Urząd Miasta Marki "",""Al.. Piłsudskiego 95, 05-270 Marki"",""1"""</code><span class="uwaga">cały wiersz w jednej kolumnie, osie zamienione, brak gminy i TERYT</span></div>
+    <div><span class="etykieta">Po przejściu przez hub</span><code>Urząd Miasta Marki,<em>52.326697</em>,<em>21.107557</em>,<em>Aleja Marszałka Józefa Piłsudskiego</em>,95,05-270,Marki,<em>wołomiński</em>,<em>mazowieckie</em>,<em>143402</em>,<em>24/7</em>,marki:1;osm:node/10037860717</code><span class="uwaga">osie naprawione, adres i TERYT z PRG, godziny z OpenStreetMap: ten AED potwierdzają 2 źródła</span></div>
+  </figure>
+  <div class="akcje">
+    <a class="przycisk glowny" href="dane/aed.csv" download>Pobierz zbiór CSV</a>
+    <a class="przycisk" href="#kreator">Opublikuj dane swojej gminy</a>
+  </div>
+  <dl class="liczby" id="liczby" aria-live="polite">
+    <div><dt>AED w zbiorze</dt><dd data-l="aed">…</dd></div>
+    <div><dt>z adresem z PRG</dt><dd data-l="adres">…</dd></div>
+    <div><dt>źródeł danych</dt><dd data-l="zrodla">…</dd></div>
+    <div><dt>potwierdzonych przez kilka źródeł</dt><dd data-l="scalone">…</dd></div>
+  </dl>
+</section>
+
+<section id="dane" aria-labelledby="h-dane">
+  <h2 id="h-dane">Pobierz dane</h2>
+  <p>Stan na <span data-l="data">…</span>. Aktualizacja codzienna. Format główny to CSV UTF-8.</p>
+  <table class="pliki">
+    <thead><tr><th scope="col">Plik</th><th scope="col">Co zawiera</th><th scope="col">Licencja</th></tr></thead>
+    <tbody>
+      <tr><td><a href="dane/aed.csv" download>aed.csv</a></td><td>Zbiór zintegrowany: jeden wiersz to jedno AED, z listą źródeł i oceną jakości.</td><td>ODbL 1.0</td></tr>
+      <tr><td><a href="dane/aed.xlsx" download>aed.xlsx</a></td><td>To samo w arkuszu, plus obserwacje, źródła, jakość i słownik pól.</td><td>ODbL 1.0</td></tr>
+      <tr><td><a href="dane/aed_obserwacje.csv" download>aed_obserwacje.csv</a></td><td>Każdy rekord każdego źródła z surowym oryginałem i listą zmian. Nic nie ginie przy scalaniu.</td><td>wg źródła</td></tr>
+      <tr><td><a href="dane/aed_dysponenci.csv" download>aed_dysponenci.csv</a></td><td>Tylko dane potwierdzone przez dysponentów (gminy, instytucje), bez OSM.</td><td>CC BY 4.0</td></tr>
+      <tr><td><a href="dane/aed.geojson" download>aed.geojson</a></td><td>Do map i GIS, WGS84.</td><td>ODbL 1.0</td></tr>
+      <tr><td><a href="dane/dane_gov_pl.xml">dane_gov_pl.xml</a> i <a href="dane/dane_gov_pl.md5">.md5</a></td><td>Plik importu dla dane.gov.pl (schemat XSD 1.13). Portal pobiera z niego dane automatycznie.</td><td>—</td></tr>
+      <tr><td><a href="dane/SHA256SUMS">SHA256SUMS</a></td><td>Sumy kontrolne wszystkich plików, do weryfikacji.</td><td>—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="kreator" class="kreator" aria-labelledby="h-kreator">
+  <h2 id="h-kreator">Opublikuj dane swojej gminy</h2>
+  <p>Wgraj listę AED w takiej postaci, w jakiej ją masz. Rozpoznamy układ pliku, pokażemy błędy i przygotujemy pliki do publikacji na dane.gov.pl. Nic nie wysyłamy na nasz serwer: wszystko dzieje się w Twojej przeglądarce.</p>
+  <ol class="kroki">
+    <li id="k1">
+      <h3>Wgraj plik</h3>
+      <label class="upusc" for="plik"><input type="file" id="plik" accept=".csv,.xlsx,.json,.geojson,.kml,.txt"><span>Upuść plik CSV, XLSX, GeoJSON lub KML albo kliknij, aby wybrać</span></label>
+      <form id="formUrl" class="url"><label for="url">albo podaj adres pliku w internecie</label><div><input type="url" id="url" placeholder="https://…/defibrylatory.csv"><button class="przycisk" type="submit">Wczytaj</button></div></form>
+      <p class="male">Nie masz pliku? Pobierz szablon: <a href="dane/szablony/szablon_mam_wspolrzedne.xlsx" download>mam współrzędne</a> albo <a href="dane/szablony/szablon_mam_adresy.xlsx" download>mam tylko adresy</a>.</p>
+    </li>
+    <li id="k2" hidden>
+      <h3>Sprawdź dopasowanie kolumn</h3>
+      <p id="rozpoznano" class="rozpoznano"></p>
+      <table class="mapowanie"><thead><tr><th scope="col">Pole wzorca</th><th scope="col">Kolumna z Twojego pliku</th></tr></thead><tbody id="mapowanie"></tbody></table>
+      <button class="przycisk" id="przelicz" type="button">Zastosuj dopasowanie</button>
+    </li>
+    <li id="k3" hidden>
+      <h3>Zobacz wynik</h3>
+      <p id="komunikat" class="komunikat" role="status"></p>
+      <div class="przewin"><table class="podglad"><thead><tr><th scope="col">Nazwa</th><th scope="col">Współrzędne</th><th scope="col">Adres</th><th scope="col">Dostępność</th><th scope="col">Uwagi</th></tr></thead><tbody id="podglad"></tbody></table></div>
+    </li>
+    <li id="k4" hidden>
+      <h3>Pobierz pliki do publikacji</h3>
+      <form id="dysponent" class="dysponent">
+        <label>Nazwa dysponenta<input id="dNazwa" required value="Urząd Gminy"></label>
+        <label>Adres strony, pod którym wystawisz pliki<input id="dUrl" type="url" required placeholder="https://bip.gmina.pl/aed/"></label>
+        <label>Licencja<select id="dLic"><option>CC BY 4.0</option><option>CC0 1.0</option></select></label>
+      </form>
+      <div class="akcje"><button class="przycisk glowny" id="pobierzCSV" type="button">Pobierz CSV</button><button class="przycisk" id="pobierzXML" type="button">Pobierz XML i MD5</button><button class="przycisk" id="pobierzProfil" type="button">Pobierz profil źródła</button></div>
+      <ol class="instrukcja"><li>Wystaw pliki CSV, XML i MD5 pod adresem podanym wyżej.</li><li>Złóż w Ministerstwie Cyfryzacji wniosek o automatyczne pobieranie, podając adres pliku XML.</li><li>Portal dane.gov.pl sam pobierze dane, gdy zmienisz plik. My też.</li></ol>
+    </li>
+  </ol>
+</section>
+
+<section id="jakosc" aria-labelledby="h-jakosc">
+  <h2 id="h-jakosc">Jakość źródeł</h2>
+  <p>Ocena 0–100 dla każdego rekordu. Brak godzin dostępności nie obniża oceny: przyjmujemy, że AED jest dostępny.</p>
+  <div class="przewin"><table class="jakosc"><thead><tr><th scope="col">Źródło</th><th scope="col">Rekordów</th><th scope="col">Ocena</th><th scope="col">Co warto poprawić</th></tr></thead><tbody id="tabJakosc"></tbody></table></div>
+</section>
+
+<section id="wzorzec" aria-labelledby="h-wzorzec">
+  <h2 id="h-wzorzec">Wzorcowy zakres danych</h2>
+  <p>Jeden zestaw pól dla wszystkich dysponentów. Wymagane są tylko trzy: nazwa obiektu i współrzędne albo nazwa, miejscowość i numer budynku.</p>
+  <div class="akcje"><a class="przycisk glowny" href="dane/wzorcowy_zakres_danych.xlsx" download>Pobierz wzorcowy zakres (XLSX)</a><a class="przycisk" href="dane/szablony/szablon_mam_wspolrzedne.csv" download>Szablon: mam współrzędne</a><a class="przycisk" href="dane/szablony/szablon_mam_adresy.csv" download>Szablon: mam tylko adresy</a></div>
+  <details><summary>Wszystkie pola</summary><div class="przewin"><table class="pola"><thead><tr><th scope="col">Pole</th><th scope="col">Opis</th><th scope="col">Format</th></tr></thead><tbody id="tabPola"></tbody></table></div></details>
+</section>
+</main>
+
+<footer class="stopka">
+  <p><strong>W nagłym wypadku dzwoń 112.</strong> otwarte AED to otwarty projekt społeczny, nie urzędowa ewidencja AED.</p>
+  <p>Dane: © współtwórcy OpenStreetMap (ODbL 1.0) · Urząd Miasta Krosna · Urząd Miejski w Przemyślu · Urząd Miasta Marki · Urząd Miasta Legionowo · adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).</p>
+</footer>
+</body>
+</html>

@@ -24,6 +24,8 @@ function komorka(p, v) {
   if (Array.isArray(v)) v = v.join(";");
   else if (typeof v === "object") v = JSON.stringify(v);
   v = String(v);
+  // Ochrona przed wstrzyknięciem formuł (dane z zewnątrz otwierane w arkuszu); "+48 …" i "-5" zostają bez zmian.
+  if (/^[=@\t\r]|^[+-](?=[^\d\s(])/.test(v)) v = "'" + v;
   return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
 }
 export function doCSV(rekordy, pola) {
@@ -69,4 +71,17 @@ export function doXML({ dataDate, bazaUrl, historia = [dataDate], zrodla = [] })
     "Rekordy AED pochodzące wyłącznie od dysponentów (urzędy, instytucje, właściciele urządzeń), bez danych OpenStreetMap, w wzorcowym zakresie danych.",
     "AED records from operators only (public bodies, owners), without OpenStreetMap data, in the model schema.")}<url>https://otwarteaed.pl</url><updateFrequency>daily</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><dbOrCopyrighted>Źródła: ${x(zrodla.filter((z) => !/ODbL/.test(z.licencja)).map((z) => z.atrybucja).join("; ") || "dysponenci AED")}.</dbOrCopyrighted><dbOrCopyrightedLicenseChosen>CC BY 4.0</dbOrCopyrightedLicenseChosen></conditions><resources>${zasob({ extIdent: `otwarteaed_dysp_${d8(dataDate)}`, url: `${bazaUrl}aed_dysponenci_${dataDate}.csv`, tytul: `AED od dysponentów ${dataDate}`, tytulEn: `AED from operators ${dataDate}`, opis: "CSV UTF-8, wzorcowy zakres danych.", opisEn: "CSV UTF-8, model schema." }, dataDate)}</resources><tags>${tagi}</tags>${flagi(false)}</dataset>`;
   return `<?xml version="1.0" encoding="UTF-8"?>\n<p:datasets xmlns:p="urn:otwarte-dane:harvester:1.13">${zbior1}${zbior2}</p:datasets>\n`;
+}
+
+// XML dla pojedynczego dysponenta (gminy) — ten sam format importu dane.gov.pl (XSD 1.13), jeden zbiór, jeden zasób CSV z datą.
+export function doXMLDysponenta({ dysponent, dataDate, nazwaCSV, slug }) {
+  const d8 = dataDate.replaceAll("-", "");
+  const lic = ["CC0 1.0", "CC BY 4.0", "CC BY-SA 4.0"].includes(dysponent.licencja) ? dysponent.licencja : "CC BY 4.0";
+  const baza = dysponent.url.endsWith("/") ? dysponent.url : dysponent.url + "/";
+  const r = zasob({ extIdent: `aed_${slug}`.slice(0, 27) + "_" + d8, url: baza + nazwaCSV,
+    tytul: `Defibrylatory AED — ${dysponent.nazwa} — ${dataDate}`, tytulEn: `AED defibrillators — ${dysponent.nazwa} — ${dataDate}`,
+    opis: "Lista AED w wzorcowym zakresie danych otwarte AED (CSV UTF-8).", opisEn: "AED list in the otwarte AED model schema (CSV UTF-8)." }, dataDate);
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<p:datasets xmlns:p="urn:otwarte-dane:harvester:1.13"><dataset status="published"><extIdent>${`aed_${slug}`.slice(0, 36)}</extIdent>${pl_en("title", `Defibrylatory AED — ${dysponent.nazwa}`, `AED defibrillators — ${dysponent.nazwa}`)}${pl_en("description",
+    `Lokalizacje automatycznych defibrylatorów zewnętrznych (AED), których dysponentem jest ${dysponent.nazwa}. Dane potwierdzone przez dysponenta, w wzorcowym zakresie danych otwarte AED.`,
+    `Locations of AED defibrillators operated by ${dysponent.nazwa}, confirmed by the operator, in the otwarte AED model schema.`)}<url>${x(baza)}</url><updateFrequency>irregular</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><dbOrCopyrightedLicenseChosen>${lic}</dbOrCopyrightedLicenseChosen></conditions><resources>${r}</resources><tags>${tagi}</tags>${flagi(false)}</dataset></p:datasets>\n`;
 }

@@ -27,6 +27,11 @@ test("CSV: cytowanie RFC 4180, kropka dziesiętna, 6 miejsc, listy przez średni
   assert.equal(csv, 'a,szerokosc,c,d,e\n"Szkoła, ""Nr 1""",50.150947,x;y,,5.88\n');
 });
 
+test("CSV: neutralizacja formuł z danych zewnętrznych, telefony i liczby bez zmian", () => {
+  const csv = doCSV([{ a: '=HYPERLINK("http://zly")', b: "@SUM(1)", c: "+48 17 772 09 09", d: "-5", e: "-cmd" }], ["a", "b", "c", "d", "e"]);
+  assert.equal(csv.split("\n")[1], '"\'=HYPERLINK(""http://zly"")",\'@SUM(1),+48 17 772 09 09,-5,\'-cmd');
+});
+
 test("indeks mapy: kody statusu 0 brak danych, 1 24/7, 2 godziny, 3 ograniczony", () => {
   const ix = doIndeksuMapy([{ aed_id: "PL-AED-1", szerokosc: 50.1, dlugosc: 21.9, status_dostepnosci: "ograniczony", nazwa_obiektu: "Bardzo długa nazwa obiektu, który ma AED w holu" },
     { aed_id: "PL-AED-2", szerokosc: null, dlugosc: null, status_dostepnosci: "24/7" }]);
