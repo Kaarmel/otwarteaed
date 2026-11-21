@@ -1,0 +1,59 @@
+{
+  "id": "przemysl",
+  "nazwa": "Urząd Miejski w Przemyślu",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "dysponent",
+  "licencja": "CC0-1.0",
+  "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "atrybucja": "Urząd Miejski w Przemyślu",
+  "url_zrodla": "https://dane.gov.pl/pl/dataset/4581",
+  "data_danych": "2024-11-06",
+  "obszar": [
+    49.7,
+    22.6,
+    49.9,
+    22.9
+  ],
+  "pobierz": {
+    "plik": "wejscie/dane_resource_62093.geojson",
+    "dane_gov_pl": {
+      "zbior": 4581,
+      "format": "geojson"
+    }
+  },
+  "id_kolumna": "id",
+  "kolumny": {
+    "szerokosc": [
+      "__lat"
+    ],
+    "dlugosc": [
+      "__lon"
+    ],
+    "nazwa_obiektu": [
+      "name"
+    ],
+    "ulica": [
+      "street"
+    ],
+    "numer": [
+      "home_number"
+    ],
+    "kod_pocztowy": [
+      "postcode"
+    ],
+    "miejscowosc": [
+      "city"
+    ],
+    "telefon": [
+      "phone"
+    ]
+  },
+  "mapowanie_stale": {
+    "adres_zrodlowy": [
+      "street",
+      "home_number",
+      "postcode",
+      "city"
+    ]
+  }
+}

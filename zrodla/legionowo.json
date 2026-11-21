@@ -1,0 +1,59 @@
+{
+  "id": "legionowo",
+  "nazwa": "Urząd Miasta Legionowo",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "dysponent",
+  "licencja": "CC0-1.0",
+  "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "atrybucja": "Urząd Miasta Legionowo",
+  "url_zrodla": "https://dane.gov.pl/pl/dataset/40593",
+  "data_danych": "2026-09-14",
+  "obszar": [
+    52.33,
+    20.85,
+    52.47,
+    21.02
+  ],
+  "pobierz": {
+    "plik": "wejscie/dane_resource_2625221.csv",
+    "dane_gov_pl": {
+      "zbior": 40593,
+      "format": "csv"
+    }
+  },
+  "kolumny": {
+    "szerokosc": [
+      "szerokosc_geograficzna"
+    ],
+    "dlugosc": [
+      "dlugosc_geograficzna"
+    ],
+    "nazwa_obiektu": [
+      "nazwa"
+    ],
+    "ulica": [
+      "nazwa_ulicy"
+    ],
+    "numer": [
+      "nr_budynku"
+    ],
+    "kod_pocztowy": [
+      "kod_pocztowy"
+    ],
+    "miejscowosc": [
+      "miejscowosc"
+    ],
+    "simc": [
+      "kod_simc"
+    ]
+  },
+  "mapowanie_stale": {
+    "adres_zrodlowy": [
+      "cecha_ulicy",
+      "nazwa_ulicy",
+      "nr_budynku",
+      "kod_pocztowy",
+      "miejscowosc"
+    ]
+  }
+}

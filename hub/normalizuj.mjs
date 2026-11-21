@@ -112,6 +112,7 @@ const POLA_TEKSTOWE = ["nazwa_obiektu", "lokalizacja_opis", "poziom", "ulica", "
 const POLA_DAT = ["data_weryfikacji", "termin_elektrod", "termin_baterii", "data_danych"];
 
 function wartosc(wiersz, kol) {
+  if (kol && kol.pierwsza) return kol.pierwsza.map((k) => tekstLubNull(wiersz[k])).find(Boolean) ?? null;
   if (Array.isArray(kol)) { const cz = kol.map((k) => tekstLubNull(wiersz[k])).filter(Boolean); return cz.length ? cz.join(" ") : null; }
   return kol === undefined ? null : wiersz[kol];
 }

@@ -1,0 +1,39 @@
+{
+  "id": "marki",
+  "nazwa": "Urząd Miasta Marki",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "dysponent",
+  "licencja": "CC-BY-4.0",
+  "licencja_url": "https://creativecommons.org/licenses/by/4.0/",
+  "atrybucja": "Urząd Miasta Marki",
+  "url_zrodla": "https://dane.gov.pl/pl/dataset/4955",
+  "data_danych": "2025-07-10",
+  "obszar": [
+    52.25,
+    21,
+    52.4,
+    21.2
+  ],
+  "pobierz": {
+    "plik": "wejscie/dane_resource_68353.csv",
+    "dane_gov_pl": {
+      "zbior": 4955,
+      "format": "csv"
+    }
+  },
+  "id_kolumna": " Numer Id",
+  "kolumny": {
+    "szerokosc": [
+      "Szerokość geograficzna"
+    ],
+    "dlugosc": [
+      "Długość geograficzna"
+    ],
+    "nazwa_obiektu": [
+      " Lokalizacja"
+    ],
+    "adres_zrodlowy": [
+      " Adres"
+    ]
+  }
+}

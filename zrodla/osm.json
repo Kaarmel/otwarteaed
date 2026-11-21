@@ -1,0 +1,78 @@
+{
+  "id": "osm",
+  "nazwa": "OpenStreetMap",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "spolecznosc",
+  "licencja": "ODbL-1.0",
+  "licencja_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "atrybucja": "© współtwórcy OpenStreetMap",
+  "url_zrodla": "https://www.openstreetmap.org/copyright",
+  "data_danych": "2026-11-21",
+  "obszar": [
+    49,
+    14.12,
+    54.84,
+    24.15
+  ],
+  "pobierz": {
+    "plik": "wejscie/osm_aed_pl.json",
+    "overpass": true
+  },
+  "id_kolumna": "__id",
+  "kolumny": {
+    "szerokosc": [
+      "__lat"
+    ],
+    "dlugosc": [
+      "__lon"
+    ],
+    "nazwa_obiektu": [
+      "name"
+    ],
+    "godziny": [
+      "opening_hours"
+    ],
+    "dostep": [
+      "access"
+    ],
+    "wewnatrz": [
+      "indoor"
+    ],
+    "operator": [
+      "operator"
+    ],
+    "poziom": [
+      "level"
+    ],
+    "data_weryfikacji": [
+      "check_date"
+    ],
+    "lokalizacja_opis": [
+      "defibrillator:location"
+    ],
+    "telefon": [
+      "phone"
+    ]
+  },
+  "mapowanie_stale": {
+    "lokalizacja_opis": {
+      "pierwsza": [
+        "defibrillator:location:pl",
+        "defibrillator:location"
+      ]
+    },
+    "telefon": {
+      "pierwsza": [
+        "phone",
+        "contact:phone"
+      ]
+    },
+    "adres_zrodlowy": [
+      "addr:street",
+      "addr:place",
+      "addr:housenumber",
+      "addr:postcode",
+      "addr:city"
+    ]
+  }
+}

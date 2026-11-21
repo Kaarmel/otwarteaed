@@ -1,0 +1,39 @@
+{
+  "id": "krosno",
+  "nazwa": "Urząd Miasta Krosna",
+  "rodzaj": "zrodlo",
+  "potwierdzenie": "dysponent",
+  "licencja": "CC0-1.0",
+  "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "atrybucja": "Urząd Miasta Krosna",
+  "url_zrodla": "https://dane.gov.pl/pl/dataset/3624",
+  "data_danych": "2024-02-19",
+  "obszar": [
+    49.6,
+    21.6,
+    49.8,
+    21.9
+  ],
+  "pobierz": {
+    "plik": "wejscie/dane_resource_54632.csv",
+    "dane_gov_pl": {
+      "zbior": 3624,
+      "format": "csv"
+    }
+  },
+  "id_kolumna": " Numer Id",
+  "kolumny": {
+    "szerokosc": [
+      "Szerokość geograficzna"
+    ],
+    "dlugosc": [
+      "Długość geograficzna"
+    ],
+    "nazwa_obiektu": [
+      " Lokalizacja"
+    ],
+    "adres_zrodlowy": [
+      " Adres"
+    ]
+  }
+}

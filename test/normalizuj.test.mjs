@@ -87,6 +87,12 @@ test("wiersz → obserwacja z pochodzeniem i bez wyjątku przy braku współrzę
   assert.deepEqual(o.surowe, wiersz);
 });
 
+test("pierwsza niepusta kolumna z listy (OSM: opis po polsku albo ogólny)", () => {
+  const o = normalizujWiersz({ "defibrillator:location": "przy wejściu", __lat: 50.1, __lon: 21.9 }, profil,
+    { lokalizacja_opis: { pierwsza: ["defibrillator:location:pl", "defibrillator:location"] }, szerokosc: "__lat", dlugosc: "__lon" }, 0);
+  assert.equal(o.lokalizacja_opis, "przy wejściu");
+});
+
 test("adres źródłowy składany z kilku kolumn, id z indeksu, gdy brak kolumny", () => {
   const o = normalizujWiersz({ ul: "Piłsudskiego", nr: "41", m: "Legionowo", szer: "52,395198", dl: "20,931382" },
     { ...profil, id_kolumna: undefined }, { adres_zrodlowy: ["ul", "nr", "m"], szerokosc: "szer", dlugosc: "dl" }, 4);
