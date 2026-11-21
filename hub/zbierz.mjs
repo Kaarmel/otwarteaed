@@ -2,6 +2,7 @@
 // Harvester otwarte AED: profile źródeł → pobranie/odczyt → normalizacja → adresy PRG → scalanie → jakość → pliki wynikowe.
 // Użycie: node hub/zbierz.mjs [--offline] [--bez-zapytan] [--wyjscie otwarteaed/dane] [--data RRRR-MM-DD] [--baza-url https://otwarteaed.pl/dane/]
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync, rmSync } from "node:fs";
+import { pobierzNajnowszy } from "./pobierz.mjs";
 import { createHash } from "node:crypto";
 import { join, dirname, isAbsolute } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,9 +32,10 @@ mkdirSync(wyj, { recursive: true });
 const zapisz = (n, dane) => writeFileSync(join(wyj, n), dane);
 
 async function pobierzZrodlo(p) {
-  const lokalny = () => new Uint8Array(readFileSync(join(ROOT, p.pobierz.plik)));
-  if (OFFLINE || !p.pobierz.dane_gov_pl) return { bajty: lokalny(), skad: p.pobierz.plik };
+  const lokalny = () => (p.pobierz.plik ? { bajty: new Uint8Array(readFileSync(join(ROOT, p.pobierz.plik))), skad: p.pobierz.plik } : null);
+  if (OFFLINE || !(p.pobierz.dane_gov_pl || p.pobierz.url)) return lokalny();
   try {
+    if (p.pobierz.url) { const r = await pobierzNajnowszy(p.pobierz.url, DATA, { dni: p.pobierz.dni_wstecz ?? 31 }); return { bajty: r.bajty, skad: r.url }; }
     const { zbior, format } = p.pobierz.dane_gov_pl;
     const r = await fetch(`https://api.dane.gov.pl/1.4/datasets/${zbior}/resources?per_page=50`, { signal: AbortSignal.timeout(20000) }).then((x) => x.json());
     const z = r.data.map((d) => d.attributes).filter((a) => (a.format || "").toLowerCase() === format).sort((a, b) => String(b.data_date).localeCompare(String(a.data_date)))[0];
@@ -41,12 +43,14 @@ async function pobierzZrodlo(p) {
     if (!url) throw new Error("brak zasobu " + format);
     const b = new Uint8Array(await (await fetch(url, { signal: AbortSignal.timeout(60000) })).arrayBuffer());
     return { bajty: b, skad: url };
-  } catch (e) { log(p.id, "pobieranie nieudane, używam pliku lokalnego:", e.message); return { bajty: lokalny(), skad: p.pobierz.plik }; }
+  } catch (e) { log(p.id, "pobieranie nieudane:", e.message, p.pobierz.plik ? "— używam pliku lokalnego" : "— pomijam źródło"); return lokalny(); }
 }
 
 const obserwacje = [], zrodlaInfo = [];
 for (const p of zrodlaProfile) {
-  const { bajty, skad } = await pobierzZrodlo(p);
+  const pobrane = await pobierzZrodlo(p);
+  if (!pobrane) { log(p.id, "brak danych — źródło pominięte w tym przebiegu"); continue; }
+  const { bajty, skad } = pobrane;
   const r = await czytajPlik(bajty, skad, p.format);
   const [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
   const profil = { ...p, data_pobrania: DATA };
