@@ -58,7 +58,7 @@ function zastosuj(o, a) {
   if (a.przyblizony) o.flagi.push("adres_przyblizony");
 }
 
-export async function uzupelnijAdresy(obserwacje, baza, { fetch = globalThis.fetch, rownolegle = 8, limitMs = 8000, postep } = {}) {
+export async function uzupelnijAdresy(obserwacje, baza, { fetch = globalThis.fetch ?? null, rownolegle = 8, limitMs = 8000, postep } = {}) {
   const s = { zapytan: 0, zBazy: 0, bledow: 0 };
   const zadania = [];
   for (const o of obserwacje) {
@@ -73,6 +73,7 @@ export async function uzupelnijAdresy(obserwacje, baza, { fetch = globalThis.fet
         zastosuj(o, g.adres);
       };
       if (k in baza) { s.zBazy++; zastosujG(baza[k]); continue; }
+      if (!fetch) continue;
       zadania.push(async () => {
         try { s.zapytan++; const g = await geokoduj(o.adres_zrodlowy, { fetch, limitMs }); baza[k] = g; zastosujG(g); }
         catch { s.bledow++; }
@@ -81,6 +82,7 @@ export async function uzupelnijAdresy(obserwacje, baza, { fetch = globalThis.fet
     }
     const k = kluczAdresu(o.szerokosc, o.dlugosc);
     if (k in baza) { s.zBazy++; zastosuj(o, baza[k]); continue; }
+    if (!fetch) { zastosuj(o, null); continue; }
     zadania.push(async () => {
       try {
         s.zapytan++;

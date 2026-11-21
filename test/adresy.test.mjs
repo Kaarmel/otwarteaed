@@ -74,6 +74,13 @@ test("geokodowanie rekordu bez współrzędnych (szablon mam_adresy)", async () 
   assert.ok(!o[0].flagi.includes("brak_wspolrzednych"));
 });
 
+test("bez fetch (tryb offline): tylko baza, bez zapytań i bez wyjątku", async () => {
+  const o = obs();
+  const s = await uzupelnijAdresy(o, {}, { fetch: null });
+  assert.equal(s.zapytan, 0);
+  assert.equal(o[0].adres_zrodlo, "brak");
+});
+
 test("geokoduj zwraca null przy braku wyniku", async () => {
   assert.equal(await geokoduj("Nieistniejąca 999", { fetch: async () => odp(PUSTO) }), null);
 });

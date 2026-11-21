@@ -1,0 +1,172 @@
+{
+ "data": "2026-11-21",
+ "zrodla": [
+  {
+   "id": "krosno",
+   "nazwa": "Urząd Miasta Krosna",
+   "potwierdzenie": "dysponent",
+   "licencja": "CC0-1.0",
+   "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "atrybucja": "Urząd Miasta Krosna",
+   "url_zrodla": "https://dane.gov.pl/pl/dataset/3624",
+   "data_danych": "2024-02-19",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/dane_resource_54632.csv",
+   "sha256_wejscia": "bfd98b17099e294174f35ce3fdc9eb617bdf394ba8ebe148ea840419fe2f2370",
+   "rekordow": 21,
+   "format": "csv",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.942,
+   "mapowanie": {
+    "szerokosc": "Szerokość geograficzna",
+    "dlugosc": "Długość geograficzna",
+    "nazwa_obiektu": " Lokalizacja",
+    "adres_zrodlowy": " Adres"
+   }
+  },
+  {
+   "id": "legionowo",
+   "nazwa": "Urząd Miasta Legionowo",
+   "potwierdzenie": "dysponent",
+   "licencja": "CC0-1.0",
+   "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "atrybucja": "Urząd Miasta Legionowo",
+   "url_zrodla": "https://dane.gov.pl/pl/dataset/40593",
+   "data_danych": "2026-09-14",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/dane_resource_2625221.csv",
+   "sha256_wejscia": "a029cdc57fc4805ba6213ed34d008a7d84bb98bc512dab77ad894b5dc22ad3fd",
+   "rekordow": 24,
+   "format": "csv",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.965,
+   "mapowanie": {
+    "szerokosc": "szerokosc_geograficzna",
+    "dlugosc": "dlugosc_geograficzna",
+    "nazwa_obiektu": "nazwa",
+    "ulica": "nazwa_ulicy",
+    "numer": "nr_budynku",
+    "kod_pocztowy": "kod_pocztowy",
+    "miejscowosc": "miejscowosc",
+    "simc": "kod_simc",
+    "adres_zrodlowy": [
+     "cecha_ulicy",
+     "nazwa_ulicy",
+     "nr_budynku",
+     "kod_pocztowy",
+     "miejscowosc"
+    ]
+   }
+  },
+  {
+   "id": "marki",
+   "nazwa": "Urząd Miasta Marki",
+   "potwierdzenie": "dysponent",
+   "licencja": "CC-BY-4.0",
+   "licencja_url": "https://creativecommons.org/licenses/by/4.0/",
+   "atrybucja": "Urząd Miasta Marki",
+   "url_zrodla": "https://dane.gov.pl/pl/dataset/4955",
+   "data_danych": "2025-07-10",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/dane_resource_68353.csv",
+   "sha256_wejscia": "d42a91e47d3a89f9e2937aaaafe31c7736306c456967ae525d994a1c3743be05",
+   "rekordow": 8,
+   "format": "csv",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.929,
+   "mapowanie": {
+    "szerokosc": "Szerokość geograficzna",
+    "dlugosc": "Długość geograficzna",
+    "nazwa_obiektu": " Lokalizacja",
+    "adres_zrodlowy": " Adres"
+   }
+  },
+  {
+   "id": "osm",
+   "nazwa": "OpenStreetMap",
+   "potwierdzenie": "spolecznosc",
+   "licencja": "ODbL-1.0",
+   "licencja_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+   "atrybucja": "© współtwórcy OpenStreetMap",
+   "url_zrodla": "https://www.openstreetmap.org/copyright",
+   "data_danych": "2026-11-21",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/osm_aed_pl.json",
+   "sha256_wejscia": "e0362127fcda2aa9c640e6eb686a906452c9e2271243272071a52d69f9824a28",
+   "rekordow": 18301,
+   "format": "osm",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.973,
+   "mapowanie": {
+    "szerokosc": "__lat",
+    "dlugosc": "__lon",
+    "nazwa_obiektu": "name",
+    "godziny": "opening_hours",
+    "dostep": "access",
+    "wewnatrz": "indoor",
+    "operator": "operator",
+    "poziom": "level",
+    "data_weryfikacji": "check_date",
+    "lokalizacja_opis": {
+     "pierwsza": [
+      "defibrillator:location:pl",
+      "defibrillator:location"
+     ]
+    },
+    "telefon": {
+     "pierwsza": [
+      "phone",
+      "contact:phone"
+     ]
+    },
+    "adres_zrodlowy": [
+     "addr:street",
+     "addr:place",
+     "addr:housenumber",
+     "addr:postcode",
+     "addr:city"
+    ]
+   }
+  },
+  {
+   "id": "przemysl",
+   "nazwa": "Urząd Miejski w Przemyślu",
+   "potwierdzenie": "dysponent",
+   "licencja": "CC0-1.0",
+   "licencja_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "atrybucja": "Urząd Miejski w Przemyślu",
+   "url_zrodla": "https://dane.gov.pl/pl/dataset/4581",
+   "data_danych": "2024-11-06",
+   "data_pobrania": "2026-11-21",
+   "plik": "wejscie/dane_resource_62093.geojson",
+   "sha256_wejscia": "2f49fe5394c1eb9e841ad5921b19c1cade6b843278d7283534658f0caba01797",
+   "rekordow": 21,
+   "format": "geojson",
+   "kodowanie": "utf-8",
+   "zgodnosc_profilu": 0.865,
+   "mapowanie": {
+    "szerokosc": "__lat",
+    "dlugosc": "__lon",
+    "nazwa_obiektu": "name",
+    "ulica": "street",
+    "numer": "home_number",
+    "kod_pocztowy": "postcode",
+    "miejscowosc": "city",
+    "telefon": "phone",
+    "adres_zrodlowy": [
+     "street",
+     "home_number",
+     "postcode",
+     "city"
+    ]
+   }
+  },
+  {
+   "id": "prg",
+   "nazwa": "PRG — punkty adresowe (GUGiK, usługa UUG)",
+   "atrybucja": "Adresy: Państwowy Rejestr Granic i punkty adresowe, GUGiK",
+   "url_zrodla": "https://services.gugik.gov.pl/uug/"
+  }
+ ],
+ "uwaga": "Licencje zachowane dla każdego rekordu (pole licencja). Zbiór zintegrowany zawiera dane OpenStreetMap na ODbL 1.0 — całość nie jest CC0."
+}
