@@ -67,7 +67,9 @@ async function pobierzZrodlo(p) {
     if (p.pobierz.url) { const r = await pobierzNajnowszy(p.pobierz.url, DATA, { dni: p.pobierz.dni_wstecz ?? 31 }); return { bajty: r.bajty, skad: r.url }; }
     const { zbior, format } = p.pobierz.dane_gov_pl;
     const r = await fetch(`https://api.dane.gov.pl/1.4/datasets/${zbior}/resources?per_page=50`, { signal: AbortSignal.timeout(20000) }).then((x) => x.json());
-    const z = r.data.map((d) => d.attributes).filter((a) => (a.format || "").toLowerCase() === format).sort((a, b) => String(b.data_date).localeCompare(String(a.data_date)))[0];
+    // tylko zasoby o AED: zbiór może mieć inne zasoby (np. Legionowo „Zdrowie” ma też wykaz aptek)
+    const tytul = new RegExp(p.pobierz.dane_gov_pl.tytul || "defibryl|\\bAED\\b", "i");
+    const z = r.data.map((d) => d.attributes).filter((a) => (a.format || "").toLowerCase() === format && tytul.test(a.title || "")).sort((a, b) => String(b.data_date).localeCompare(String(a.data_date)))[0];
     const url = z?.download_url || z?.file_url || z?.link;
     if (!url) throw new Error("brak zasobu " + format);
     const b = new Uint8Array(await (await fetch(url, { signal: AbortSignal.timeout(60000) })).arrayBuffer());
@@ -79,11 +81,20 @@ const obserwacje = [], zrodlaInfo = [];
 for (const p of zrodlaProfile) {
   const pobrane = await pobierzZrodlo(p);
   if (!pobrane) { log(p.id, "brak danych — źródło pominięte w tym przebiegu"); continue; }
-  const { bajty, skad } = pobrane;
+  let { bajty, skad } = pobrane;
   const r = await czytajPlik(bajty, skad, p.format);
   // filtr: np. z bazy pojazdów ZTM tylko pojazdy z AED
   if (p.filtr) r.wiersze = r.wiersze.filter((w) => String(w[p.filtr.kolumna]) === String(p.filtr.rowne));
-  const [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
+  let [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
+  // bezpiecznik: pobrany plik musi pasować do profilu źródła; inaczej zostaje ostatni sprawdzony plik lokalny
+  const niepasuje = w.wynik < 0.5 || w.brakujaceWymagane.some((k) => k === "szerokosc" || k === "dlugosc");
+  if (niepasuje && skad.startsWith("http") && p.pobierz.plik) {
+    log(p.id, "pobrany plik nie pasuje do profilu (wynik", w.wynik, "brak:", w.brakujaceWymagane.join(", ") + ") — używam pliku lokalnego");
+    bajty = new Uint8Array(readFileSync(join(ROOT, p.pobierz.plik))); skad = p.pobierz.plik;
+    Object.assign(r, await czytajPlik(bajty, skad, p.format));
+    if (p.filtr) r.wiersze = r.wiersze.filter((x) => String(x[p.filtr.kolumna]) === String(p.filtr.rowne));
+    [w] = wykryjProfil(r.naglowki, r.wiersze, [p]);
+  }
   const profil = { ...p, data_pobrania: DATA };
   const nowe = r.wiersze.map((wiersz, i) => normalizujWiersz(wiersz, profil, w.mapowanie, i));
   oznaczOdstajace(nowe);
