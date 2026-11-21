@@ -82,3 +82,12 @@ details{margin-top:1.5rem}summary{cursor:pointer;font-weight:700;color:var(--gra
 pre.kod{background:var(--tlo);border:1px solid var(--linia);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-all}
 /* Materiały zgłoszenia */
 .materialy{width:100%;border-collapse:collapse}.materialy th,.materialy td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linia);vertical-align:top}
+
+/* Dla kogo */
+.dla{display:block;font-size:15px;font-weight:700;color:var(--zielen-tekst);margin:0 0 6px;letter-spacing:.01em}
+.dlakogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0 8px;max-width:1000px}
+.dlakogo a{display:flex;flex-direction:column;gap:4px;padding:16px 18px;border:1px solid var(--linia);border-radius:12px;text-decoration:none;color:var(--tekst);background:#fff}
+.dlakogo a:hover,.dlakogo a:focus-visible{border-color:var(--granat);box-shadow:0 0 0 3px rgb(11 61 145 / .12)}
+.dlakogo b{color:var(--granat);font-size:18px;line-height:1.25}
+.dlakogo span:not(.dla){font-size:15px;color:var(--szary);line-height:1.4}
+.dlakogo .dla{margin:0}

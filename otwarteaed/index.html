@@ -26,7 +26,7 @@
 <main id="tresc">
 <section class="start" aria-labelledby="h-start">
   <h1 id="h-start">Jeden zbiór danych o&nbsp;AED dla całej Polski</h1>
-  <p class="wstep">Zbieramy listy defibrylatorów od gmin, instytucji i z OpenStreetMap. Każdy plik sprowadzamy do jednego wzorca, uzupełniamy adresy z państwowego rejestru PRG i publikujemy tak, jak wymaga dane.gov.pl.</p>
+  <p class="wstep"><strong>Gmina, straż pożarna, szkoła czy firma publikuje dane o swoich AED w kilka minut, a ministerstwo dostaje jeden sprawdzony zbiór dla całej Polski na dane.gov.pl.</strong> Zbieramy listy defibrylatorów od dysponentów i z OpenStreetMap, sprowadzamy je do jednego wzorca, uzupełniamy adresy z państwowego rejestru PRG i publikujemy tak, jak wymaga portal.</p>
   <figure class="przemiana" aria-label="Przykład: prawdziwy wiersz z pliku gminy przed i po ujednoliceniu">
     <div><span class="etykieta">Plik gminy na dane.gov.pl</span><code>"52.326697, 21.107557,""Defibrylator"",""Urząd Miasta Marki "",""Al.. Piłsudskiego 95, 05-270 Marki"",""1"""</code><span class="uwaga">cały wiersz w jednej kolumnie, osie zamienione, brak gminy i TERYT</span></div>
     <div><span class="etykieta">Po przejściu przez hub</span><code>Urząd Miasta Marki,<em>52.326697</em>,<em>21.107557</em>,<em>Aleja Marszałka Józefa Piłsudskiego</em>,95,05-270,Marki,<em>wołomiński</em>,<em>mazowieckie</em>,<em>143402</em>,<em>24/7</em>,marki:1;osm:node/10037860717</code><span class="uwaga">osie naprawione, adres i TERYT z PRG, godziny z OpenStreetMap: ten AED potwierdzają 2 źródła</span></div>
@@ -35,6 +35,12 @@
     <a class="przycisk glowny" href="dane/aed.csv" download>Pobierz zbiór CSV</a>
     <a class="przycisk" href="#kreator">Opublikuj dane swojej gminy</a>
   </div>
+  <nav class="dlakogo" aria-label="Dla kogo">
+    <a href="#kreator"><span class="dla">Gminy, PSP i OSP, szkoły, szpitale, firmy</span><b>Opublikuj dane o swoich AED</b><span>Kreator: wgrywasz plik, pobierasz CSV, XML i MD5 dla dane.gov.pl</span></a>
+    <a href="#dane"><span class="dla">Ministerstwo i portal dane.gov.pl</span><b>Jeden zbiór do automatycznego importu</b><span>XML zgodny z XSD portalu, CSV z datą, aktualizacja co 2 godziny</span></a>
+    <a href="#dane"><span class="dla">Służby ratownicze, analitycy, twórcy aplikacji</span><b>Pobierz dane lub podłącz system</b><span>CSV, XLSX, GeoJSON pod stałymi adresami, z kodami TERYT</span></a>
+    <a href="https://gdzieaed.pl"><span class="dla">Mieszkańcy i pracodawcy</span><b>Znajdź najbliższy AED</b><span>Mapa gdzieaed.pl i karta do powieszenia obok planu ewakuacji</span></a>
+  </nav>
   <dl class="liczby" id="liczby" aria-live="polite">
     <div><dt>AED w zbiorze</dt><dd data-l="aed">…</dd></div>
     <div><dt>z adresem z PRG</dt><dd data-l="adres">…</dd></div>
@@ -44,6 +50,7 @@
 </section>
 
 <section id="dane" aria-labelledby="h-dane">
+  <p class="dla">Dla ministerstwa (dane.gov.pl), służb ratowniczych, analityków i twórców aplikacji</p>
   <h2 id="h-dane">Pobierz dane</h2>
   <p>Stan na <span data-l="data">…</span>. Dane odświeżane automatycznie co 2 godziny. Format główny to CSV UTF-8.</p>
   <table class="pliki">
@@ -61,6 +68,7 @@
 </section>
 
 <section id="kreator" class="kreator" aria-labelledby="h-kreator">
+  <p class="dla">Dla gmin, powiatów, PSP i OSP, szkół, szpitali i firm: dla każdego, kto ma AED</p>
   <h2 id="h-kreator">Opublikuj dane swojej gminy</h2>
   <p>Wgraj listę AED w takiej postaci, w jakiej ją masz. Rozpoznamy układ pliku, pokażemy błędy i przygotujemy pliki do publikacji na dane.gov.pl. Nic nie wysyłamy na nasz serwer: wszystko dzieje się w Twojej przeglądarce.</p>
   <ol class="kroki">
@@ -97,12 +105,14 @@
 </section>
 
 <section id="jakosc" aria-labelledby="h-jakosc">
+  <p class="dla">Dla dysponentów i ministerstwa: co warto poprawić w każdym źródle</p>
   <h2 id="h-jakosc">Jakość źródeł</h2>
   <p>Ocena 0–100 dla każdego rekordu. Brak godzin dostępności nie obniża oceny: przyjmujemy, że AED jest dostępny.</p>
   <div class="przewin"><table class="jakosc"><thead><tr><th scope="col">Źródło</th><th scope="col">Rekordów</th><th scope="col">Ocena</th><th scope="col">Co warto poprawić</th></tr></thead><tbody id="tabJakosc"></tbody></table></div>
 </section>
 
 <section id="wzorzec" aria-labelledby="h-wzorzec">
+  <p class="dla">Dla każdej instytucji, która publikuje dane o AED na dane.gov.pl</p>
   <h2 id="h-wzorzec">Wzorcowy zakres danych</h2>
   <p>Jeden zestaw pól dla wszystkich dysponentów. Wymagane są tylko trzy: nazwa obiektu i współrzędne albo nazwa, miejscowość i numer budynku.</p>
   <div class="akcje"><a class="przycisk glowny" href="dane/wzorcowy_zakres_danych.xlsx" download>Pobierz wzorcowy zakres (XLSX)</a><a class="przycisk" href="dane/szablony/szablon_mam_wspolrzedne.csv" download>Szablon: mam współrzędne</a><a class="przycisk" href="dane/szablony/szablon_mam_adresy.csv" download>Szablon: mam tylko adresy</a></div>
@@ -110,6 +120,7 @@
 </section>
 
 <section id="kampania" aria-labelledby="h-kampania">
+  <p class="dla">Dla dysponentów AED i ich komunikacji: urzędów, straży, szkół, firm</p>
   <h2 id="h-kampania">Kampania „otwarte AED”</h2>
   <p class="wstep" style="margin-bottom:8px"><strong>Każda minuta ma adres.</strong> Dla dysponentów: <strong>„Pokaż swój AED. Opublikuj dane na dane.gov.pl.”</strong></p>
   <p>Zachęcamy gminy, PSP i OSP, szkoły, szpitale i firmy do publikowania potwierdzonych danych o swoich defibrylatorach. Nikogo nie zmuszamy i nie prosimy o zgłaszanie cudzych urządzeń. Postęp kampanii liczy hub: ilu dysponentów publikuje i ile AED potwierdzili.</p>
