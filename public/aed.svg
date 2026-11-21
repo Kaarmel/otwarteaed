@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="AED">
+  <rect width="120" height="120" rx="5" fill="#087944"/>
+  <path d="M52 99 17 65C-4 42 21 20 40 35L52 46 63 35C83 18 107 43 87 64Z" fill="#fff"/>
+  <path d="m58 39-20 29h15l-7 25 25-35H56Z" fill="#087944"/>
+  <path d="M93 12v24M81 24h24" stroke="#fff" stroke-width="8"/>
+</svg>

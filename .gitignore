@@ -1,0 +1,33 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+.cache/
+.direnv/
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials*.json
+secrets*.json
+
+# Session, agent and build artifacts
+codex_log*.txt
+*codex*.log
+**/.impeccable/
+kolejka_codex.sh
+*.log
+*.pdf
+*.png
+.DS_Store
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Internal planning and task drafts
+PLAN*.md
+POMYSLY*.md
+ZADANIE*.md
