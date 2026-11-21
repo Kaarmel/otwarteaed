@@ -40,3 +40,4 @@ ZADANIE*.md
 # Plan execution scratch
 .superpowers/
 dist/
+.wrangler/
