@@ -95,6 +95,8 @@ function czytajJSON(dane) {
     return { format: "geojson", wiersze };
   }
   const lista = Array.isArray(dane) ? dane : Object.values(dane || {}).find(Array.isArray) || [];
+  // lista obiektów w stylu GeoJSON bez FeatureCollection (np. API Warszawy): [{geometry, properties}, ...]
+  if (lista.length && lista[0]?.geometry && lista[0]?.properties) return czytajJSON({ type: "FeatureCollection", features: lista });
   return { format: "json", wiersze: lista.map((x) => splaszcz(x)) };
 }
 

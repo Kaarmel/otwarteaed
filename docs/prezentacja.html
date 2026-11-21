@@ -175,7 +175,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>XML zgodny z oficjalnym schematem portalu</b> (XSD 1.13, <span class="c">otwarte_dane_latest.xsd</span>). Walidacja xmllint w każdym przebiegu testów.</li>
       <li><b>Plik .md5 obok XML.</b> Portal pobiera dane ponownie tylko wtedy, gdy zmieni się suma.</li>
       <li><b>CSV UTF-8 z datą w nazwie</b> (<span class="c">aed_2026-11-21.csv</span>), stałe identyfikatory extIdent do 36 znaków, historia wersji.</li>
-      <li><b>Kategoria HEAL</b>, aktualizacja codzienna, tytuły i opisy po polsku i angielsku.</li>
+      <li><b>Kategoria HEAL</b>, tytuły i opisy po polsku i angielsku. Hub odświeża dane <b>co 2 godziny</b> (GitHub Actions); portal dostaje nowy zasób raz dziennie.</li>
       <li><b>Licencje i atrybucja źródeł</b> w warunkach zbioru. Rekomendujemy jako główny zbiór „od dysponentów” (CC BY 4.0, bez OSM); zbiór z OSM osobno, na warunkach ODbL.</li>
       <li><b>Ten sam mechanizm automatycznego zasilania</b>, z którego od 2025 r. korzystają deweloperzy (instrukcja COI). Gmina dostaje z kreatora własny XML, MD5 i CSV.</li>
     </ul>

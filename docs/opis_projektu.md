@@ -131,6 +131,15 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 - **Firma:** generuje na gdzieaed.pl kartę A4 z najbliższymi AED, adresem do podania dyspozytorowi i krokami pierwszej pomocy.
 - **Analityk:** pobiera CSV lub XLSX i może sprawdzić każdą wartość w `aed_obserwacje.csv` oraz sumy w `SHA256SUMS`.
 
+## Aktualność
+
+- **Co 2 godziny** automat (GitHub Actions, `.github/workflows/aktualizacja.yml`) pobiera:
+  - świeże dane OpenStreetMap (Overpass);
+  - najnowsze zasoby gmin z dane.gov.pl;
+  - adresy PRG dla nowych punktów.
+- **Po każdym przebiegu** obie strony są wdrażane ponownie.
+- **Portal dane.gov.pl** dostaje nowy zasób z datą w nazwie raz dziennie (`updateFrequency = daily`).
+
 ## Weryfikowalność
 
 - **75 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:

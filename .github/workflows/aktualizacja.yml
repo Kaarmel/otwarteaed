@@ -1,0 +1,50 @@
+# Automatyczna aktualizacja zbioru co 2 godziny: OpenStreetMap (Overpass), zasoby z dane.gov.pl, nowe adresy z PRG,
+# potem wdrożenie otwarteaed.pl i gdzieaed.pl. Baza adresów i pliki z datą są przenoszone między przebiegami w pamięci podręcznej Actions.
+name: Aktualizacja danych
+on:
+  schedule:
+    - cron: "7 */2 * * *"
+  workflow_dispatch:
+concurrency:
+  group: aktualizacja
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  aktualizacja:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Przywróć stan poprzedniego przebiegu
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            baza/adresy_prg.json
+            otwarteaed/dane
+          key: stan-${{ github.run_id }}
+          restore-keys: stan-
+      - name: Zbierz dane
+        env:
+          WARSZAWA_API_TOKEN: ${{ secrets.WARSZAWA_API_TOKEN }}
+        run: node hub/zbierz.mjs
+      - name: Zbuduj strony
+        run: sh skrypty/strony.sh
+      - name: Wdróż na Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx -y wrangler@4 pages deploy dist/otwarteaed --project-name otwarteaed --branch main --commit-dirty=true
+          npx -y wrangler@4 pages deploy dist/gdzieaed --project-name gdzieaed --branch main --commit-dirty=true
+      - name: Zapisz stan
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            baza/adresy_prg.json
+            otwarteaed/dane
+          key: stan-${{ github.run_id }}

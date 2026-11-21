@@ -67,3 +67,15 @@ test("KML: Placemark z nazwą i punktem", async () => {
   assert.equal(r.wiersze[0].__lon, 19.45);
   assert.equal(r.wiersze[0].__lat, 51.77);
 });
+
+test("JSON jako lista obiektów GeoJSON bez FeatureCollection (API Warszawy, także w polu result)", async () => {
+  const { czytajPlik } = await import("../hub/czytaj.mjs");
+  const lista = [{ geometry: { coordinates: [[21.0148748892902, 52.2086170695684]], type: "Point" }, properties: { defibrillator_id: "622", location_street: "Rakowiecka", location_building: "25/27" } }];
+  for (const dane of [lista, { success: true, result: lista }]) {
+    const r = await czytajPlik(new TextEncoder().encode(JSON.stringify(dane)), "w.json");
+    assert.equal(r.wiersze.length, 1);
+    assert.equal(r.wiersze[0].defibrillator_id, "622");
+    assert.equal(r.wiersze[0].__lat, 52.2086170695684);
+    assert.equal(r.wiersze[0].__lon, 21.0148748892902);
+  }
+});

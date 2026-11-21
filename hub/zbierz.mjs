@@ -31,10 +31,39 @@ const zrodlaProfile = czytajJSONy("zrodla"), szablony = czytajJSONy("szablony");
 mkdirSync(wyj, { recursive: true });
 const zapisz = (n, dane) => writeFileSync(join(wyj, n), dane);
 
+// OpenStreetMap: świeży eksport z Overpass; odpowiedź niepełna (mniej niż 90% poprzedniego pliku) nie zastępuje danych.
+async function pobierzOverpass(p) {
+  const q = '[out:json][timeout:180];area["ISO3166-1"="PL"][admin_level=2]->.pl;nwr["emergency"="defibrillator"](area.pl);out center meta;';
+  let poprzednio = 0;
+  try { poprzednio = JSON.parse(readFileSync(join(ROOT, p.pobierz.plik), "utf8")).elements.length; } catch {}
+  for (const ep of ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]) {
+    try {
+      const res = await fetch(ep, { method: "POST", body: new URLSearchParams({ data: q }), headers: { "User-Agent": "otwarteaed.pl-harvester" }, signal: AbortSignal.timeout(240000) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const bajty = new Uint8Array(await res.arrayBuffer());
+      const j = JSON.parse(new TextDecoder().decode(bajty));
+      const n = j.elements?.length || 0;
+      if (j.remark || n < 0.9 * poprzednio) throw new Error(`niepełna odpowiedź (${n} elementów)`);
+      log(p.id, "Overpass:", n, "elementów z", ep);
+      return { bajty, skad: ep };
+    } catch (e) { log(p.id, "Overpass nieudany:", ep, e.message); }
+  }
+  return null;
+}
+
 async function pobierzZrodlo(p) {
   const lokalny = () => (p.pobierz.plik ? { bajty: new Uint8Array(readFileSync(join(ROOT, p.pobierz.plik))), skad: p.pobierz.plik } : null);
-  if (OFFLINE || !(p.pobierz.dane_gov_pl || p.pobierz.url)) return lokalny();
+  if (OFFLINE || !(p.pobierz.dane_gov_pl || p.pobierz.url || p.pobierz.overpass || p.pobierz.api)) return lokalny();
+  if (p.pobierz.overpass) return (await pobierzOverpass(p)) || lokalny();
   try {
+    if (p.pobierz.api) {
+      // np. Warszawa: API z tokenem użytkownika (zmienna środowiskowa, nigdy w repozytorium)
+      const token = process.env[p.pobierz.api.token_env];
+      if (!token) { log(p.id, "brak tokena w zmiennej", p.pobierz.api.token_env, "— pomijam źródło"); return lokalny(); }
+      const res = await fetch(p.pobierz.api.url, { method: p.pobierz.api.metoda || "GET", headers: { Authorization: token, "Content-Type": "application/json" }, body: p.pobierz.api.metoda === "POST" ? "{}" : undefined, signal: AbortSignal.timeout(60000) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return { bajty: new Uint8Array(await res.arrayBuffer()), skad: p.pobierz.api.url };
+    }
     if (p.pobierz.url) { const r = await pobierzNajnowszy(p.pobierz.url, DATA, { dni: p.pobierz.dni_wstecz ?? 31 }); return { bajty: r.bajty, skad: r.url }; }
     const { zbior, format } = p.pobierz.dane_gov_pl;
     const r = await fetch(`https://api.dane.gov.pl/1.4/datasets/${zbior}/resources?per_page=50`, { signal: AbortSignal.timeout(20000) }).then((x) => x.json());
