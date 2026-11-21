@@ -20,6 +20,11 @@ kolejka_codex.sh
 *.log
 *.pdf
 *.png
+!kampania/**/*.pdf
+!kampania/**/*.png
+!docs/**/*.pdf
+!docs/**/*.png
+!otwarteaed/**/*.png
 .DS_Store
 .vscode/
 .idea/
@@ -31,3 +36,6 @@ __pycache__/
 PLAN*.md
 POMYSLY*.md
 ZADANIE*.md
+
+# Plan execution scratch
+.superpowers/
