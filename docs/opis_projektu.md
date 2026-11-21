@@ -1,9 +1,12 @@
-# otwarte AED — hub danych o defibrylatorach dla dane.gov.pl
+# otwarte AED — Każda minuta ma adres.
+
+**Hub danych o defibrylatorach dla dane.gov.pl i kampania dla dysponentów AED**
 
 **Misja AED — Dane na ratunek · HackNation 2026**
 
 - Hub danych i kreator dla gmin: **https://otwarteaed.pl** (podgląd: https://otwarteaed.pages.dev)
-- Mapa dla mieszkańców i firm: **https://gdzieaed.pl** (podgląd: https://gdzieaed.pages.dev)
+- Mapa dla mieszkańców, firm i służb: **https://gdzieaed.pl** (podgląd: https://gdzieaed.pages.dev)
+- Wszystkie materiały zgłoszenia: **https://otwarteaed.pl/materialy/**. Tabela „wymaganie zadania → gdzie spełnione” jest w [README](../README.md) i na slajdzie 2 prezentacji.
 
 ## Problem
 
@@ -74,14 +77,30 @@ Nic nie trafia na nasz serwer.
   - **„Mam tylko adresy”:** wymagane nazwa, miejscowość i numer budynku; współrzędne uzupełnia hub z PRG.
 - Każdy inny układ pliku też jest rozpoznawany automatycznie.
 
-### 4. Kampania „otwarte AED” i gdzieaed.pl
+### 4. Kampania „otwarte AED” dla dysponentów
 
-gdzieaed.pl to strona dla mieszkańców i firm:
+- **Nazwa akcji:** otwarte AED. **Hasło:** „Każda minuta ma adres.” **Hasło dla dysponentów:** „Pokaż swój AED. Opublikuj dane na dane.gov.pl.”
+- **Logo:** średnik, czyli separator kolumn w pliku CSV, z kropką w kształcie serca i ogonkiem w kształcie błyskawicy wyładowania. Wersje SVG, PNG, JPG i PDF są w `kampania/logo/`.
+- **Księga znaku** (`kampania/ksiega_znaku.pdf`): koncepcja, wersje znaku, kolorystyka z kontrastami, pole ochronne, minimalne rozmiary, niedozwolone użycie, zastosowania.
+- **Materiały dla dysponentów** (`kampania/dla_dysponentow/`):
+  - odznaka „Publikujemy dane o AED na dane.gov.pl” do BIP i na stronę;
+  - 3 posty 1080×1080 do mediów społecznościowych;
+  - list do wójtów, burmistrzów, komendantów PSP i prezesów OSP, dyrektorów szkół i szpitali;
+  - plan kampanii na 12 miesięcy: grupy docelowe, kanały, etapy, mierniki.
+- **Naklejki A6** (`kampania/naklejki.pdf`): „Masz AED? Pokaż go.”, „AED jest w środku”, „Najbliższy AED”, „Ktoś upadł i nie oddycha?”.
+- **Mierniki liczy hub** przy każdym przebiegu (`zrodla.json`, `jakosc.json`):
+  - liczba dysponentów publikujących dane;
+  - liczba AED potwierdzonych przez dysponenta (dziś 73 z 18 326);
+  - jakość plików od dysponentów.
+- **Zasada:** zachęcamy, nie zmuszamy. Dane potwierdza dysponent, więc kampania nie zachęca do zgłaszania cudzych urządzeń. Propozycja dla PSP i OSP jest w `docs/propozycja_psp_osp.md`.
+
+### 5. Dodatkowo: gdzieaed.pl
+
+Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 - mapa wszystkich AED;
 - przycisk „Najbliższy AED” z czasem dojścia;
+- wyszukiwanie po adresie, przydatne np. dla dyspozytora;
 - karta A4 do powieszenia obok planu ewakuacji.
-
-Kampania zachęca dysponentów (gminy, PSP i OSP, instytucje) do publikowania **potwierdzonych** danych na dane.gov.pl.
 
 ## Wynik na dziś (2026-11-21)
 
@@ -103,13 +122,14 @@ Kampania zachęca dysponentów (gminy, PSP i OSP, instytucje) do publikowania **
   4. Pobiera CSV, XML i MD5 i wystawia je na swojej stronie (np. w BIP).
   5. Składa wniosek do MC o automatyczne pobieranie. Od tej chwili portal i hub pobierają dane same.
 - **Ministerstwo, czyli portal dane.gov.pl:** pobiera `https://otwarteaed.pl/dane/dane_gov_pl.xml`. Gdy zmieni się `.md5`, importuje nowe zasoby z datą w nazwie.
+- **Służby ratownicze:** dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy ratownicze mogą pobierać `aed.csv` lub `aed.geojson` z kodami TERYT. Integrację trzeba uzgodnić z operatorem systemu.
 - **Mieszkaniec:** otwiera gdzieaed.pl i klika „Najbliższy AED” albo wpisuje adres, a potem idzie trasą pieszą. Dzwoni 112.
 - **Firma:** generuje na gdzieaed.pl kartę A4 z najbliższymi AED, adresem do podania dyspozytorowi i krokami pierwszej pomocy.
 - **Analityk:** pobiera CSV lub XLSX i może sprawdzić każdą wartość w `aed_obserwacje.csv` oraz sumy w `SHA256SUMS`.
 
 ## Weryfikowalność
 
-- **73 testy automatyczne** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
+- **74 testy automatyczne** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
   - wykrywanie profilu;
   - CSV z Marek;
   - przeliczenie PL-1992;
@@ -133,6 +153,18 @@ node hub/zbierz.mjs --offline   # przebieg na zamrożonych danych → otwarteaed
 node hub/zbierz.mjs             # pobranie najnowszych zasobów z dane.gov.pl + nowe adresy z PRG
 npm run strony                  # dist/otwarteaed i dist/gdzieaed do wdrożenia
 ```
+
+## Dostępność (WCAG) i responsywność
+
+- **Audyt automatyczny:** Lighthouse daje w kategorii dostępności 100/100 na otwarteaed.pl i na gdzieaed.pl. Audyt automatyczny nie zastępuje testów z użytkownikami.
+- **Czytelność:** krój Atkinson Hyperlegible i kontrast tekstu co najmniej 4,5:1.
+- **Obsługa:** pełna obsługa klawiaturą i odnośnik „Przejdź do treści”.
+- **Statusy:** kolor statusu zawsze ma podpis tekstowy.
+- **Telefon:** obie strony działają przy szerokości 390 px (zrzuty w prezentacji).
+
+## Wykorzystanie AI
+
+Zakres opisuje [oswiadczenie_ai.md](oswiadczenie_ai.md) (regulamin zadania, §2 pkt 8).
 
 ## Ograniczenia
 

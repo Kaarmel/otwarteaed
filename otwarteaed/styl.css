@@ -74,3 +74,11 @@ details{margin-top:1.5rem}summary{cursor:pointer;font-weight:700;color:var(--gra
 @media (min-width:900px){.przemiana{grid-template-columns:1fr 1fr}.przemiana>div+div{border-top:0;border-left:2px solid var(--zielen)}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 @media (max-width:640px){.pliki thead{display:none}.pliki tr{display:grid;padding:.5rem 0;border-bottom:1px solid var(--linia)}.pliki td{border:0;padding:.15rem 0}.kroki>li{padding:1rem 1rem 1.25rem 1rem}.kroki>li::before{position:static;margin-bottom:.5rem}h1{max-width:none}}
+
+/* Kampania */
+.kampania-siatka{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin:20px 0 28px}
+.kampania-siatka figure{margin:0}.kampania-siatka img{width:100%;height:auto;border-radius:12px;border:1px solid var(--linia);display:block}
+.kampania-siatka figcaption{font-size:15px;color:var(--szary);margin-top:6px}
+pre.kod{background:var(--tlo);border:1px solid var(--linia);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:14px;white-space:pre-wrap;word-break:break-all}
+/* Materiały zgłoszenia */
+.materialy{width:100%;border-collapse:collapse}.materialy th,.materialy td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linia);vertical-align:top}

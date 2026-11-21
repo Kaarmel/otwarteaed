@@ -41,6 +41,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
 .tab td{padding:12px 14px;border-bottom:1px solid var(--b);vertical-align:top}
 .chip{display:inline-block;background:#fff;border:2px solid var(--b);border-radius:999px;padding:4px 18px;margin:0 8px 10px 0;font-size:22px}
 .chip b{color:var(--g)}
+.wym{font-size:20px}.wym td{padding:7px 14px}.wym tr.gr td{background:var(--l);color:var(--g);font-weight:700;font-size:19px;padding:7px 14px}
 /* przepływ */
 .flow{display:grid;grid-template-columns:420px 70px 1fr 70px 430px;align-items:stretch}
 .flow .kol{display:flex;flex-direction:column;gap:14px;justify-content:center}
@@ -84,6 +85,33 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
 
 <!-- 2 -->
 <section class="s">
+  <p class="k">00<b>;</b> Wymagania zadania</p>
+  <h1 style="margin-bottom:28px">Wszystkie wymagania zadania są spełnione</h1>
+  <table class="tab wym">
+    <thead><tr><th style="width:36%">Wymaganie z treści zadania</th><th>Gdzie to jest</th><th style="width:9%">Slajd</th></tr></thead>
+    <tbody>
+      <tr class="gr"><td colspan="3">4. Wymagania formalne</td></tr>
+      <tr><td>Szczegółowy opis i tytuł projektu</td><td>„otwarte AED — Każda minuta ma adres.”: <b>otwarteaed.pl/materialy</b> → opis_projektu.md</td><td>1–4</td></tr>
+      <tr><td>Prezentacja: zrzuty ekranu, kroki użytkownika, ograniczenia</td><td>ta prezentacja; zrzuty z działających stron i poleceń</td><td>5–10, 14, 16</td></tr>
+      <tr><td>Prototyp rozwiązania</td><td><b>otwarteaed.pl</b> (hub danych i kreator dla gmin) · gdzieaed.pl (mapa)</td><td>4, 8</td></tr>
+      <tr><td>Wzorcowy zakres danych w XLSX</td><td><b>otwarteaed.pl/dane/wzorcowy_zakres_danych.xlsx</b> (39 pól, słowniki, 2 szablony)</td><td>6, 7</td></tr>
+      <tr><td>Kod źródłowy</td><td>repozytorium GitHub z testami (link w zgłoszeniu)</td><td>18</td></tr>
+      <tr><td>Logotyp JPG, PNG, PDF i format otwarty; księga znaku PDF</td><td>SVG, PNG, JPG, PDF i ksiega_znaku.pdf: <b>otwarteaed.pl/materialy</b></td><td>11</td></tr>
+      <tr class="gr"><td colspan="3">5. Wymagania techniczne</td></tr>
+      <tr><td>Dane w formacie odczytywalnym maszynowo</td><td>CSV UTF-8, XLSX, GeoJSON, XML, JSON; żadnych danych w PDF ani DOC</td><td>7</td></tr>
+      <tr><td>Zgodność z zasadami działania dane.gov.pl</td><td>XML zgodny z oficjalnym XSD 1.13, plik MD5, CSV z datą w nazwie, licencje</td><td>5</td></tr>
+      <tr><td>WCAG, responsywność, UX</td><td>Lighthouse dostępność 100/100 na obu stronach; widoki 390 px</td><td>10</td></tr>
+      <tr><td>Zakres wykorzystania AI (regulamin, §2 pkt 8)</td><td>osobny slajd i oswiadczenie_ai.md</td><td>17</td></tr>
+      <tr class="gr"><td colspan="3">2. Wyzwanie</td></tr>
+      <tr><td>Dane z wielu źródeł w jednym zbiorze; wzorcowy zakres</td><td>harvester: 5 źródeł → 18 326 AED; 39 pól; kreator dla dysponentów</td><td>4–9</td></tr>
+      <tr><td>Nazwa akcji, hasło, logotyp, księga znaku; zachęta dla dysponentów</td><td>„otwarte AED”, „Każda minuta ma adres.”; odznaka, posty, list, plan z miernikami</td><td>11–13</td></tr>
+    </tbody>
+  </table>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>2</span></div>
+</section>
+
+<!-- 3 -->
+<section class="s">
   <p class="k">01<b>;</b> Problem</p>
   <h1>W Polsce nie ma jednej listy defibrylatorów</h1>
   <div class="siatka" style="grid-template-columns:repeat(3,1fr);margin-bottom:72px">
@@ -98,10 +126,10 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
     <div class="karta" style="padding:36px 36px 40px"><h3>Legionowo</h3><p class="mal">CSV z BOM, kody TERC i SIMC zamiast nazw</p></div>
   </div>
   <p class="mal" style="margin-top:34px">Nie ma też państwowej ewidencji AED ani obowiązku zgłaszania lokalizacji (Ministerstwo Zdrowia, odpowiedź na interpelację nr 20763).</p>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>2</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>3</span></div>
 </section>
 
-<!-- 3 -->
+<!-- 4 -->
 <section class="s">
   <p class="k">02<b>;</b> Rozwiązanie</p>
   <h1>Harvester: wiele źródeł, jeden zbiór wysokiej jakości</h1>
@@ -134,13 +162,13 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="wy" style="background:#DDF5E7"><b style="color:var(--zt)">18 375 → 18 326</b><span>obserwacji → AED · 98% z adresem PRG · 48 potwierdzonych przez kilka źródeł</span></div>
     </div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>3</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>4</span></div>
 </section>
 
-<!-- 4 -->
+<!-- 5 -->
 <section class="s">
   <p class="k">03<b>;</b> Zgodność z dane.gov.pl</p>
-  <h1>Gotowe do automatycznego importu na dane.gov.pl</h1>
+  <h1>Zgodne z zasadami działania dane.gov.pl</h1>
   <div class="siatka" style="grid-template-columns:1fr 860px;gap:56px">
     <ul class="lista">
       <li><b>XML zgodny z oficjalnym schematem portalu</b> (XSD 1.13, <span class="c">otwarte_dane_latest.xsd</span>). Walidacja xmllint w każdym przebiegu testów.</li>
@@ -151,30 +179,14 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>Ten sam mechanizm automatycznego zasilania</b>, z którego od 2025 r. korzystają deweloperzy (instrukcja COI). Gmina dostaje z kreatora własny XML, MD5 i CSV.</li>
     </ul>
     <div>
-      <div class="karta" style="background:#0F1B2D;color:#E6EDF7;padding:28px 30px">
-<div class="code" style="font-size:18.5px">&lt;p:datasets xmlns:p="urn:otwarte-dane:harvester:1.13"&gt;
- &lt;dataset status="published"&gt;
-  &lt;extIdent&gt;otwarteaed_aed_polska&lt;/extIdent&gt;
-  &lt;title&gt;&lt;polish&gt;Defibrylatory AED w Polsce — zbiór
-   zintegrowany (otwarte AED)&lt;/polish&gt;…&lt;/title&gt;
-  &lt;updateFrequency&gt;daily&lt;/updateFrequency&gt;
-  &lt;categories&gt;&lt;category&gt;HEAL&lt;/category&gt;&lt;/categories&gt;
-  &lt;conditions&gt;&lt;source&gt;true&lt;/source&gt;…&lt;/conditions&gt;
-  &lt;resources&gt;
-   &lt;resource status="published"&gt;
-    &lt;extIdent&gt;otwarteaed_aed_csv_20261121&lt;/extIdent&gt;
-    &lt;url&gt;https://otwarteaed.pl/dane/aed_2026-11-21.csv&lt;/url&gt;
-    &lt;availability&gt;local&lt;/availability&gt;
-    &lt;dataDate&gt;2026-11-21&lt;/dataDate&gt;
-    …</div>
-      </div>
-      <p class="mal" style="margin-top:18px">Na żywo: <b style="color:var(--g)">otwarteaed.pl/dane/dane_gov_pl.xml</b><br>MD5: <span class="c">9981f7c2859cdfbcd43db5d0b2ef75d5</span></p>
+      <div class="zrzut" style="height:422px;border:0"><img src="zrzuty/dowod_xsd_md5.jpg" alt="Wynik poleceń: xmllint potwierdza zgodność dane_gov_pl.xml z oficjalnym XSD dane.gov.pl; suma MD5 zgadza się; 74 testy przechodzą" style="object-fit:contain"></div>
+      <p class="mal" style="margin-top:16px">Prawdziwe wyjście poleceń: plik pobrany na żywo z otwarteaed.pl, schemat pobrany z dane.gov.pl, <b style="color:var(--t)">„validates”</b>; suma MD5 zgadza się z plikiem .md5.</p>
     </div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>4</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>5</span></div>
 </section>
 
-<!-- 5 -->
+<!-- 6 -->
 <section class="s">
   <p class="k">04<b>;</b> Wzorcowy zakres danych</p>
   <h1>39 pól i dwa proste szablony dla gmin</h1>
@@ -207,12 +219,25 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <div class="karta" style="grid-column:1/-1;background:#DDF5E7"><b style="color:var(--zt)">Każdy inny układ też zadziała.</b> Kreator sam rozpoznaje szablon albo profil źródła po nagłówkach i zawartości kolumn.</div>
     </div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>5</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>6</span></div>
 </section>
 
-<!-- 6 -->
+<!-- 7 -->
 <section class="s">
-  <p class="k">05<b>;</b> Kreator dla gmin i dysponentów</p>
+  <p class="k">05<b>;</b> Dowody: formaty odczytywalne maszynowo</p>
+  <h1>Dane tylko w formatach odczytywalnych maszynowo</h1>
+  <div class="siatka" style="grid-template-columns:1fr 1fr 1fr;gap:36px">
+    <figure style="margin:0"><div class="zrzut" style="height:470px"><img src="zrzuty/dowod_xlsx_wzorcowy.jpg" alt="wzorcowy_zakres_danych.xlsx otwarty w podglądzie systemu"></div><figcaption class="mal" style="margin-top:12px"><b style="color:var(--g)">wzorcowy_zakres_danych.xlsx</b> otwarty w podglądzie systemu macOS: 39 pól, opis, typ, format, przykład</figcaption></figure>
+    <figure style="margin:0"><div class="zrzut" style="height:470px"><img src="zrzuty/dowod_csv.jpg" alt="Początek pliku aed.csv w podglądzie systemu"></div><figcaption class="mal" style="margin-top:12px"><b style="color:var(--g)">aed.csv</b>: UTF-8, nagłówek, przecinek, kropka dziesiętna, daty RRRR-MM-DD</figcaption></figure>
+    <figure style="margin:0"><div class="zrzut" style="height:470px"><img src="zrzuty/dowod_xml_na_zywo.jpg" alt="Plik dane_gov_pl.xml otwarty w przeglądarce z otwarteaed.pl"></div><figcaption class="mal" style="margin-top:12px"><b style="color:var(--g)">otwarteaed.pl/dane/dane_gov_pl.xml</b> na żywo w przeglądarce</figcaption></figure>
+  </div>
+  <p style="margin-top:30px">Do pobrania: <b>aed.csv</b> (format główny) · <b>aed.xlsx</b> · <b>aed.geojson</b> · <b>aed_obserwacje.csv</b> · <b>aed_dysponenci.csv</b> · <b>dane_gov_pl.xml</b> + <b>.md5</b> · <b>SHA256SUMS</b>. PDF używamy tylko dla logo, księgi znaku i materiałów kampanii.</p>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>7</span></div>
+</section>
+
+<!-- 8 -->
+<section class="s">
+  <p class="k">06<b>;</b> Kreator dla gmin i dysponentów</p>
   <h1>Gmina publikuje dane w kilka kliknięć</h1>
   <div class="siatka" style="grid-template-columns:1fr 900px;gap:64px">
     <div>
@@ -224,12 +249,12 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
     </div>
     <div class="zrzut" style="height:730px"><img src="zrzuty/kreator_marki.png" alt="Kreator na otwarteaed.pl: dopasowanie kolumn i wynik dla pliku Marek"></div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>6</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>8</span></div>
 </section>
 
-<!-- 7 -->
+<!-- 9 -->
 <section class="s">
-  <p class="k">06<b>;</b> Jakość i scalanie</p>
+  <p class="k">07<b>;</b> Jakość i scalanie</p>
   <h1>Jakość, którą każdy może sprawdzić</h1>
   <div class="siatka" style="grid-template-columns:1fr 1fr;gap:28px;margin-bottom:40px">
     <div class="karta" style="background:#FDF1F0"><p class="mal" style="margin-bottom:10px"><b style="color:var(--r)">Plik gminy na dane.gov.pl</b></p><div class="code" style="color:var(--r)">"52.326697, 21.107557,""Defibrylator"",""Urząd Miasta Marki "",""Al.. Piłsudskiego 95, 05-270 Marki"",""1"""</div><p class="mal" style="margin:12px 0 0">cały wiersz w jednej kolumnie, osie zamienione, brak gminy i TERYT</p></div>
@@ -252,33 +277,33 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>Brak godzin = przyjęto: dostępny.</b> Waga 0, kolor zielony, źródła nie nadpisujemy.</li>
     </ul>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>7</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>9</span></div>
 </section>
 
-<!-- 8 -->
+<!-- 10 -->
 <section class="s">
-  <p class="k">07<b>;</b> gdzieaed.pl</p>
-  <h1>Mapa dla mieszkańców i firm</h1>
-  <div class="siatka" style="grid-template-columns:1150px 1fr;gap:56px">
-    <div class="zrzut" style="height:718px"><img src="zrzuty/p_gdzieaed_mapa.png" alt="Mapa gdzieaed.pl z 18 326 AED" style="object-position:center"></div>
+  <p class="k">08<b>;</b> Dowody: WCAG, responsywność, UX</p>
+  <h1>Dostępne i działające na telefonie</h1>
+  <div class="siatka" style="grid-template-columns:600px 1fr;gap:48px">
     <div>
-      <p style="margin-bottom:12px"><span class="kropka" style="background:var(--z)"></span><b>24/7 lub brak danych</b></p>
-      <p style="margin-bottom:12px"><span class="kropka" style="background:var(--y)"></span><b>W określonych godzinach</b></p>
-      <p style="margin-bottom:34px"><span class="kropka" style="background:var(--o)"></span><b>Prywatny lub ograniczony</b></p>
-      <ul class="lista" style="font-size:25px">
-        <li><b>„Najbliższy AED”</b> jednym przyciskiem, z czasem dojścia i trasą pieszą.</li>
-        <li><b>Wyszukiwanie adresu</b> dla osoby, która dzwoni z innego miejsca.</li>
-        <li><b>Karta A4 dla firm</b> do powieszenia obok planu ewakuacji: najbliższe AED, adres dla dyspozytora, kroki pierwszej pomocy.</li>
-        <li><b>112 zawsze widoczne.</b> Dane do pobrania prowadzą do otwarteaed.pl.</li>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <figure style="margin:0"><div class="zrzut" style="height:206px"><img src="zrzuty/dowod_lighthouse_otwarteaed.jpg" alt="Lighthouse otwarteaed.pl: Accessibility 100, Best Practices 100"></div><figcaption class="mal" style="margin-top:6px"><b style="color:var(--g)">otwarteaed.pl</b></figcaption></figure>
+        <figure style="margin:0"><div class="zrzut" style="height:206px"><img src="zrzuty/dowod_lighthouse_gdzieaed.jpg" alt="Lighthouse gdzieaed.pl: Accessibility 100, Best Practices 96"></div><figcaption class="mal" style="margin-top:6px"><b style="color:var(--g)">gdzieaed.pl</b></figcaption></figure>
+      </div>
+      <p class="mal" style="margin-top:16px">Automatyczny audyt Lighthouse (dostępność): <b style="color:var(--t)">100/100</b> na otwarteaed.pl i gdzieaed.pl. Audyt automatyczny nie zastępuje testów z użytkownikami.</p>
+      <ul class="lista" style="font-size:23px;margin-top:14px">
+        <li>Krój Atkinson Hyperlegible, kontrast tekstu co najmniej 4,5:1, obsługa klawiaturą, „Przejdź do treści”</li>
+        <li>Kolory statusów zawsze z podpisem, nie tylko kolorem</li>
       </ul>
     </div>
+    <div class="zrzut" style="height:730px;border:0;box-shadow:none"><img src="zrzuty/dowod_telefon.jpg" alt="Strony otwarteaed.pl, kreator i gdzieaed.pl na ekranie telefonu 390 px" style="object-fit:contain;object-position:center"></div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>8</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>10</span></div>
 </section>
 
-<!-- 9 -->
+<!-- 11 -->
 <section class="s">
-  <p class="k">08<b>;</b> Logotyp i hasło</p>
+  <p class="k">09<b>;</b> Logotyp i hasło</p>
   <h1>Średnik, który ratuje życie</h1>
   <div class="siatka" style="grid-template-columns:900px 1fr;gap:72px">
     <div class="siatka" style="grid-template-columns:1fr 1fr;gap:24px">
@@ -300,41 +325,60 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <p class="mal">Księga znaku: pole ochronne, minimalne rozmiary, niedozwolone użycie. Krój Atkinson Hyperlegible (OFL). Bez godła i barw narodowych.</p>
     </div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>9</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>11</span></div>
 </section>
 
-<!-- 10 -->
+<!-- 12 -->
 <section class="s">
-  <p class="k">09<b>;</b> Kampania i propozycja PSP/OSP</p>
-  <h1>Dane od tych, którzy mają AED</h1>
-  <div class="siatka" style="grid-template-columns:420px 1fr 1fr;gap:64px">
-    <div class="naklejka">
-      <img src="../kampania/logo/otwarte-aed-poziome-negatyw.svg" alt="" style="width:300px">
-      <div class="h">Najbliższy AED:<br>120 m w prawo →</div>
-      <div><div class="z">Recepcja, parter. Całą dobę.</div><p style="font-size:20px;margin:14px 0 0;color:#C9D6EE">Zatrzymanie krążenia? Dzwoń 112.<br>Mapa: gdzieaed.pl</p></div>
+  <p class="k">10<b>;</b> Kampania dla dysponentów</p>
+  <h1>„Pokaż swój AED. Opublikuj dane na dane.gov.pl.”</h1>
+  <div class="siatka" style="grid-template-columns:1fr 1fr 1fr 300px;gap:28px;align-items:start">
+    <figure style="margin:0"><img src="../kampania/dla_dysponentow/post-1-masz-aed.png" alt="Post Masz AED? Pokaż go." style="width:100%;border-radius:14px"><figcaption class="mal" style="margin-top:8px">Post dla gmin, szkół, firm i OSP</figcaption></figure>
+    <figure style="margin:0"><img src="../kampania/dla_dysponentow/post-2-trzy-kroki.png" alt="Post Dane o AED w 3 krokach" style="width:100%;border-radius:14px;border:2px solid var(--b)"><figcaption class="mal" style="margin-top:8px">Jak opublikować: 3 kroki</figcaption></figure>
+    <figure style="margin:0"><img src="../kampania/dla_dysponentow/post-3-nasza-gmina.png" alt="Post Nasza gmina pokazuje swoje defibrylatory" style="width:100%;border-radius:14px"><figcaption class="mal" style="margin-top:8px">Dla gmin, które już publikują</figcaption></figure>
+    <figure style="margin:0"><div class="zrzut" style="height:420px"><img src="zrzuty/kampania_list.jpg" alt="List do dysponentów AED"></div><figcaption class="mal" style="margin-top:8px">List do wójtów, komendantów, dyrektorów</figcaption></figure>
+  </div>
+  <div class="siatka" style="grid-template-columns:560px 1fr;gap:40px;margin-top:34px;align-items:center">
+    <img src="../kampania/dla_dysponentow/odznaka-jasna.svg" alt="Odznaka Publikujemy dane o AED na dane.gov.pl" style="width:560px">
+    <p style="font-size:25px;margin:0"><b>Odznaka do BIP i na stronę</b> dla dysponenta, który opublikował dane: widoczny dowód udziału, który zachęca kolejnych. Do tego naklejki A6 na drzwi. Nie zmuszamy i nie prosimy o zgłaszanie cudzych urządzeń. Wszystko na <b>otwarteaed.pl/#kampania</b>.</p>
+  </div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>12</span></div>
+</section>
+
+<!-- 13 -->
+<section class="s">
+  <p class="k">11<b>;</b> Kampania: plan i mierniki</p>
+  <h1>Plan na 12 miesięcy, mierzony automatycznie</h1>
+  <div class="siatka" style="grid-template-columns:1fr 1fr;gap:56px">
+    <div>
+      <h3>Etapy</h3>
+      <div class="krok"><span class="nr">1</span><div><b>Miesiąc 1: ambasadorzy</b>Krosno, Przemyśl, Marki, Legionowo i Warszawa już publikują: pierwsze odznaki, przejście na wzorcowy zakres.</div></div>
+      <div class="krok"><span class="nr">2</span><div><b>Miesiące 2–4: samorządy i PSP</b>Pismo do gmin przez ePUAP, webinar „Dane o AED w 15 minut”, wytyczne KG PSP dla OSP.</div></div>
+      <div class="krok"><span class="nr">3</span><div><b>Miesiące 5–12: wszyscy dysponenci</b>Posty i naklejki; szczyt 16 października, w Europejskim Dniu Przywracania Czynności Serca.</div></div>
+      <div class="karta" style="margin-top:8px;padding:24px 30px"><b style="color:var(--g)">Propozycja dla PSP i OSP:</b> komendy powiatowe raz w roku zbierają dane o AED w jednostkach PSP i OSP szablonem „Mam współrzędne” i publikują je przez XML + MD5.</div>
     </div>
     <div>
-      <h3>Hasło dla dysponentów</h3>
-      <p style="font-size:46px;font-weight:700;color:var(--zt);line-height:1.15;margin-bottom:34px">„Pokaż swój AED. Opublikuj dane na dane.gov.pl.”</p>
-      <ul class="lista" style="font-size:27px">
-        <li>Zachęcamy, nie zmuszamy. Dane potwierdza dysponent, więc nie prosimy o zgłaszanie cudzych urządzeń.</li>
-        <li>Naklejka A6 przy drzwiach i planie ewakuacji: kilka sekund uwagi, jedna informacja.</li>
-        <li>Gmina, szkoła czy firma publikuje dane kreatorem w kilka minut.</li>
-      </ul>
-    </div>
-    <div class="karta">
-      <h3>Propozycja dla PSP i OSP</h3>
-      <div class="krok" style="margin-bottom:34px;margin-top:20px"><span class="nr">1</span><div style="font-size:27px">Wytyczne KG PSP: komendy powiatowe raz w roku zbierają dane o AED w jednostkach PSP i OSP.</div></div>
-      <div class="krok" style="margin-bottom:34px"><span class="nr">2</span><div style="font-size:27px">Szablon „Mam współrzędne” i kontrola w kreatorze: błędy, adres i TERYT z PRG.</div></div>
-      <div class="krok" style="margin-bottom:0"><span class="nr">3</span><div style="font-size:27px">Publikacja XML + MD5 na dane.gov.pl. Hub pobiera je jako dane potwierdzone przez dysponenta.</div></div>
+      <h3>Mierniki (liczy je hub przy każdym przebiegu)</h3>
+      <table class="tab">
+        <thead><tr><th>Miernik</th><th>Dziś</th><th>Cel 12 mies.*</th></tr></thead>
+        <tbody>
+          <tr><td>Zbiory dysponentów o AED na dane.gov.pl</td><td><b>6</b></td><td>100 gmin i KG PSP</td></tr>
+          <tr><td>AED potwierdzone przez dysponenta</td><td><b>73</b> z 18 326</td><td>5000</td></tr>
+          <tr><td>Ocena jakości plików dysponentów</td><td><b>85–99,8</b></td><td>≥ 95 każdy</td></tr>
+          <tr><td>Strony i BIP z odznaką</td><td><b>0</b></td><td>100</td></tr>
+        </tbody>
+      </table>
+      <p class="mal">* Cele to propozycja do uzgodnienia z Ministerstwem Cyfryzacji. Plan kampanii i list do dysponentów są w PDF na otwarteaed.pl/materialy.</p>
+      <h3 style="margin-top:26px">Grupy docelowe</h3>
+      <div><span class="chip"><b>Gminy</b> 2477</span><span class="chip"><b>PSP i OSP</b></span><span class="chip"><b>Szkoły i szpitale</b></span><span class="chip"><b>Firmy i transport</b></span></div>
     </div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>10</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>13</span></div>
 </section>
 
-<!-- 11 -->
+<!-- 14 -->
 <section class="s">
-  <p class="k">10<b>;</b> Kroki użytkownika</p>
+  <p class="k">12<b>;</b> Kroki użytkownika</p>
   <h1>Kroki użytkownika</h1>
   <div class="siatka" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:32px;height:700px">
     <div class="persona" style="grid-row:span 2">
@@ -348,16 +392,38 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       </ol>
     </div>
     <div class="persona"><h3>Ministerstwo (dane.gov.pl)</h3><p>Pobiera otwarteaed.pl/dane/dane_gov_pl.xml. Gdy zmieni się suma .md5, importuje nowe zasoby z datą w nazwie.</p></div>
-    <div class="persona"><h3>Mieszkaniec</h3><p>Otwiera gdzieaed.pl, klika „Najbliższy AED” albo wpisuje adres i idzie trasą pieszą. Dzwoni 112.</p></div>
-    <div class="persona"><h3>Firma</h3><p>Generuje na gdzieaed.pl kartę A4 z najbliższymi AED, adresem dla dyspozytora i krokami pierwszej pomocy.</p></div>
+    <div class="persona"><h3>Służby ratownicze</h3><p>Dyspozytor wpisuje adres zdarzenia na gdzieaed.pl i widzi najbliższe AED z odległością i godzinami. Systemy ratownicze mogą pobierać aed.csv lub aed.geojson z kodami TERYT (integrację trzeba uzgodnić z operatorem systemu).</p></div>
+    <div class="persona"><h3>Mieszkaniec i firma</h3><p>Mieszkaniec klika „Najbliższy AED” na gdzieaed.pl i dzwoni 112. Firma drukuje kartę A4 z najbliższymi AED i krokami pierwszej pomocy.</p></div>
     <div class="persona"><h3>Analityk lub jury</h3><p>Pobiera CSV albo XLSX. Każdą wartość sprawdzi w aed_obserwacje.csv, a pliki w SHA256SUMS.</p></div>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>11</span></div>
+  </div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>14</span></div>
 </section>
 
-<!-- 12 -->
+<!-- 15 -->
 <section class="s">
-  <p class="k">11<b>;</b> Ograniczenia</p>
+  <p class="k">13<b>;</b> Dodatkowo: gdzieaed.pl</p>
+  <h1>Te same dane dla mieszkańców i firm</h1>
+  <div class="siatka" style="grid-template-columns:1150px 1fr;gap:56px">
+    <div class="zrzut" style="height:718px"><img src="zrzuty/p_gdzieaed_mapa.png" alt="Mapa gdzieaed.pl z 18 326 AED" style="object-position:center"></div>
+    <div>
+      <p style="margin-bottom:12px"><span class="kropka" style="background:var(--z)"></span><b>24/7 lub brak danych</b></p>
+      <p style="margin-bottom:12px"><span class="kropka" style="background:var(--y)"></span><b>W określonych godzinach</b></p>
+      <p style="margin-bottom:34px"><span class="kropka" style="background:var(--o)"></span><b>Prywatny lub ograniczony</b></p>
+      <ul class="lista" style="font-size:25px">
+        <li><b>„Najbliższy AED”</b> jednym przyciskiem, z czasem dojścia i trasą pieszą.</li>
+        <li><b>Wyszukiwanie adresu</b> dla osoby, która dzwoni z innego miejsca.</li>
+        <li><b>Karta A4 dla firm</b> do powieszenia obok planu ewakuacji: najbliższe AED, adres dla dyspozytora, kroki pierwszej pomocy.</li>
+        <li><b>112 zawsze widoczne.</b> Dane do pobrania prowadzą do otwarteaed.pl.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>15</span></div>
+</section>
+
+<!-- 16 -->
+<section class="s">
+  <p class="k">14<b>;</b> Ograniczenia</p>
   <h1>Ograniczenia</h1>
   <div class="siatka" style="grid-template-columns:1fr 1fr;gap:28px 72px">
     <ul class="lista uwagi" style="font-size:28px">
@@ -373,24 +439,50 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>Treść pierwszej pomocy</b> na kartach wymaga sprawdzenia przez ratownika lub lekarza przed szeroką dystrybucją.</li>
     </ul>
   </div>
-  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>12</span></div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>16</span></div>
 </section>
 
-<!-- 13 -->
+<!-- 17 -->
+<section class="s">
+  <p class="k">15<b>;</b> Wykorzystanie AI (regulamin, §2 pkt 8)</p>
+  <h1>Zakres wykorzystania sztucznej inteligencji</h1>
+  <div class="siatka" style="grid-template-columns:1.15fr 1fr;gap:56px">
+    <table class="tab" style="font-size:24px">
+      <thead><tr><th>Narzędzie</th><th>Do czego</th></tr></thead>
+      <tbody>
+        <tr><td><b>Claude Code</b><br><span class="mal">Claude Opus 5.5, Anthropic</span></td><td>Rozpoznanie źródeł i dokumentacji dane.gov.pl, kod harvestera, kreatora i stron, testy, teksty dokumentacji. Kod powstał od zera podczas wydarzenia.</td></tr>
+        <tr><td><b>Antigravity</b><br><span class="mal">Google</span></td><td>Szkice kierunków logo (wybrany kierunek przerysowany ręcznie jako SVG); niezależny przegląd zgodności z treścią zadania.</td></tr>
+      </tbody>
+    </table>
+    <div>
+      <h3>Praca zespołu</h3>
+      <ul class="lista" style="font-size:24px">
+        <li>Wybór problemu i koncepcji, decyzje o licencjach, nazwie, haśle i logo</li>
+        <li>Konsultacje z mentorami ministerstwa, które zmieniły zakres: harvester, „brak danych = dostępny”, szablony dla gmin, PSP/OSP</li>
+        <li>Przegląd i akceptacja wyników</li>
+      </ul>
+      <h3 style="margin-top:20px">Jak sprawdzaliśmy wyniki AI</h3>
+      <p style="font-size:24px">Testy na prawdziwych plikach z dane.gov.pl, walidacja XML oficjalnym XSD, zrzuty na komputerze i telefonie, przegląd bezpieczeństwa. Do narzędzi AI nie trafiły dane osobowe.</p>
+    </div>
+  </div>
+  <div class="stopka"><span>otwarte AED · HackNation 2026</span><span>17</span></div>
+</section>
+
+<!-- 18 -->
 <section class="s ciemny" style="display:flex;flex-direction:column">
-  <p class="k">12<b style="color:#fff">;</b> Weryfikowalność</p>
+  <p class="k">16<b style="color:#fff">;</b> Weryfikowalność</p>
   <h1>Każdą liczbę można sprawdzić</h1>
   <div class="siatka" style="grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:60px">
-    <div><div class="duza" style="color:#fff">73</div><p style="color:#C9D6EE;margin-top:12px">testy automatyczne, także na prawdziwych plikach z dane.gov.pl</p></div>
+    <div><div class="duza" style="color:#fff">74</div><p style="color:#C9D6EE;margin-top:12px">testy automatyczne, także na prawdziwych plikach z dane.gov.pl</p></div>
     <div><div class="duza" style="color:#fff">2×</div><p style="color:#C9D6EE;margin-top:12px">ten sam wynik: dwa przebiegi dają identyczne sumy SHA256SUMS</p></div>
     <div><div class="duza" style="color:#fff">0</div><p style="color:#C9D6EE;margin-top:12px">zewnętrznych bibliotek w hubie: własny XLSX, MD5 i przeliczenie PL-1992</p></div>
     <div><div class="duza" style="color:#7FE0A8">100%</div><p style="color:#C9D6EE;margin-top:12px">rekordów z pochodzeniem: źródła, adres_zrodlo, konflikty, surowy oryginał</p></div>
   </div>
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;margin-bottom:60px">
-    <div style="font-size:30px;line-height:1.6"><b>otwarteaed.pl</b> · dane, kreator, wzorcowy zakres<br><b>gdzieaed.pl</b> · mapa i karty<br><span style="color:#C9D6EE">Kod źródłowy, logo i księga znaku w repozytorium projektu</span></div>
+    <div style="font-size:30px;line-height:1.6"><b>otwarteaed.pl</b> · dane, kreator, wzorcowy zakres<br><b>gdzieaed.pl</b> · mapa i karty<br><b>otwarteaed.pl/materialy</b> · wszystkie materiały zgłoszenia<br><span style="color:#C9D6EE">Kod źródłowy z testami w repozytorium GitHub</span></div>
     <div style="font-size:104px;font-weight:700;line-height:1;text-align:right">Każda minuta<br>ma adres.</div>
   </div>
-  <div class="stopka"><span>Misja AED — Dane na ratunek · HackNation 2026</span><span>13</span></div>
+  <div class="stopka"><span>Misja AED — Dane na ratunek · HackNation 2026</span><span>18</span></div>
 </section>
 
 </body></html>

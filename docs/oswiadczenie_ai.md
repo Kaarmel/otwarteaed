@@ -5,7 +5,7 @@ Rozwiązanie powstało przy wsparciu narzędzi AI. Jego zakres, decyzje i weryfi
 | Narzędzie | Do czego użyte |
 |---|---|
 | **Claude Code (model Claude Opus 5.5, Anthropic)** | Rozpoznanie źródeł danych i dokumentacji dane.gov.pl, projekt architektury, kod (harvester, kreator, strony), testy automatyczne, teksty dokumentacji. Kod powstał od zera w trakcie wydarzenia. |
-| **Antigravity (Google, generator obrazów)** | Szkice koncepcji logo w kilku wariantach, każdy z innym kierunkiem twórczym. Wybrany kierunek przerysowano jako wektor SVG. |
+| **Antigravity (Google)** | Szkice koncepcji logo w kilku wariantach, każdy z innym kierunkiem twórczym; wybrany kierunek przerysowano jako wektor SVG. Niezależny przegląd zgodności zgłoszenia z treścią zadania. |
 | **Codex (OpenAI)** | Wstępny szkic sprzed wydarzenia (`docs/archiwum/`). Nie został użyty w rozwiązaniu, cały kod napisano od nowa. |
 
 **Co zrobił człowiek:**
