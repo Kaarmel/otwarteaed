@@ -14,7 +14,7 @@ const szczegoly = id => (pliki[shard(id)] ||= fetch(`dane/szczegoly/${shard(id)}
   .then(d => d[id] || null);
 
 function pinezka(kolor, nr) {
-  const srodek = nr ? `<text x="15" y="19.5" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="800" font-size="14" fill="#fff">${nr}</text>`
+  const srodek = nr ? `<text x="15" y="19.5" text-anchor="middle" font-family="A,sans-serif" font-weight="800" font-size="14" fill="#fff">${nr}</text>`
     : '<path d="M15 21.5 9.6 16.2c-3-3 .9-6.7 3.6-4.4l1.8 1.6 1.8-1.6c2.8-2.3 6.6 1.4 3.6 4.4Z" fill="#fff"/>';
   return `<svg class="pinezka" width="30" height="40" viewBox="0 0 30 40"><path d="M15 39S2 24 2 14a13 13 0 0 1 26 0c0 10-13 25-13 25Z" fill="${kolor}" stroke="#fff" stroke-width="2"/>${srodek}</svg>`;
 }
@@ -39,11 +39,12 @@ const gdzie = d => [d?.location_description, d?.address].filter(Boolean).join(' 
 
 /* ---------- zakładki ---------- */
 function zakladka() {
-  const [t, q] = location.hash.slice(1).split('?');
-  const tab = ['znajdz', 'dla-firm', 'dane'].includes(t) ? t : 'znajdz';
+  let [t, q] = location.hash.slice(1).split('?');
+  if (t === 'dla-firm') { t = 'karty'; history.replaceState(null, '', '#karty' + (q ? '?' + q : '')); } // stare linki
+  const tab = ['znajdz', 'karty', 'dane'].includes(t) ? t : 'znajdz';
   document.body.dataset.tab = tab;
   if (tab === 'znajdz') setTimeout(() => mapa.invalidateSize());
-  if (tab === 'dla-firm') skaluj();
+  if (tab === 'karty') skaluj();
   return new URLSearchParams(q || '');
 }
 addEventListener('hashchange', zakladka);
@@ -154,11 +155,11 @@ $('#szukaj').onsubmit = async e => {
 
 /* ---------- karta do druku ---------- */
 const KROKI = [
-  ['Bezpiecznie?', 'Rozejrzyj się', '<path d="M32 7 59 55H5Z" fill="#F2B705" stroke-linejoin="round"/><path d="M32 24v15"/><circle cx="32" cy="47" r="2.8" fill="#15201B" stroke="none"/>'],
+  ['Bezpiecznie?', 'Rozejrzyj się', '<path d="M32 7 59 55H5Z" fill="#F2B705" stroke-linejoin="round"/><path d="M32 24v15"/><circle cx="32" cy="47" r="2.8" fill="#10213F" stroke="none"/>'],
   ['Reaguje?', 'Potrząśnij za ramiona, zawołaj', '<circle cx="32" cy="20" r="8"/><path d="M14 54c0-12 8-20 18-20s18 8 18 20M7 27c-3 4-3 9 0 13M57 27c3 4 3 9 0 13"/>'],
   ['Oddycha?', 'Odchyl głowę, patrz i słuchaj do 10 s', '<circle cx="14" cy="42" r="6"/><path d="M21 45h36M8 30c3-4 6-4 9 0s6 4 9 0M30 22c3-4 6-4 9 0s6 4 9 0"/>'],
-  ['Dzwoń 112', 'Włącz głośnik, wyślij kogoś po AED', '<path d="M18 8l7 8c1 1.3 1 3.2-.1 4.4L22 23a28 28 0 0 0 15 15l2.8-2.9c1.2-1.1 3.1-1.2 4.4-.1l8 7c1.4 1.2 1.5 3.4.2 4.7L48 51c-2 2-5 2.6-7.6 1.6A44 44 0 0 1 11 23.4C10 20.8 10.6 17.9 12.6 16l3.2-3.4" fill="#C8102E" stroke="#C8102E"/><text x="44" y="22" text-anchor="middle" font-size="14" font-weight="800" fill="#15201B" stroke="none" font-family="Barlow,sans-serif">112</text>'],
-  ['30 uciśnięć', 'Środek klatki, 5–6 cm, 100–120/min. 2 wdechy, jeśli umiesz', '<path d="M6 50h52"/><circle cx="10" cy="44" r="5"/><rect x="24" y="33" width="18" height="9" rx="3" fill="#15201B"/><path d="M33 6v20m-7-7 7 7 7-7"/>'],
+  ['Dzwoń 112', 'Włącz głośnik, wyślij kogoś po AED', '<path d="M18 8l7 8c1 1.3 1 3.2-.1 4.4L22 23a28 28 0 0 0 15 15l2.8-2.9c1.2-1.1 3.1-1.2 4.4-.1l8 7c1.4 1.2 1.5 3.4.2 4.7L48 51c-2 2-5 2.6-7.6 1.6A44 44 0 0 1 11 23.4C10 20.8 10.6 17.9 12.6 16l3.2-3.4" fill="#C8102E" stroke="#C8102E"/><text x="44" y="22" text-anchor="middle" font-size="14" font-weight="800" fill="#10213F" stroke="none" font-family="A,sans-serif">112</text>'],
+  ['30 uciśnięć', 'Środek klatki, 5–6 cm, 100–120/min. 2 wdechy, jeśli umiesz', '<path d="M6 50h52"/><circle cx="10" cy="44" r="5"/><rect x="24" y="33" width="18" height="9" rx="3" fill="#10213F"/><path d="M33 6v20m-7-7 7 7 7-7"/>'],
   ['Włącz AED', 'Rób, co mówi urządzenie', '<use href="#i-aed" x="8" y="8" width="48" height="48"/>'],
 ];
 let miejsce = null, kartaMapa = null;
@@ -197,7 +198,7 @@ async function zbudujKarte() {
     <div class="k-inne">${n.slice(1).map((x, i) => `<b>${i + 2}.</b> ${esc(nazwa(x.p, d[i + 1]))}, ${metry(x.m)}`).join('&emsp;')}</div>
     <section class="k-adres"><small>Podaj dyspozytorowi adres:</small><div>${nazwaMiejsca ? esc(nazwaMiejsca) + '<br>' : ''}${esc(adres)}</div></section>
     <section class="k-alarm"><div class="glowny"><b>112</b><span>Numer<br>alarmowy</span></div><div><b>999</b>Pogotowie</div><div><b>998</b>Straż</div><div><b>997</b>Policja</div></section>
-    <section class="k-kroki">${KROKI.map(([t, s, svg], i) => `<div><svg viewBox="0 0 64 64" fill="none" stroke="#15201B" stroke-width="3.5" stroke-linecap="round">${svg}</svg><b>${i + 1}. ${t}</b><span>${s}</span></div>`).join('')}</section>
+    <section class="k-kroki">${KROKI.map(([t, s, svg], i) => `<div><svg viewBox="0 0 64 64" fill="none" stroke="#10213F" stroke-width="3.5" stroke-linecap="round">${svg}</svg><b>${i + 1}. ${t}</b><span>${s}</span></div>`).join('')}</section>
     <footer class="k-stopka"><div class="qr" id="k-qr"></div><div><b>Aktualna mapa AED: gdzieaed.pl</b><br>
       Karta z ${dzis}. Godziny i dostępność mogą się zmienić. Karta nie zastępuje szkolenia z pierwszej pomocy.<br>
       Dane: © współtwórcy OpenStreetMap (ODbL) i źródła miejskie.</div></footer>`;
@@ -206,7 +207,7 @@ async function zbudujKarte() {
   kartaMapa?.remove();
   kartaMapa = L.map('k-mapa', {zoomControl: false, fadeAnimation: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false, zoomSnap: 0.25});
   L.tileLayer(OSM, {maxZoom: 19, attribution: OSM_ATR}).addTo(kartaMapa);
-  L.polyline([[miejsce.lat, miejsce.lon], [g.p[1], g.p[0]]], {color: '#15201B', weight: 3, dashArray: '6 6'}).addTo(kartaMapa);
+  L.polyline([[miejsce.lat, miejsce.lon], [g.p[1], g.p[0]]], {color: '#10213F', weight: 3, dashArray: '6 6'}).addTo(kartaMapa);
   L.marker([miejsce.lat, miejsce.lon], {icon: L.divIcon({className: '', html: '<div class="k-tu">Tu jesteś</div>', iconSize: [76, 26], iconAnchor: [38, 13]})}).addTo(kartaMapa);
   n.forEach((x, i) => L.marker([x.p[1], x.p[0]], {icon: ikona(KOLOR[x.p[2]], i + 1)}).addTo(kartaMapa));
   kartaMapa.fitBounds(L.latLngBounds([[miejsce.lat, miejsce.lon], ...n.map(x => [x.p[1], x.p[0]])]), {padding: [40, 40], maxZoom: 18});
@@ -250,7 +251,7 @@ pustaKarta();
 const start = zakladka();
 if (start.has('lat') && start.has('lon')) {
   const lat = +start.get('lat'), lon = +start.get('lon');
-  if (document.body.dataset.tab === 'dla-firm') { // link do gotowej karty: #dla-firm?lat=..&lon=..&adres=..&nazwa=..
+  if (document.body.dataset.tab === 'karty') { // link do gotowej karty: #karty?lat=..&lon=..&adres=..&nazwa=..
     $('#k-adres').value = start.get('adres') || ''; $('#k-nazwa').value = start.get('nazwa') || '';
     miejsce = {lat, lon}; zbudujKarte();
   } else obok(lat, lon);

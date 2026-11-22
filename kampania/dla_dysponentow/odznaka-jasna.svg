@@ -2,5 +2,5 @@
 <rect x="1" y="1" width="378" height="94" rx="16" fill="#FFFFFF" stroke="#0B3D91" stroke-width="2"/>
 <g transform="translate(16 16)"><path fill="#00843D" d="M15 0L49 0C57.28 0 64 6.72 64 15L64 49C64 57.28 57.28 64 49 64L15 64C6.72 64 0 57.28 0 49L0 15C0 6.72 6.72 0 15 0Z"/><path fill="#FFFFFF" d="M32 32.54C21.44 25.66 18 20.75 18 16.69C18 12.89 20.95 10.06 24.51 10.06C27.7 10.06 30.03 11.78 32 14.48C33.96 11.78 36.3 10.06 39.49 10.06C43.05 10.06 46 12.89 46 16.69C46 20.75 42.56 25.66 32 32.54ZM35.08 36.65L24.96 47.1L29.92 47.1L26.92 53.95L37.03 43.51L31.88 43.51L35.08 36.65Z"/></g>
 <text x="96" y="44" font-size="22" fill="#0B3D91">Publikujemy dane o AED</text>
-<text x="96" y="71" font-size="17" fill="#00753A">na dane.gov.pl<tspan fill="#4A5568"> · otwarte;AED</tspan></text>
+<text x="96" y="71" font-size="17" fill="#00753A">na dane.gov.pl<tspan fill="#4A5568"> · otwarte AED</tspan></text>
 </svg>

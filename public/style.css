@@ -1,20 +1,23 @@
+@font-face{font-family:A;font-weight:400;font-display:swap;src:url(fonts/atkinson-latin-400-normal.woff2) format('woff2')}@font-face{font-family:A;font-weight:400;font-display:swap;src:url(fonts/atkinson-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02AF}
+@font-face{font-family:A;font-weight:700;font-display:swap;src:url(fonts/atkinson-latin-700-normal.woff2) format('woff2')}@font-face{font-family:A;font-weight:700;font-display:swap;src:url(fonts/atkinson-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02AF}
 /* otwarteaed.pl — język tabliczek bezpieczeństwa (ISO 7010): zieleń sygnałowa, biel, czerwień tylko dla 112. */
 :root {
-  --zielen: #00794A; --zielen-ciemna: #005A37; --czerwien: #C8102E; --czerwien-tekst: #C8102E;
-  --tusz: #15201B; --papier: #FFFFFF; --mgla: #EEF3F0; --linia: #D2DCD6; --szary: #5E6B65;
+  --logo-tekst: var(--tusz); --logo-akcent: #00843D;
+  --zielen: #00843D; --zielen-ciemna: #006B31; --czerwien: #C8102E; --czerwien-tekst: #C8102E;
+  --tusz: #10213F; --papier: #FFFFFF; --mgla: #F2F4F7; --linia: #D5DCE5; --szary: #4A5568;
   --k0: #00A651; --k1: #00A651; --k2: #E6B800; --k3: #E8590C; --wylaczony: #8C979E;
-  --r: 10px; --cien: 0 2px 10px rgb(21 32 27 / .18);
+  --r: 10px; --cien: 0 2px 10px rgb(16 33 63 / .18);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --papier: #16201B; --tusz: #E9F0EC; --mgla: #202C26; --linia: #34433B; --szary: #A3B2AA; --czerwien-tekst: #FF8C9D; --cien: 0 2px 12px rgb(0 0 0 / .5); color-scheme: dark; }
+  :root:not([data-theme="light"]) { --logo-akcent: #7FE0A8; --papier: #0D1B33; --tusz: #EEF2F7; --mgla: #17284A; --linia: #2A3D63; --szary: #A8B4C8; --czerwien-tekst: #FF8C9D; --cien: 0 2px 12px rgb(0 0 0 / .5); color-scheme: dark; }
 }
-:root[data-theme="dark"] { --papier: #16201B; --tusz: #E9F0EC; --mgla: #202C26; --linia: #34433B; --szary: #A3B2AA; --czerwien-tekst: #FF8C9D; color-scheme: dark; }
+:root[data-theme="dark"] { --logo-akcent: #7FE0A8; --papier: #0D1B33; --tusz: #EEF2F7; --mgla: #17284A; --linia: #2A3D63; --szary: #A8B4C8; --czerwien-tekst: #FF8C9D; color-scheme: dark; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 body {
-  font: 500 16px/1.4 Barlow, system-ui, sans-serif; color: var(--tusz); background: var(--papier);
+  font: 500 16px/1.4 A, system-ui, sans-serif; color: var(--tusz); background: var(--papier);
   display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); height: 100dvh; overflow: hidden;
 }
 /* ikony 1em; :where = zerowa specyficzność, nie rusza warstw Leaflet ani pinezek */
@@ -33,7 +36,7 @@ button, input { font: inherit; color: inherit; }
 .zakladki a { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-weight: 600; color: var(--szary); }
 .zakladki a svg { font-size: 20px; }
 .zakladki a:hover { background: var(--mgla); color: var(--tusz); }
-body[data-tab="znajdz"] [data-t="znajdz"], body[data-tab="dla-firm"] [data-t="dla-firm"], body[data-tab="dane"] [data-t="dane"] { background: var(--zielen); color: #fff; }
+body[data-tab="znajdz"] [data-t="znajdz"], body[data-tab="karty"] [data-t="karty"], body[data-tab="dane"] [data-t="dane"] { background: var(--zielen); color: #fff; }
 .tel112 { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--czerwien); color: #fff; font-weight: 800; font-size: 20px; text-decoration: none; }
 .tel112 svg { font-size: 17px; }
 @media (max-width: 640px) {
@@ -49,11 +52,11 @@ body[data-tab="znajdz"] [data-t="znajdz"], body[data-tab="dla-firm"] [data-t="dl
 
 /* Widoki */
 .widok { display: none; min-height: 0; position: relative; }
-body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-tab="dane"] #dane { display: block; }
-#dla-firm, #dane { overflow: auto; }
+body[data-tab="znajdz"] #znajdz, body[data-tab="karty"] #karty, body[data-tab="dane"] #dane { display: block; }
+#karty, #dane { overflow: auto; }
 
 /* Mapa */
-#mapa { position: absolute; inset: 0; background: #E4EAE6; }
+#mapa { position: absolute; inset: 0; background: #E6EBF2; }
 .leaflet-container { font: inherit; }
 .leaflet-top.leaflet-right { top: 52px; }
 .legenda { position: absolute; z-index: 500; top: 10px; left: 10px; margin: 0; padding: 6px 10px; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 12px; background: var(--papier); border-radius: 8px; box-shadow: var(--cien); font-size: 14px; font-weight: 600; max-width: calc(100% - 20px); }
@@ -89,13 +92,13 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-
 .aed .gdzie { margin: 0; color: var(--szary); font-size: 15px; }
 .aed.pierwszy .dystans { font-size: 26px; }
 .stan { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--mgla); margin-left: 4px; }
-.stan.open { background: #DDF1E6; color: #00552F; } .stan.closed { background: #FBE4D0; color: #8A3D00; }
+.stan.open { background: #E6F4EC; color: #00592B; } .stan.closed { background: #FBE4D0; color: #8A3D00; }
 .prowadz { grid-column: 2; justify-self: start; margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; background: var(--tusz); color: var(--papier); font-weight: 700; text-decoration: none; }
 .blad { margin: 0; font-weight: 600; }
 
 .pinezka { width: 30px; height: 40px; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .45)); }
 .ja { width: 18px; height: 18px; border-radius: 50%; background: #1A73E8; border: 3px solid #fff; box-shadow: 0 0 0 6px rgb(26 115 232 / .25); }
-.leaflet-popup-content { font: 500 15px/1.35 Barlow, system-ui, sans-serif; margin: 12px 14px; }
+.leaflet-popup-content { font: 500 15px/1.35 A, system-ui, sans-serif; margin: 12px 14px; }
 .leaflet-popup-content h3 { margin: 0 0 4px; font-size: 17px; }
 .leaflet-popup-content p { margin: 4px 0; }
 
@@ -116,9 +119,9 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-
 .skala { transform-origin: top left; width: 210mm; }
 
 /* KARTA A4 — kolory stałe (to papier, nie interfejs) */
-.karta { width: 210mm; height: 297mm; background: #fff; color: #15201B; box-shadow: var(--cien); display: grid; grid-template-rows: 34mm auto 1fr auto auto auto auto; overflow: hidden; font-family: Barlow, system-ui, sans-serif; }
+.karta { width: 210mm; height: 297mm; background: #fff; color: #10213F; box-shadow: var(--cien); display: grid; grid-template-rows: 34mm auto 1fr auto auto auto auto; overflow: hidden; font-family: A, system-ui, sans-serif; }
 .karta.pusta { display: grid; place-items: center; grid-template-rows: 1fr; color: #8C979E; font-size: 6mm; font-weight: 600; text-align: center; padding: 20mm; }
-.k-gora { background: #00794A; color: #fff; display: flex; align-items: center; gap: 6mm; padding: 0 10mm; }
+.k-gora { background: #00843D; color: #fff; display: flex; align-items: center; gap: 6mm; padding: 0 10mm; }
 .k-gora svg { width: 24mm; height: 24mm; border-radius: 3mm; outline: .7mm solid #fff; }
 .k-gora h2 { margin: 0; font-size: 12.5mm; line-height: .95; font-weight: 800; letter-spacing: -.02em; }
 .k-cel { display: grid; grid-template-columns: auto 1fr; gap: 0 6mm; align-items: center; padding: 5mm 10mm 3mm; }
@@ -126,16 +129,16 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-
 .k-cel .ile small { display: block; font-size: 5mm; font-weight: 700; letter-spacing: 0; margin-top: 1mm; }
 .k-cel .co { font-size: 5mm; line-height: 1.25; }
 .k-cel .co b { display: block; font-size: 6mm; }
-.k-cel .co .godz { display: inline-block; margin-top: 1.5mm; padding: .5mm 2.5mm; border-radius: 3mm; background: #EEF3F0; font-weight: 700; font-size: 4mm; }
-.k-mapa { margin: 0 10mm; border: .5mm solid #15201B; border-radius: 2mm; min-height: 60mm; position: relative; overflow: hidden; }
+.k-cel .co .godz { display: inline-block; margin-top: 1.5mm; padding: .5mm 2.5mm; border-radius: 3mm; background: #F2F4F7; font-weight: 700; font-size: 4mm; }
+.k-mapa { margin: 0 10mm; border: .5mm solid #10213F; border-radius: 2mm; min-height: 60mm; position: relative; overflow: hidden; }
 .k-mapa .leaflet-control-attribution { font-size: 2.2mm; }
-.k-tu { background: #15201B; color: #fff; font: 800 13px/26px Barlow, sans-serif; text-align: center; border-radius: 13px; border: 2px solid #fff; }
+.k-tu { background: #10213F; color: #fff; font: 800 13px/26px A, sans-serif; text-align: center; border-radius: 13px; border: 2px solid #fff; }
 .k-inne { padding: 2mm 10mm 0; font-size: 3.6mm; color: #3E4448; }
-.k-adres { margin: 3mm 10mm 0; border: .8mm solid #15201B; border-radius: 2mm; padding: 2mm 4mm; }
+.k-adres { margin: 3mm 10mm 0; border: .8mm solid #10213F; border-radius: 2mm; padding: 2mm 4mm; }
 .k-adres small { display: block; font-size: 3.6mm; font-weight: 700; }
 .k-adres div { font-size: 6.5mm; font-weight: 800; line-height: 1.15; }
 .k-alarm { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2mm; margin: 3mm 10mm 0; }
-.k-alarm div { border-radius: 2mm; background: #EEF3F0; display: grid; place-content: center; text-align: center; padding: 1.5mm; font-size: 3.4mm; font-weight: 700; }
+.k-alarm div { border-radius: 2mm; background: #F2F4F7; display: grid; place-content: center; text-align: center; padding: 1.5mm; font-size: 3.4mm; font-weight: 700; }
 .k-alarm b { font-size: 8mm; line-height: 1; }
 .k-alarm .glowny { background: #C8102E; color: #fff; grid-auto-flow: column; align-items: center; gap: 2.5mm; font-size: 4mm; text-align: left; }
 .k-alarm .glowny b { font-size: 15mm; }
@@ -144,10 +147,10 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="dla-firm"] #dla-firm, body[data-
 .k-kroki svg { width: 17mm; height: 17mm; }
 .k-kroki b { font-size: 3.7mm; line-height: 1.1; }
 .k-kroki span { font-size: 2.9mm; line-height: 1.15; color: #3E4448; }
-.k-stopka { display: grid; grid-template-columns: auto 1fr; gap: 4mm; align-items: center; margin: 3mm 10mm 7mm; padding-top: 2.5mm; border-top: .3mm solid #D2DCD6; font-size: 3mm; color: #3E4448; }
+.k-stopka { display: grid; grid-template-columns: auto 1fr; gap: 4mm; align-items: center; margin: 3mm 10mm 7mm; padding-top: 2.5mm; border-top: .3mm solid #D5DCE5; font-size: 3mm; color: #3E4448; }
 .k-stopka .qr { width: 19mm; height: 19mm; }
 .k-stopka .qr img, .k-stopka .qr canvas { width: 100% !important; height: 100% !important; }
-.k-stopka b { font-size: 4.2mm; color: #15201B; }
+.k-stopka b { font-size: 4.2mm; color: #10213F; }
 
 /* Dane */
 .dane { max-width: 860px; margin: 0 auto; padding: 24px 16px 40px; display: grid; gap: 18px; }
@@ -178,10 +181,12 @@ body[data-tab="znajdz"] .stopka { font-size: 12px; }
 @media print {
   body { display: block; height: auto; overflow: visible; background: #fff; }
   .pasek, .stopka, #znajdz, #dane, .kreator { display: none !important; }
-  #dla-firm { display: block !important; overflow: visible; }
+  #karty { display: block !important; overflow: visible; }
   .generator { display: block; padding: 0; max-width: none; }
   .podglad { padding: 0; background: none; border-radius: 0; height: auto !important; }
   .skala { transform: none !important; }
   .karta { box-shadow: none; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+.logo .slowo{height:36px;width:auto;display:block}.logo .dom{font-size:13px;font-weight:700;opacity:.7;margin-left:10px;align-self:center}
