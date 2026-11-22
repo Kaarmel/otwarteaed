@@ -50,7 +50,7 @@ Wartości CMYK są dobrane ręcznie. Punktem wyjścia była konwersja sRGB do pr
 | Czerń (mono) | #1A1A1A | 26 26 26 | 0 0 0 100 | Black C | wersja jednobarwna |
 | Biel | #FFFFFF | 255 255 255 | 0 0 0 0 | n/d | znak w sygnecie, wersja biała |
 
-Biały znak na zieleni AED ma kontrast 4,8:1 (WCAG AA). Granat na bieli ma 10,3:1.
+Biały znak na zieleni AED ma kontrast 4,8:1 (WCAG AA). Granat na bieli ma 10,0:1.
 
 ## Budowa znaku
 
