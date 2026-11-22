@@ -72,6 +72,7 @@ function nakladka() {
   k.innerHTML = "<svg viewBox='0 0 24 24' width='46' height='46'><path d='M4 2l15 11-6.5 1.2 3.8 7.3-2.9 1.5-3.8-7.4L4 19.5z' fill='#fff' stroke='#10213F' stroke-width='1.6' stroke-linejoin='round'/></svg>";
   document.documentElement.appendChild(k);
   document.body.style.transformOrigin = "0 0";
+  Element.prototype.scrollIntoView = function () {}; // kamerę prowadzi transformacja, strona nie może sama przewijać
   window.__napis = (t) => { const d = document.getElementById("__napis"); d.classList.remove("on"); if (!t) return; setTimeout(() => { d.textContent = t; d.classList.add("on"); }, 220); };
   window.__rozdzial = (t) => { const d = document.getElementById("__rozdzial"); d.textContent = t || ""; d.classList.toggle("on", !!t); };
   window.__kamera = (sel, s, ms, dryf, dryfMs) => {
@@ -142,6 +143,7 @@ await o(20.9); await wywolaj("fakt", "f3");
 // 2 — rozwiązanie (22.5–38 s): kamera po etapach
 await o(22.2); start("rozwiazanie", 22.2); await przejdz(STRONA + "/", true, ".baner", 1.02); await rozdzial("2 · Rozwiązanie");
 await o(23.2); await napis("otwarte AED: jeden otwarty zbiór danych o AED dla całej Polski");
+await js("document.getElementById('przyklad')?.click()"); // rozgrzanie: przykład liczy się raz poza kadrem, w demo raport pojawi się od razu po kliknięciu
 await o(25.1); await napis("Zbieramy · ujednolicamy · łączymy · publikujemy co 2 godziny");
 await o(25.9); await kamera("#jak .etapy li:nth-child(1)", 1.9, 900, 0.03, 3000);
 await o(28.9); await kamera("#jak .etapy li:nth-child(2)", 1.9, 800, 0.03, 3600);
@@ -159,17 +161,14 @@ await o(45.48); await wywolaj("szablon", "sA");
 await o(47.519999999999996); await wywolaj("szablon", "sB");
 
 // 4 — demo na prawdziwym pliku (50.2–74 s): kursor, klik, kamera na wyniki
-await o(50.0); start("demo", 50.0); await przejdz(STRONA + "/", true, "#kreator", 1.0); await rozdzial("4 · Demo na prawdziwym pliku");
-await js("document.getElementById('przyklad').click()"); // wyniki liczą się poza kadrem, klik kursora poniżej jest pokazowy
-await o(50.8); await napis("Plik gminy Marki z dane.gov.pl: wiersze w jednej kolumnie, zamienione osie");
+await o(50.0); start("demo", 50.0); await przejdz(STRONA + "/", true, "#kreator", 1.0); await rozdzial("4 · Demo na prawdziwym pliku");await o(50.8); await napis("Plik gminy Marki z dane.gov.pl: wiersze w jednej kolumnie, zamienione osie");
 await o(51.0); await kamera("#przyklad", 1.5, 1000, 0.02, 2000);
 await o(51.4); await kursor("start");
 await o(52.2); await kursor("#przyklad");
-await o(53.4); await klik();
+await o(53.4); await klik(); await js("document.getElementById('przyklad').click()");
 await o(54.3); await kursor(""); await kamera(".przemiana > div:first-child", 1.7, 1100, 0.04, 2200); await napis("Oryginał z dane.gov.pl: cały wiersz w jednej kolumnie, osie zamienione");
-await o(56.9); await kamera(".przemiana", 1.15, 900, 0.02, 1500);
+await o(56.9); await kamera("#rozpoznano", 1.6, 1100, 0.03, 4500);
 await o(58.5); await napis("Kreator sam rozpoznaje plik: Urząd Miasta Marki (93%)");
-await o(59.2); await kamera("#rozpoznano", 1.7, 800, 0.03, 1500);
 await o(60.6); await napis("Naprawione osie w 7 z 8 rekordów");
 await o(61.5); await kamera("#naprawy", 1.3, 800, 0.02, 1500);
 await o(63.1); await kamera("~km", 1.7, 800, 0.03, 3000); await napis("Punkt 293 km dalej oznaczony do sprawdzenia");
