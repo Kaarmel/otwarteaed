@@ -176,7 +176,7 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
       <li><b>XML zgodny z oficjalnym schematem portalu</b> (XSD 1.13, <span class="c">otwarte_dane_latest.xsd</span>). Walidacja xmllint w każdym przebiegu testów.</li>
       <li><b>Plik .md5 obok XML.</b> Portal pobiera dane ponownie tylko wtedy, gdy zmieni się suma.</li>
       <li><b>CSV UTF-8 z datą w nazwie</b> (<span class="c">aed_2026-11-21.csv</span>), stałe identyfikatory extIdent do 36 znaków, historia wersji.</li>
-      <li><b>Kategoria HEAL</b>, tytuły i opisy po polsku i angielsku. Hub odświeża dane <b>co 2 godziny</b> (GitHub Actions); portal dostaje nowy zasób raz dziennie.</li>
+      <li><b>Kategoria HEAL</b>, tytuły i opisy po polsku i angielsku. Hub odświeża dane <b>co 2 godziny</b> (GitHub Actions); po podłączeniu importu portal dostaje nowy zasób raz dziennie.</li>
       <li><b>Licencje i atrybucja źródeł</b> w warunkach zbioru. Rekomendujemy jako główny zbiór „od dysponentów” (CC BY 4.0, bez OSM); zbiór z OSM osobno, na warunkach ODbL.</li>
       <li><b>Ten sam mechanizm automatycznego zasilania</b>, z którego od 2025 r. korzystają deweloperzy (instrukcja COI). Gmina dostaje z kreatora własny XML, MD5 i CSV.</li>
     </ul>
@@ -485,21 +485,22 @@ em.n{font-style:normal;background:#DDF5E7;color:var(--zt);border-radius:4px;padd
 <!-- 19 -->
 <section class="s">
   <p class="k">17<b>;</b> Wykorzystanie AI (regulamin, §2 pkt 8)</p>
-  <h1>Zakres wykorzystania sztucznej inteligencji</h1>
+  <h1>Praca zespołu i wykorzystanie AI</h1>
   <div class="siatka" style="grid-template-columns:1.15fr 1fr;gap:56px">
     <table class="tab" style="font-size:24px">
       <thead><tr><th>Narzędzie</th><th>Do czego</th></tr></thead>
       <tbody>
-        <tr><td><b>Claude Code</b><br><span class="mal">Claude Opus 5.5, Anthropic</span></td><td>Rozpoznanie źródeł i dokumentacji dane.gov.pl, kod harvestera, kreatora i stron, testy, teksty dokumentacji. Kod powstał od zera podczas wydarzenia.</td></tr>
+        <tr><td><b>Claude Code</b><br><span class="mal">Claude Opus 5.5, Anthropic</span></td><td>Wsparcie zespołu przy rozpoznaniu źródeł i dokumentacji dane.gov.pl, opracowaniu architektury, implementacji kodu oraz przygotowaniu testów i dokumentacji. Kod powstał od zera podczas wydarzenia.</td></tr>
         <tr><td><b>Antigravity</b><br><span class="mal">Google</span></td><td>Szkice kierunków logo (wybrany kierunek przerysowany ręcznie jako SVG); niezależny przegląd zgodności z treścią zadania.</td></tr>
         <tr><td><b>ElevenLabs</b></td><td>Film: usunięcie szumu z nagrania głosu autora, transkrypcja do montażu, podkład muzyczny. Lektorem jest autor.</td></tr>      </tbody>
     </table>
     <div>
       <h3>Praca zespołu</h3>
       <ul class="lista" style="font-size:24px">
-        <li>Wybór problemu i koncepcji, decyzje o licencjach, nazwie, haśle i logo</li>
-        <li>Konsultacje z mentorami ministerstwa, które zmieniły zakres: harvester, „brak danych = dostępny”, szablony dla gmin, PSP/OSP</li>
-        <li>Przegląd i akceptacja wyników</li>
+        <li>Projekt architektury: wspólny rdzeń harvestera i kreatora, przepływ danych do portalu i mapy</li>
+        <li>Integracja źródeł i wdrożenie w Cloudflare Pages, sekrety API w GitHub Actions</li>
+        <li>Koncepcja, konsultacje z mentorami ministerstwa, wymagania dla gmin i PSP/OSP, decyzje o licencjach i identyfikacji wizualnej</li>
+        <li>Testy integracji, przegląd bezpieczeństwa i akceptacja publikacji</li>
       </ul>
       <h3 style="margin-top:20px">Jak sprawdzaliśmy wyniki AI</h3>
       <p style="font-size:24px">Testy na prawdziwych plikach z dane.gov.pl, walidacja XML oficjalnym XSD, zrzuty na komputerze i telefonie, przegląd bezpieczeństwa. Do narzędzi AI nie trafiły dane osobowe.</p>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>otwarte AED — jeden otwarty zbiór danych o defibrylatorach dla dane.gov.pl</title>
-<meta name="description" content="otwarte AED zbiera dane o defibrylatorach AED z wielu źródeł, łączy je w jeden zbiór dla całej Polski i publikuje na dane.gov.pl. Kreator dla gmin, wzorcowy zakres danych i kampania „Każda minuta ma adres.”">
+<meta name="description" content="otwarte AED zbiera dane o defibrylatorach AED z wielu źródeł, łączy je w jeden zbiór dla całej Polski i przygotowuje go do automatycznego importu na dane.gov.pl. Kreator dla gmin, wzorcowy zakres danych i kampania „Każda minuta ma adres.”">
 <link rel="icon" href="sygnet.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styl.css">
 <script type="module" src="app.mjs"></script>
@@ -36,7 +36,7 @@
     <div class="baner-tekst">
       <p class="baner-nad">Misja AED: dane na ratunek</p>
       <h1 id="h-start">Każda minuta<br>ma adres.</h1>
-      <p class="baner-lead">Zbieramy dane o defibrylatorach z wielu rozproszonych źródeł, łączymy je w <strong>jeden otwarty zbiór dla całej Polski</strong> i publikujemy na dane.gov.pl. Gmina, straż, szkoła czy firma publikuje swoje dane w kilka minut.</p>
+      <p class="baner-lead">Zbieramy dane o defibrylatorach z wielu rozproszonych źródeł, łączymy je w <strong>jeden otwarty zbiór dla całej Polski</strong>, gotowy do automatycznego importu na dane.gov.pl. Gmina, straż, szkoła czy firma przygotuje swoje dane do publikacji w kilka minut.</p>
       <div class="akcje">
         <a class="przycisk bialy" href="#kreator">Opublikuj dane o AED</a>
         <a class="przycisk obrys" href="dane/aed.csv" download>Pobierz zbiór (CSV)</a>
@@ -86,7 +86,7 @@
     <li><b>Zbieramy</b><span>Dane z wielu źródeł: zbiory gmin z dane.gov.pl, API Warszawy, ZTM Gdańsk, OpenStreetMap. Każde źródło opisuje jeden plik konfiguracji.</span></li>
     <li><b>Ujednolicamy</b><span>Do wzorcowego zakresu: rozpoznajemy układ pliku, naprawiamy współrzędne (przecinek, PL-1992, zamienione osie), dodajemy adres i TERYT z PRG.</span></li>
     <li><b>Łączymy</b><span>Duplikaty z różnych źródeł scalamy w jeden AED. Dane od dysponenta mają pierwszeństwo, a każda obserwacja zostaje w pliku.</span></li>
-    <li><b>Publikujemy</b><span>Co 2 godziny, po kontroli jakości: CSV, XLSX, GeoJSON i XML z MD5 do automatycznego importu na dane.gov.pl.</span></li>
+    <li><b>Udostępniamy</b><span>Co 2 godziny, po kontroli jakości, na otwarteaed.pl: CSV, XLSX, GeoJSON i XML z MD5, gotowe do automatycznego importu na dane.gov.pl.</span></li>
   </ol>
   <figure class="przemiana" aria-label="Przykład: prawdziwy wiersz z pliku gminy przed i po ujednoliceniu">
     <div><span class="etykieta">Plik gminy Marki na dane.gov.pl</span><code>"52.326697, 21.107557,""Defibrylator"",""Urząd Miasta Marki "",""Al.. Piłsudskiego 95, 05-270 Marki"",""1"""</code><span class="uwaga">cały wiersz w jednej kolumnie, osie zamienione, brak gminy i TERYT</span></div>
@@ -112,7 +112,7 @@
       <tr><td><a href="dane/aed_obserwacje.csv" download>aed_obserwacje.csv</a></td><td>Każdy rekord każdego źródła z surowym oryginałem i listą zmian. Nic nie ginie przy scalaniu.</td><td>wg źródła</td></tr>
       <tr><td><a href="dane/aed_dysponenci.csv" download>aed_dysponenci.csv</a></td><td>Tylko dane potwierdzone przez dysponentów (gminy, instytucje), bez OSM.</td><td>CC BY 4.0</td></tr>
       <tr><td><a href="dane/aed.geojson" download>aed.geojson</a></td><td>Do map i GIS, WGS84.</td><td>ODbL 1.0</td></tr>
-      <tr><td><a href="dane/dane_gov_pl.xml">dane_gov_pl.xml</a> i <a href="dane/dane_gov_pl.md5">.md5</a></td><td>Plik importu dla dane.gov.pl (schemat XSD 1.13). Portal pobiera z niego dane automatycznie.</td><td>—</td></tr>
+      <tr><td><a href="dane/dane_gov_pl.xml">dane_gov_pl.xml</a> i <a href="dane/dane_gov_pl.md5">.md5</a></td><td>Plik importu dla dane.gov.pl (schemat XSD 1.13). Po złożeniu wniosku o automatyczne pobieranie portal pobiera z niego dane sam.</td><td>—</td></tr>
       <tr><td><a href="dane/SHA256SUMS">SHA256SUMS</a></td><td>Sumy kontrolne wszystkich plików, do weryfikacji.</td><td>—</td></tr>
     </tbody>
   </table>
