@@ -117,7 +117,8 @@ async function przejdz(url, strona, cel, skala = 1) { await zakryj(); await idz(
 
 const sceny = [];
 let T0;
-const o = async (s) => { const d = T0 + s * 1000 - Date.now(); if (d > 0) await sleep(d); };
+const PRZES = 3.3, KONIEC_S = 116.7; // pauza po walidacji XML wycięta: zdarzenia od 84 s są wcześniej
+const o = async (s) => { const t = s >= 84 ? s - PRZES : s; const d = T0 + t * 1000 - Date.now(); if (d > 0) await sleep(d); };
 const start = (nazwa, s) => sceny.push({ nazwa, s });
 
 await idz(scena("tytul.html"), false);
@@ -184,8 +185,7 @@ await o(73.4); await kursor("");
 await o(74.1); start("zgodnosc", 74.1); await napis(""); await przejdz(scena("walidacja.html"), false); await rozdzial("5 · Zgodność z dane.gov.pl");
 await o(74.9); await wywolaj("wpisz", [{ cmd: "curl -s https://otwarteaed.pl/dane/dane_gov_pl.xml -o dane_gov_pl.xml" }, { cmd: "curl -s https://dane.gov.pl/static/xml/otwarte_dane_latest.xsd -o otwarte_dane_latest.xsd" }]);
 await o(76.1); await wywolaj("wpisz", [{ cmd: "xmllint --noout --schema otwarte_dane_latest.xsd dane_gov_pl.xml" }, { out: "dane_gov_pl.xml <span class=ok>validates ✔</span>" }]);
-await o(80.9); await wywolaj("wpisz", [{ cmd: "curl -s https://otwarteaed.pl/dane/dane_gov_pl.md5" }, { out: "<span class=h>" + MD5 + "</span>" }, { cmd: "md5 -q dane_gov_pl.xml" }, { out: "<span class=h>" + MD5 + "</span>  <span class=ok>✔ zgodne</span>" }]);
-await o(82.9); await wywolaj("znak");
+await o(79.4); await wywolaj("znak");
 await o(84.45); await przejdz(STRONA + "/", true, "#dane", 1.0); await rozdzial("5 · Zgodność z dane.gov.pl");
 await o(85.4); await kamera(".zgodnosc", 1.35, 1000, 0.03, 5000);
 await o(86.0); await napis("Przed każdą publikacją hub sam sprawdza wynik · co 2 godziny");
@@ -218,9 +218,9 @@ const uzyte = [...(przed ? [{ plik: przed.plik, t: T0 }] : []), ...klatki.filter
 // Dokładnie 30 kl./s: dla każdej klatki wyjściowej ostatnia klatka nagrana przed jej czasem (bez dryfu czasu)
 const SEK = join(KLATKI, "sek"); mkdirSync(SEK, { recursive: true });
 let j = 0;
-for (let i = 0; i < 3600; i++) { const t = T0 + (i * 1000) / 30; while (j + 1 < uzyte.length && uzyte[j + 1].t <= t) j++; symlinkSync(uzyte[j].plik, join(SEK, String(i).padStart(6, "0") + ".jpg")); }
+for (let i = 0; i < Math.round(KONIEC_S * 30); i++) { const t = T0 + (i * 1000) / 30; while (j + 1 < uzyte.length && uzyte[j + 1].t <= t) j++; symlinkSync(uzyte[j].plik, join(SEK, String(i).padStart(6, "0") + ".jpg")); }
 const film = join(WYJ, "otwarte-aed-film.mp4");
 execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-framerate", "30", "-i", join(SEK, "%06d.jpg"), "-vf", "scale=" + SZER + ":" + WYS + ":force_original_aspect_ratio=decrease:flags=lanczos,pad=" + SZER + ":" + WYS + ":(ow-iw)/2:(oh-ih)/2:color=white,format=yuv420p",
-  "-t", "120", "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-profile:v", "high", "-movflags", "+faststart", film]);
+  "-t", String(KONIEC_S), "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-profile:v", "high", "-movflags", "+faststart", film]);
 writeFileSync(join(WYJ, "sceny.json"), JSON.stringify({ klatek: uzyte.length, sceny }, null, 2));
 console.log("gotowe:", film, "klatek:", uzyte.length, "czas:", ((KONIEC - T0) / 1000).toFixed(1) + " s");

@@ -1,6 +1,6 @@
 # Film otwarte AED: scenariusz i tekst lektora
 
-> **Wersja do oddania (22.11, 06:00):** `film/out/otwarte-aed-film-v3.mp4`.
+> **Wersja do oddania (22.11, 06:35):** `film/out/otwarte-aed-film-v4.mp4` (1:57). Bez MD5 w terminalu i w głosie, bo treść zadania nie wymaga MD5; dowodem zgodności jest walidacja XSD.
 > - **Obraz:** 2560×1440, 30 kl./s, H.264 CRF 16. Nagrany przez `node film/nagraj.mjs`, z ruchem kamery, kurtynami przejść, kursorem i animowanymi planszami.
 > - **Głos:** prawdziwy głos autora, oczyszczony w ElevenLabs (Voice Isolator). Początek pochodzi z nagrania „Stroma 2”, a od zdania „Dodaje adres” i od „Sprawdziliśmy” z nagrania „Stroma”. Układ cięć jest w `film/out/glos-prawdziwy-v3-uklad.json`.
 > - **Muzyka:** podkład wygenerowany w ElevenLabs Music, automatycznie ściszany pod głosem. Głośność całości −14 LUFS.

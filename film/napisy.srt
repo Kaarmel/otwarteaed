@@ -20,7 +20,7 @@ adres i kod TERYT z rejestru PRG. Łączy duplikaty i co dwie godziny publikuje 
 
 6
 00:00:38,500 --> 00:00:49,140
-zaprojektowaliśmy wzorcowy zakres danych trzydzieści dziewięć pól i dwa proste szablony dla gmin ze współrzędnymi i dla gminy, która ma tylko adresy.
+zaprojektowaliśmy wzorcowy zakres danych, trzydzieści dziewięć pól i dwa proste szablony: dla gmin ze współrzędnymi i dla gminy, która ma tylko adresy.
 
 7
 00:00:50,500 --> 00:00:58,640
@@ -35,25 +35,25 @@ sam rozpoznaje plik, odwraca osie w siedmiu z ośmiu rekordów i oznacza szkoł�
 pobiera gotowe pliki CSV, XML i MD5.
 
 10
-00:01:14,500 --> 00:01:23,100
-jest tylko podgląd. Plik XML przechodzi walidację oficjalnym schematem portalu dane.gov.pl, a suma MD5 się zgadza.
+00:01:14,500 --> 00:01:21,180
+jest tylko podgląd. Plik XML przechodzi walidację oficjalnym schematem portalu dane.gov.pl.
 
 11
-00:01:25,000 --> 00:01:30,780
+00:01:21,700 --> 00:01:27,480
 może pobierać dane automatycznie, a przed każdą publikacją hub sam sprawdza wynik.
 
 12
-00:01:32,000 --> 00:01:40,220
+00:01:28,700 --> 00:01:36,920
 jest jednak, żeby dysponenci chcieli publikować. Dziś robi to tylko pięć z dwóch tysięcy czterystu siedemdziesięciu dziewięciu gmin.
 
 13
-00:01:40,570 --> 00:01:45,150
+00:01:37,270 --> 00:01:41,850
 wskazuje trzysta pięćdziesiąt jeden gmin bez żadnego AED w zbiorze. Do tego
 
 14
-00:01:45,500 --> 00:01:48,020
+00:01:42,200 --> 00:01:44,720
 odznaka, posty i naklejki.
 
 15
-00:01:51,400 --> 00:01:59,100
-AED. Jeden otwarty zbiór danych o defibrylatorach dla całej Polski, bo każda minuta ma adres.
+00:01:48,100 --> 00:01:55,800
+AED. Jeden otwarty zbiór o danych o defibrylatorach dla całej Polski. Bo każda minuta ma adres.
