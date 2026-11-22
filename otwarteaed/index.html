@@ -47,6 +47,7 @@
     <div><dt>źródeł danych</dt><dd data-l="zrodla">…</dd></div>
     <div><dt>potwierdzonych przez kilka źródeł</dt><dd data-l="scalone">…</dd></div>
   </dl>
+  <p class="techniczne">Bez zależności npm · <span data-l="testy">80</span> testów automatycznych · XML sprawdzany schematem dane.gov.pl przed każdą publikacją · dane odświeżane co 2 godziny</p>
 </section>
 
 <section id="dane" aria-labelledby="h-dane">
@@ -89,6 +90,7 @@
     </li>
     <li id="k3" hidden>
       <h3>Zobacz wynik</h3>
+      <div id="naprawy" class="naprawy" role="status" hidden></div>
       <p id="komunikat" class="komunikat" role="status"></p>
       <div class="przewin"><table class="podglad"><thead><tr><th scope="col">Nazwa</th><th scope="col">Współrzędne</th><th scope="col">Adres</th><th scope="col">Dostępność</th><th scope="col">Uwagi</th></tr></thead><tbody id="podglad"></tbody></table></div>
     </li>
@@ -110,6 +112,7 @@
   <h2 id="h-jakosc">Jakość źródeł</h2>
   <div class="wiarygodnosc">
     <h3>Skąd wiadomo, że dane są prawdziwe</h3>
+    <p class="porownanie"><strong>Tylko <span data-l="gminy-dysp">5</span> z <span data-l="gminy">2479</span> gmin publikuje dane o swoich AED.</strong> W zbiorze otwarte AED jest <span data-l="dysp">1059</span> defibrylatorów potwierdzonych przez dysponentów (gminy, Warszawa, ZTM Gdańsk). Reszta pochodzi z OpenStreetMap i jest oznaczona jako dane społeczności. Same dane od dysponentów, bez OSM: <a href="dane/aed_dysponenci.csv" download>aed_dysponenci.csv</a> (CC BY 4.0).</p>
     <ul>
       <li><strong>Tylko zarejestrowane źródła.</strong> Hub pobiera dane z opisanych źródeł (dane.gov.pl, API miast, OpenStreetMap), a nie od anonimowych osób.</li>
       <li><strong>Publikuje sam dysponent.</strong> Kreator tylko przygotowuje pliki. Na dane.gov.pl trafiają ze strony lub BIP urzędu, przez wniosek do ministerstwa.</li>
@@ -139,6 +142,15 @@
     <figure><img src="materialy/dla_dysponentow/post-2-trzy-kroki.png" alt="Post: Dane o AED w 3 krokach — wgraj plik, sprawdź podgląd, opublikuj na dane.gov.pl." width="1080" height="1080" loading="lazy"><figcaption>Post „Dane o AED w 3 krokach”</figcaption></figure>
     <figure><img src="materialy/dla_dysponentow/post-3-nasza-gmina.png" alt="Post: Nasza gmina pokazuje swoje defibrylatory, z odznaką otwarte AED." width="1080" height="1080" loading="lazy"><figcaption>Post „Nasza gmina pokazuje swoje defibrylatory”</figcaption></figure>
   </div>
+  <h3 id="biale-plamy">Białe plamy: gminy bez AED w zbiorze</h3>
+  <p><strong><span data-l="bez-aed">…</span> z <span data-l="gminy">…</span> gmin</strong> nie ma w zbiorze otwarte AED ani jednego defibrylatora. To nie znaczy, że AED tam nie ma: być może są w szkole, ośrodku zdrowia albo remizie, ale nikt ich nie opublikował. Od tych gmin warto zacząć kampanię. Każde pismo jest gotowe do wysłania przez ePUAP.</p>
+  <div class="filtry">
+    <label>Województwo <select id="bpWoj"><option value="">wszystkie</option></select></label>
+    <label>Szukaj gminy <input id="bpSzukaj" type="search" placeholder="np. Jemielno"></label>
+    <a class="przycisk" href="dane/biale_plamy.csv" download>Pobierz listę (CSV)</a>
+  </div>
+  <div class="przewin"><table class="plamy"><thead><tr><th scope="col">Gmina</th><th scope="col">Powiat</th><th scope="col">Województwo</th><th scope="col">Pismo</th></tr></thead><tbody id="bpTab"></tbody></table></div>
+  <p class="male" id="bpInfo"></p>
   <h3>Odznaka dla dysponentów</h3>
   <p>Umieść ją na stronie lub w BIP, z linkiem do swojego zbioru na dane.gov.pl.</p>
   <p><img src="materialy/dla_dysponentow/odznaka-jasna.svg" alt="Publikujemy dane o AED na dane.gov.pl — otwarte AED" width="285" height="72"></p>

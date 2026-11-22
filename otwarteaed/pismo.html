@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pismo do gminy — otwarte AED</title>
+<link rel="icon" href="sygnet.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styl.css">
+<style>
+.pismo{background:#fff;border:1px solid var(--linia);border-radius:12px;padding:28px 32px;max-width:820px;white-space:pre-wrap;font-size:17px;line-height:1.6}
+.instrukcja-epuap{max-width:820px}
+@media print{.naglowek,.instrukcja-epuap,.akcje,.stopka,.pomin{display:none!important}.pismo{border:0;padding:0}}
+</style>
+<script type="module" src="pismo.mjs"></script>
+</head>
+<body>
+<a class="pomin" href="#tresc">Przejdź do treści</a>
+<header class="naglowek">
+  <a class="marka" href="./" aria-label="otwarte AED — strona główna"><img src="sygnet.svg" alt="" width="40" height="40"><span>otwarte<b aria-hidden="true">;</b>AED</span></a>
+  <nav aria-label="Główna"><a href="./#kreator">Dodaj dane gminy</a><a href="./#biale-plamy">Białe plamy</a></nav>
+</header>
+<main id="tresc">
+<section aria-labelledby="h-pismo">
+  <p class="dla">Dla organizatora kampanii: ministerstwa, PSP albo stowarzyszenia</p>
+  <h1 id="h-pismo">Pismo do gminy</h1>
+  <div class="instrukcja-epuap">
+    <p>Jak wysłać przez ePUAP:</p>
+    <ol>
+      <li>Kliknij „Kopiuj treść”.</li>
+      <li>Na epuap.gov.pl wybierz „Pismo ogólne do podmiotu publicznego”, a jako adresata wpisz urząd gminy.</li>
+      <li>Wklej treść i podpisz profilem zaufanym albo podpisem kwalifikowanym.</li>
+    </ol>
+    <p>Możesz też zapisać pismo jako PDF przyciskiem „Drukuj” i dołączyć je jako załącznik.</p>
+  </div>
+  <div class="akcje"><button class="przycisk glowny" id="kopiuj" type="button">Kopiuj treść</button><button class="przycisk" id="drukuj" type="button">Drukuj / zapisz PDF</button></div>
+  <p id="status" class="male" role="status"></p>
+  <div class="pismo" id="pismo">Wczytuję dane gminy…</div>
+</section>
+</main>
+<footer class="stopka"><p><strong>W nagłym wypadku dzwoń 112.</strong> otwarte AED to otwarty projekt społeczny, nie urzędowa ewidencja AED.</p></footer>
+</body>
+</html>

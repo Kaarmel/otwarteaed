@@ -11,7 +11,7 @@ import { wykryjProfil } from "./wykryj.mjs";
 import { normalizujWiersz } from "./normalizuj.mjs";
 import { uzupelnijAdresy, ATRYBUCJA_PRG } from "./adresy.mjs";
 import { scal, zachowajIdentyfikatory } from "./scal.mjs";
-import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci, OPISY } from "./jakosc.mjs";
+import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci, OPISY, pokrycieGmin } from "./jakosc.mjs";
 import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow } from "./eksport.mjs";
 import { md5 } from "./md5.mjs";
 
@@ -142,6 +142,13 @@ zapisz("aed.geojson", JSON.stringify(doGeoJSON(aed, POLA)));
 zapisz("aed_mapa.json", JSON.stringify(doIndeksuMapy(aed)));
 
 const raport = raportJakosci(aed, obserwacje, zrodlaProfile, DATA);
+const plikGmin = join(ROOT, "baza/gminy.json");
+if (existsSync(plikGmin)) {
+  const pg = pokrycieGmin(aed, JSON.parse(readFileSync(plikGmin, "utf8")).gminy);
+  raport.gminy = { wszystkie: pg.length, bez_aed: pg.filter((g) => !g.aed).length, bez_danych_dysponenta: pg.filter((g) => !g.dysponent).length };
+  zapisz("gminy_aed.json", JSON.stringify({ data: DATA, zrodlo: "gminy: PRG (GUGiK); liczby AED: otwarte AED", pola: ["teryt", "nazwa", "typ", "powiat", "wojewodztwo", "aed", "dysponent"], gminy: pg.map((g) => [g.teryt, g.nazwa, g.typ, g.powiat, g.wojewodztwo, g.aed, g.dysponent]) }));
+  zapisz("biale_plamy.csv", doCSV(pg.filter((g) => !g.aed), ["teryt", "nazwa", "typ", "powiat", "wojewodztwo"]));
+}
 zapisz("jakosc.json", JSON.stringify(raport, null, 1));
 const zrodlaJSON = { data: DATA, zrodla: [...zrodlaInfo, { id: "prg", nazwa: "PRG — punkty adresowe (GUGiK, usługa UUG)", atrybucja: ATRYBUCJA_PRG, url_zrodla: "https://services.gugik.gov.pl/uug/" }],
   uwaga: "Licencje zachowane dla każdego rekordu (pole licencja). Zbiór zintegrowany zawiera dane OpenStreetMap na ODbL 1.0 — całość nie jest CC0." };

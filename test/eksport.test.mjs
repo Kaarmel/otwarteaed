@@ -100,3 +100,11 @@ test("XML dane.gov.pl przechodzi oficjalny XSD 1.13, kategoria HEAL, extIdent �
   assert.match(xml, /<dbOrCopyrightedLicenseChosen>CC BY 4.0<\/dbOrCopyrightedLicenseChosen>|ODbL/);
   assert.equal(md5(xml).length, 32);
 });
+
+test("białe plamy: gminy bez AED w zbiorze, liczone po kodzie TERYT gminy", async () => {
+  const { pokrycieGmin } = await import("../hub/jakosc.mjs");
+  const gminy = [{ teryt: "1434021", nazwa: "Marki" }, { teryt: "1816063", nazwa: "Głogów Małopolski" }];
+  const aed = [{ teryt_gmina: "143402", szerokosc: 52.3, potwierdzenie: "dysponent" }, { teryt_gmina: "143402", szerokosc: 52.3, potwierdzenie: "spolecznosc" }, { teryt_gmina: "181606", szerokosc: null }];
+  const p = pokrycieGmin(aed, gminy);
+  assert.deepEqual(p.map((g) => [g.nazwa, g.aed, g.dysponent]), [["Marki", 2, 1], ["Głogów Małopolski", 0, 0]]);
+});

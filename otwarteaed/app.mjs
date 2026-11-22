@@ -18,11 +18,52 @@ if (jakosc) {
   ustaw("adres", Math.round((jakosc.z_adresem / jakosc.aed_na_mapie) * 100) + "%");
   ustaw("zrodla", Object.keys(jakosc.zrodla).length);
   ustaw("scalone", fmt.format(jakosc.aed_z_kilku_zrodel));
+  ustaw("dysp", fmt.format(jakosc.potwierdzone_przez_dysponenta));
+  if (jakosc.gminy) { ustaw("gminy", fmt.format(jakosc.gminy.wszystkie)); ustaw("bez-aed", fmt.format(jakosc.gminy.bez_aed)); ustaw("gminy-dysp", fmt.format(jakosc.gminy.wszystkie - jakosc.gminy.bez_danych_dysponenta)); }
   ustaw("data", new Date(jakosc.data).toLocaleDateString("pl-PL", { day: "numeric", month: "long", year: "numeric" }));
   $("#tabJakosc").innerHTML = Object.values(jakosc.zrodla).sort((a, b) => b.obserwacji - a.obserwacji)
     .map((z) => `<tr><td>${esc(z.nazwa)}</td><td>${fmt.format(z.obserwacji)}</td><td class="ocena">${z.srednia_ocena}</td><td>${esc(z.komunikat)}</td></tr>`).join("");
 }
 $("#tabPola").innerHTML = schemat.pola.map((p) => `<tr><td><code>${p.nazwa}</code>${p.wymagane ? " (wymagane)" : ""}</td><td>${esc(p.opis)}</td><td>${esc(p.format ?? (p.slownik || []).join(" | "))}</td></tr>`).join("");
+
+// Białe plamy: gminy bez AED w zbiorze, z pismem do wysłania przez ePUAP
+fetch("dane/gminy_aed.json").then((r) => r.json()).then(({ gminy }) => {
+  const plamy = gminy.filter((g) => g[5] === 0);
+  const woj = [...new Set(plamy.map((g) => g[4]))].sort((a, b) => a.localeCompare(b, "pl"));
+  $("#bpWoj").insertAdjacentHTML("beforeend", woj.map((w) => `<option>${esc(w)}</option>`).join(""));
+  const pokaz = () => {
+    const w = $("#bpWoj").value, q = $("#bpSzukaj").value.trim().toLowerCase();
+    const lista = plamy.filter((g) => (!w || g[4] === w) && (!q || g[1].toLowerCase().includes(q)));
+    $("#bpTab").innerHTML = lista.slice(0, 40).map((g) => `<tr><td>${esc(g[1])} <small>(${esc(g[2])})</small></td><td>${esc(g[3])}</td><td>${esc(g[4])}</td><td><a href="pismo.html?teryt=${esc(g[0])}">Pismo do gminy</a></td></tr>`).join("");
+    $("#bpInfo").textContent = lista.length > 40 ? `Pokazano 40 z ${fmt.format(lista.length)}. Zawęź województwem albo nazwą.` : `Gmin na liście: ${fmt.format(lista.length)}.`;
+  };
+  $("#bpWoj").addEventListener("change", pokaz); $("#bpSzukaj").addEventListener("input", pokaz); pokaz();
+}).catch(() => {});
+
+// Ramka autonaprawy: co hub sam wykrył i naprawił w pliku
+function raportNaprawy(w) {
+  const o = w.obserwacje, ile = (f) => o.filter(f).length, pkt = [];
+  if (w.plik.meta.zagniezdzony) pkt.push("rozpakowano wiersze zapisane w jednej komórce (cały wiersz CSV w jednej kolumnie)");
+  const osie = ile((x) => x.flagi.includes("zamienione_osie"));
+  if (osie) pkt.push(`odwrócono zamienione współrzędne w ${osie} z ${o.length} rekordów`);
+  const przec = ile((x) => (x.przeksztalcenia || []).includes("przecinek→kropka"));
+  if (przec) pkt.push(`zamieniono przecinek dziesiętny na kropkę w ${przec} rekordach`);
+  const pl92 = ile((x) => x.flagi.includes("pl1992"));
+  if (pl92) pkt.push(`przeliczono ${pl92} punktów z układu PL-1992 na WGS84`);
+  const z = o.filter((x) => x.szerokosc !== null && x.szerokosc !== undefined);
+  const med = (t) => { const s = [...t].sort((a, b) => a - b); return s[Math.floor(s.length / 2)]; };
+  if (z.length >= 3) {
+    const sl = med(z.map((x) => x.szerokosc)), dl = med(z.map((x) => x.dlugosc)), r = Math.PI / 180;
+    for (const x of o.filter((x) => x.flagi.includes("daleko_od_pozostalych"))) {
+      const km = Math.round(6371 * Math.hypot((x.dlugosc - dl) * r * Math.cos(sl * r), (x.szerokosc - sl) * r));
+      pkt.push(`oznaczono do sprawdzenia punkt „${x.nazwa_obiektu ?? x.obs_id}”, który leży ok. ${km} km od pozostałych (prawdopodobnie skopiowane współrzędne)`);
+    }
+  }
+  const prg = ile((x) => x.gmina);
+  if (prg) pkt.push(`dopisano gminę i kod TERYT z rejestru PRG dla ${prg} z ${o.length} rekordów`);
+  pkt.push("przygotowano pliki CSV, XML i MD5 w formacie automatycznego importu dane.gov.pl (schemat 1.13)");
+  return pkt;
+}
 
 let stan = { bajty: null, nazwa: "", wynik: null, mapowanie: null, baza: {} };
 const NAZWY = Object.fromEntries(schemat.pola.map((p) => [p.nazwa, p.opis.split(/[.(]/)[0]]));
@@ -53,6 +94,9 @@ async function uruchom() {
   $("#mapowanieReszta").innerHTML = reszta.map(wiersz).join("");
   const z = Object.values(w.raport.zrodla)[0];
   komunikat.textContent = z ? `Średnia ocena jakości: ${z.srednia_ocena}/100. ${z.komunikat}` : "Plik nie zawiera rekordów.";
+  const naprawy = w.obserwacje.length ? raportNaprawy(w) : [];
+  $("#naprawy").hidden = !naprawy.length;
+  $("#naprawy").innerHTML = `<strong>✔ Automatyczna kontrola i naprawa pliku</strong><ul>${naprawy.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
   $("#podglad").innerHTML = w.obserwacje.slice(0, 20).map((o) => {
     const [kod, opis] = STATUS[o.status_dostepnosci];
     const adres = [[o.ulica, o.numer].filter(Boolean).join(" "), o.miejscowosc].filter(Boolean).join(", ");

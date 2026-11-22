@@ -1,5 +1,5 @@
 {
- "data": "2026-11-21",
+ "data": "2026-11-22",
  "obserwacji": 19361,
  "aed": 19071,
  "aed_z_kilku_zrodel": 289,
@@ -117,5 +117,10 @@
   "pl1992": 0,
   "brak_danych_dostepnosci": 0,
   "mobilny_bez_pozycji": 0
+ },
+ "gminy": {
+  "wszystkie": 2479,
+  "bez_aed": 351,
+  "bez_danych_dysponenta": 2474
  }
 }

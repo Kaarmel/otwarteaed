@@ -84,3 +84,16 @@ export function oznaczOdstajace(obserwacje) {
   if (m > 15) return;
   z.forEach((o, i) => { if (d[i] > Math.max(50, 5 * m) && !o.flagi.includes("daleko_od_pozostalych")) o.flagi.push("daleko_od_pozostalych"); });
 }
+
+// Pokrycie gmin: ile AED (ze stałą lokalizacją) i ile potwierdzonych przez dysponenta ma każda gmina z rejestru PRG.
+// Gmina bez AED w zbiorze to „biała plama”: albo nie ma AED, albo nikt ich nie opublikował.
+export function pokrycieGmin(aed, gminy) {
+  const ile = new Map(), dysp = new Map();
+  for (const a of aed) {
+    const k = (a.teryt_gmina || "").slice(0, 6);
+    if (!k || a.szerokosc === null || a.szerokosc === undefined) continue;
+    ile.set(k, (ile.get(k) || 0) + 1);
+    if (a.potwierdzenie === "dysponent") dysp.set(k, (dysp.get(k) || 0) + 1);
+  }
+  return gminy.map((g) => ({ ...g, aed: ile.get(g.teryt.slice(0, 6)) || 0, dysponent: dysp.get(g.teryt.slice(0, 6)) || 0 }));
+}
