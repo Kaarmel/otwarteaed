@@ -120,7 +120,7 @@ body[data-tab="znajdz"] #znajdz, body[data-tab="karty"] #karty, body[data-tab="d
 
 /* KARTA A4 — kolory stałe (to papier, nie interfejs) */
 .karta { width: 210mm; height: 297mm; background: #fff; color: #10213F; box-shadow: var(--cien); display: grid; grid-template-rows: 34mm auto 1fr auto auto auto auto; overflow: hidden; font-family: A, system-ui, sans-serif; }
-.karta.pusta { display: grid; place-items: center; grid-template-rows: 1fr; color: #8C979E; font-size: 6mm; font-weight: 600; text-align: center; padding: 20mm; }
+.karta.pusta { display: grid; place-items: center; grid-template-rows: 1fr; color: #4A5568; font-size: 6mm; font-weight: 600; text-align: center; padding: 20mm; }
 .k-gora { background: #00843D; color: #fff; display: flex; align-items: center; gap: 6mm; padding: 0 10mm; }
 .k-gora svg { width: 24mm; height: 24mm; border-radius: 3mm; outline: .7mm solid #fff; }
 .k-gora h2 { margin: 0; font-size: 12.5mm; line-height: .95; font-weight: 800; letter-spacing: -.02em; }
