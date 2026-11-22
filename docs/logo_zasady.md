@@ -79,3 +79,14 @@ Podgląd: `kampania/logo/propozycje_v4.html`.
 | S6 | S1 w większej skali | najczytelniejszy w 16 px |
 
 **Rekomendacja: S5.** Napis mówi „dane” (średnik), sygnet mówi „adres” (pinezka) i „AED” (serce z błyskawicą). Hasło, nazwa i znak tworzą jedną historię, a pinezka jest czytelna nawet w 16 px.
+
+## Rewizja 5: sygnet S2, cztery kompozycje średnika
+
+Podgląd: `kampania/logo/propozycje_v5.html` (obraz: `propozycje_v5.jpg`). Ten sam średnik (serce i błyskawica) w znaczku i w napisie, zmienia się tylko kompozycja.
+
+| Kompozycja | Zasada | Charakter |
+|---|---|---|
+| 1 · Oś i środek optyczny | serce i błyskawica na jednej osi, odstęp równy grubości kreski, całość nad środkiem geometrycznym | spokojny, urzędowy |
+| 2 · Serce dominuje | serce 1,618 razy większe od błyskawicy (złoty podział) | na pierwszym planie ratunek |
+| 3 · Kursywa 12° | cały średnik pochylony jak w kursywie | ruch, energia wyładowania |
+| 4 · Pogrubiony | większe i grubsze kształty, większy odstęp | najczytelniejszy w 16 px |
