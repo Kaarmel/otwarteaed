@@ -41,3 +41,5 @@ ZADANIE*.md
 .superpowers/
 dist/
 .wrangler/
+
+film/out/

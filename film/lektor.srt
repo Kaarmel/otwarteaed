@@ -1,0 +1,59 @@
+1
+00:00:00,000 --> 00:00:06,000
+Dwie minuty: od wadliwego pliku gminy do danych gotowych dla dane.gov.pl.
+
+2
+00:00:06,500 --> 00:00:13,000
+Przy zatrzymaniu krążenia liczy się każda minuta. Defibrylatora może użyć każdy, jeśli wie, gdzie on jest.
+
+3
+00:00:13,000 --> 00:00:20,000
+Dziś dane o AED są rozproszone: w OpenStreetMap, w plikach gmin, w API miast. Każde w innym formacie.
+
+4
+00:00:20,500 --> 00:00:29,000
+otwarte AED to hub danych. Zbiera dane z siedmiu źródeł i sprowadza je do jednego wzorca.
+
+5
+00:00:29,000 --> 00:00:38,000
+Dodaje adres i kod TERYT z rejestru PRG, łączy duplikaty i co dwie godziny publikuje jeden zbiór dla całej Polski.
+
+6
+00:00:38,500 --> 00:00:50,000
+Dla dysponentów zaprojektowaliśmy wzorcowy zakres danych: trzydzieści dziewięć pól i dwa proste szablony, dla gminy ze współrzędnymi i dla gminy, która ma tylko adresy.
+
+7
+00:00:50,500 --> 00:00:57,000
+Sprawdźmy to na prawdziwym pliku z dane.gov.pl. Marki zapisały cały wiersz w jednej kolumnie i zamieniły osie współrzędnych.
+
+8
+00:00:57,500 --> 00:01:09,000
+Kreator sam rozpoznaje plik, odwraca osie w siedmiu z ośmiu rekordów i oznacza szkołę, której punkt leży dwieście dziewięćdziesiąt trzy kilometry dalej, w Krośnie.
+
+9
+00:01:09,500 --> 00:01:14,000
+Gmina pobiera gotowe pliki CSV, XML i MD5.
+
+10
+00:01:14,500 --> 00:01:25,000
+To nie jest tylko podgląd. Plik XML przechodzi walidację oficjalnym schematem portalu dane.gov.pl, a suma MD5 się zgadza.
+
+11
+00:01:25,000 --> 00:01:32,000
+Portal może pobierać dane automatycznie, a przed każdą publikacją hub sam sprawdza wynik.
+
+12
+00:01:32,500 --> 00:01:38,000
+Najważniejsze jest jednak, żeby dysponenci chcieli publikować. Dziś robi to tylko pięć z dwóch tysięcy czterystu siedemdziesięciu dziewięciu gmin.
+
+13
+00:01:38,000 --> 00:01:44,500
+Hub wskazuje trzysta pięćdziesiąt jeden gmin bez żadnego AED w zbiorze.
+
+14
+00:01:45,000 --> 00:01:52,000
+Dla każdej przygotowuje pismo do wysłania przez ePUAP. Do tego odznaka, posty i naklejki.
+
+15
+00:01:52,500 --> 00:02:00,000
+otwarte AED. Jeden otwarty zbiór danych o defibrylatorach dla całej Polski. Bo każda minuta ma adres.
