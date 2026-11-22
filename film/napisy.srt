@@ -55,8 +55,8 @@ wskazuje trzysta pięćdziesiąt jeden gmin bez żadnego AED w zbiorze. Do tego
 odznaka, posty i naklejki.
 
 15
-00:01:48,100 --> 00:01:51,880
-Wydrukuj kartę z najbliższym AED. Oby się nie przydała.
+00:01:48,100 --> 00:01:50,400
+Wydrukuj kartę z najbliższym AED.
 
 16
 00:01:52,100 --> 00:01:59,800
