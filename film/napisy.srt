@@ -55,5 +55,9 @@ wskazuje trzysta pięćdziesiąt jeden gmin bez żadnego AED w zbiorze. Do tego
 odznaka, posty i naklejki.
 
 15
-00:01:51,400 --> 00:01:59,100
+00:01:48,100 --> 00:01:51,880
+Wydrukuj kartę z najbliższym AED. Oby się nie przydała.
+
+16
+00:01:52,100 --> 00:01:59,800
 AED. Jeden otwarty zbiór o danych o defibrylatorach dla całej Polski. Bo każda minuta ma adres.

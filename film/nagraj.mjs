@@ -118,7 +118,7 @@ async function przejdz(url, strona, cel, skala = 1) { await zakryj(); await idz(
 const sceny = [];
 let T0;
 const PRZES = 3.3, KONIEC_S = 120; // pauza po walidacji XML wycięta: zdarzenia od 84 s są wcześniej
-const PAUZY = [[50.0, 0.8], [58.4, 1.0], [91.7, 0.8], [100.3, 0.7]]; // dodatkowy oddech w miejscach, gdzie dzieje się dużo
+const PAUZY = [[50.0, 0.8], [58.4, 1.0], [91.7, 0.8], [100.3, 0.7], [111.1, 0.7]]; // dodatkowy oddech w miejscach, gdzie dzieje się dużo
 const o = async (s) => { let t = s >= 84 ? s - PRZES : s; for (const [prog, p] of PAUZY) if (s >= prog) t += p; const d = T0 + t * 1000 - Date.now(); if (d > 0) await sleep(d); };
 const start = (nazwa, s) => sceny.push({ nazwa, s });
 
