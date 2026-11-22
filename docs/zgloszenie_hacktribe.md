@@ -65,7 +65,7 @@ Cel: przekazać ministerstwu gotowy mechanizm, który zbiera dane o AED w jednym
 
 ## Your video presentation
 
-Link do filmu na YouTube z widocznością „Niepubliczny” (Listed). Plik: `film/out/otwarte-aed-film-glos.mp4` (po nagraniu głosu, zob. `film/scenariusz.md`).
+https://youtu.be/6z07MNqQFEI
 
 ## Website
 

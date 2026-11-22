@@ -27,6 +27,8 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 
 ## Jak sprawdzić w 2 minuty
 
+Film demonstracyjny (2 min): https://youtu.be/6z07MNqQFEI
+
 1. Otwórz https://otwarteaed.pl i kliknij **„Wypróbuj na prawdziwym pliku Marek z dane.gov.pl”**. Kreator rozpozna plik gminy, naprawi zamienione osie, doda adresy i TERYT z PRG i przygotuje CSV, XML i MD5.
 2. Pobierz https://otwarteaed.pl/dane/dane_gov_pl.xml i sprawdź go oficjalnym schematem portalu:
    ```sh
