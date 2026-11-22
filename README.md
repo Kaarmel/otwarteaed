@@ -62,12 +62,6 @@ Jak dodać nowe źródło danych (także plik z datą w nazwie): [docs/jak_dodac
 | `kampania/` | logo, księga znaku, naklejki, materiały dla dysponentów |
 | `docs/` | opis, prezentacja, ograniczenia, oświadczenie o AI, propozycja PSP/OSP |
 
-## Przygotowane przed hackathonem
-
-- Rozeznanie źródeł danych o AED (zbiory na dane.gov.pl, OpenStreetMap, serwisy miast) i wstępny szkic mapy przygotowany z Codex (OpenAI). Logi i zadania tego szkicu są w `docs/archiwum/`.
-- Hub danych (`hub/`), kreator dla gmin, wzorcowy zakres danych, plik XML dla dane.gov.pl, logo i kampania powstały w trakcie wydarzenia (pierwszy commit: 21.11.2026, 13:16).
-- Zakres użycia AI: [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md).
-
 ## Licencje danych
 
 Zbiór zintegrowany zawiera dane © współtwórców OpenStreetMap (ODbL 1.0) oraz dane dysponentów: Krosno, Przemyśl, Legionowo (CC0 1.0), Marki, ZTM w Gdańsku (CC BY 4.0), m.st. Warszawa — Stołeczne Centrum Bezpieczeństwa (CC BY). Adresy: PRG, GUGiK. Krój pisma: Atkinson Hyperlegible (SIL OFL).
