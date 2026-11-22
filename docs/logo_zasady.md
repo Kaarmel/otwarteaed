@@ -90,3 +90,7 @@ Podgląd: `kampania/logo/propozycje_v5.html` (obraz: `propozycje_v5.jpg`). Ten s
 | 2 · Serce dominuje | serce 1,618 razy większe od błyskawicy (złoty podział) | na pierwszym planie ratunek |
 | 3 · Kursywa 12° | cały średnik pochylony jak w kursywie | ruch, energia wyładowania |
 | 4 · Pogrubiony | większe i grubsze kształty, większy odstęp | najczytelniejszy w 16 px |
+
+## Decyzja
+
+Wybrano **kompozycję 2 (serce dominuje)** z napisem 4D: „otwarte” w granacie, średnik z serca i błyskawicy oraz „AED” w zieleni AED. Komplet plików (SVG, PNG, PDF i EPS w RGB i CMYK) oraz zasady użycia są w folderze `grafiki/` (`grafiki/README.md`).
