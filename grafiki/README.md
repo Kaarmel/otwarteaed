@@ -61,7 +61,7 @@ Biały znak na zieleni AED ma kontrast 4,8:1 (WCAG AA). Granat na bieli ma 10,0:
 
 ## Zasady użycia
 
-- **Pole ochronne:** wokół logo zostaw pusty margines równy połowie wysokości sygnetu.
+- **Pole ochronne:** wokół logo zostaw pusty margines x = ¼ wysokości sygnetu (jak w księdze znaku).
 - **Minimalny rozmiar:**
   - układ poziomy: 30 mm w druku i 120 px na ekranie;
   - sygnet: 6 mm i 24 px.
