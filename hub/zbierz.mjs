@@ -59,7 +59,7 @@ async function pobierzZrodlo(p) {
     if (p.pobierz.api) {
       // np. Warszawa: API z tokenem użytkownika (zmienna środowiskowa, nigdy w repozytorium)
       const token = process.env[p.pobierz.api.token_env];
-      if (!token) { log(p.id, "brak tokena w zmiennej", p.pobierz.api.token_env, "— pomijam źródło"); return lokalny(); }
+      if (!token) { log(p.id, "brak tokena w zmiennej", p.pobierz.api.token_env, p.pobierz.plik ? "— używam ostatniej zapisanej kopii" : "— pomijam źródło"); return lokalny(); }
       const res = await fetch(p.pobierz.api.url, { method: p.pobierz.api.metoda || "GET", headers: { Authorization: token, "Content-Type": "application/json" }, body: p.pobierz.api.metoda === "POST" ? "{}" : undefined, signal: AbortSignal.timeout(60000) });
       if (!res.ok) throw new Error("HTTP " + res.status);
       return { bajty: new Uint8Array(await res.arrayBuffer()), skad: p.pobierz.api.url };
