@@ -75,7 +75,7 @@ function nakladka() {
   window.__napis = (t) => { const d = document.getElementById("__napis"); d.classList.remove("on"); if (!t) return; setTimeout(() => { d.textContent = t; d.classList.add("on"); }, 220); };
   window.__rozdzial = (t) => { const d = document.getElementById("__rozdzial"); d.textContent = t || ""; d.classList.toggle("on", !!t); };
   window.__kamera = (sel, s, ms, dryf, dryfMs) => {
-    const b = document.body; clearTimeout(window.__dt);
+    const b = document.body; clearTimeout(window.__dt); if (ms > 100) ms = Math.round(ms * 1.3);
     const ust = (t, tr) => { b.style.transition = tr; b.style.transform = t; };
     if (!sel) { ust("translate(0px,0px) scale(1)", "transform " + ms + "ms cubic-bezier(.65,0,.35,1)"); return; }
     const e = sel[0] === "~" ? [...document.querySelectorAll("#naprawy li")].find((x) => x.textContent.includes(sel.slice(1))) : document.querySelector(sel);
@@ -117,8 +117,9 @@ async function przejdz(url, strona, cel, skala = 1) { await zakryj(); await idz(
 
 const sceny = [];
 let T0;
-const PRZES = 3.3, KONIEC_S = 116.7; // pauza po walidacji XML wycięta: zdarzenia od 84 s są wcześniej
-const o = async (s) => { const t = s >= 84 ? s - PRZES : s; const d = T0 + t * 1000 - Date.now(); if (d > 0) await sleep(d); };
+const PRZES = 3.3, KONIEC_S = 120; // pauza po walidacji XML wycięta: zdarzenia od 84 s są wcześniej
+const PAUZY = [[50.0, 0.8], [58.4, 1.0], [91.7, 0.8], [100.3, 0.7]]; // dodatkowy oddech w miejscach, gdzie dzieje się dużo
+const o = async (s) => { let t = s >= 84 ? s - PRZES : s; for (const [prog, p] of PAUZY) if (s >= prog) t += p; const d = T0 + t * 1000 - Date.now(); if (d > 0) await sleep(d); };
 const start = (nazwa, s) => sceny.push({ nazwa, s });
 
 await idz(scena("tytul.html"), false);
@@ -141,7 +142,6 @@ await o(20.9); await wywolaj("fakt", "f3");
 // 2 — rozwiązanie (22.5–38 s): kamera po etapach
 await o(22.2); start("rozwiazanie", 22.2); await przejdz(STRONA + "/", true, ".baner", 1.02); await rozdzial("2 · Rozwiązanie");
 await o(23.2); await napis("otwarte AED: jeden otwarty zbiór danych o AED dla całej Polski");
-await o(24.6); await kamera("#jak .etapy", 1.0, 1100, 0.02, 1500);
 await o(25.1); await napis("Zbieramy · ujednolicamy · łączymy · publikujemy co 2 godziny");
 await o(25.9); await kamera("#jak .etapy li:nth-child(1)", 1.9, 900, 0.03, 3000);
 await o(28.9); await kamera("#jak .etapy li:nth-child(2)", 1.9, 800, 0.03, 3600);
@@ -168,13 +168,12 @@ await o(52.2); await kursor("#przyklad");
 await o(53.4); await klik();
 await o(54.3); await kursor(""); await kamera(".przemiana > div:first-child", 1.7, 1100, 0.04, 2200); await napis("Oryginał z dane.gov.pl: cały wiersz w jednej kolumnie, osie zamienione");
 await o(56.9); await kamera(".przemiana", 1.15, 900, 0.02, 1500);
-await o(58.5); await kamera("#k2", 1.0, 900, 0.01, 800); await napis("Kreator sam rozpoznaje plik: Urząd Miasta Marki (93%)");
+await o(58.5); await napis("Kreator sam rozpoznaje plik: Urząd Miasta Marki (93%)");
 await o(59.2); await kamera("#rozpoznano", 1.7, 800, 0.03, 1500);
-await o(60.6); await kamera("#k3", 1.0, 800, 0.01, 600); await napis("Naprawione osie w 7 z 8 rekordów");
+await o(60.6); await napis("Naprawione osie w 7 z 8 rekordów");
 await o(61.5); await kamera("#naprawy", 1.3, 800, 0.02, 1500);
 await o(63.1); await kamera("~km", 1.7, 800, 0.03, 3000); await napis("Punkt 293 km dalej oznaczony do sprawdzenia");
-await o(66.4); await kamera("#naprawy", 1.15, 1000, 0.03, 2500);
-await o(69.2); await kamera("#k4", 1.0, 900, 0.01, 600); await napis("Gmina pobiera gotowe pliki CSV, XML i MD5");
+await o(69.2); await napis("Gmina pobiera gotowe pliki CSV, XML i MD5");
 await o(70.2); await kamera("#k4 .akcje", 1.5, 800, 0.03, 3500);
 await o(70.8); await kursor("start");
 await o(71.5); await kursor("#pobierzXML");
@@ -191,13 +190,11 @@ await o(85.4); await kamera(".zgodnosc", 1.35, 1000, 0.03, 5000);
 await o(86.0); await napis("Przed każdą publikacją hub sam sprawdza wynik · co 2 godziny");
 
 // 6 — kampania i białe plamy (91.7–111 s)
-await o(91.7); start("kampania", 91.7); await rozdzial("6 · Kampania dla dysponentów"); await kamera("#kampania", 1.0, 1100, 0.02, 1000);
+await o(91.7); start("kampania", 91.7); await rozdzial("6 · Kampania dla dysponentów"); await kamera(".znak", 1.2, 1100, 0.03, 3500);
 await o(92.3); await napis("Kampania „otwarte AED”: znak, hasło i materiały dla dysponentów");
-await o(92.9); await kamera(".znak", 1.2, 900, 0.03, 2200);
-await o(95.2); await kamera("#biale-plamy", 1.0, 1000, 0.01, 600); await napis("Tylko 5 z 2479 gmin publikuje dane o AED");
+await o(95.2); await napis("Tylko 5 z 2479 gmin publikuje dane o AED");
 await o(96.2); await kamera("#biale-plamy + p", 1.55, 900, 0.03, 3500);
 await o(100.3); await kamera(".plamy", 1.25, 1000, 0.02, 4000); await napis("351 gmin bez żadnego AED w zbiorze: od nich zaczynamy");
-await o(102.4); await kamera(".plamy tbody tr:nth-child(-n+4)", 1.6, 900, 0.03, 2000);
 await o(104.5); start("materialy", 104.5); await napis(""); await przejdz(scena("materialy.html"), false); await rozdzial("6 · Kampania dla dysponentów");
 await o(106.4); await wywolaj("akcent", "m1");
 await o(107.1); await wywolaj("akcent", "m2");
