@@ -1,0 +1,11 @@
+@keyframes wej{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.82)}60%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
+@keyframes dryf{from{transform:scale(1)}to{transform:scale(1.06)}}
+@keyframes tlo{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.16) translate(-2%,-3%)}}
+.wej,.pop{opacity:0}
+body.start .wej{animation:wej .75s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+body.start .pop{animation:pop .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+body.start .dryf{animation:dryf var(--t,9s) linear both}
+body.start .kb{animation:kb var(--t,8s) ease-out both;animation-delay:var(--d,0s);transform-origin:0 0}
+.ruchome{background:linear-gradient(120deg,#0B3D91,#0A4FB8,#082E6E,#0B3D91)!important;background-size:260% 260%!important;animation:tlo 9s ease-in-out infinite alternate}

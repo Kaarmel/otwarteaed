@@ -1,8 +1,17 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>walidacja</title><style>@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-400-normal.woff2)}@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-ext-400-normal.woff2);unicode-range:U+0100-02AF}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-700-normal.woff2)}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-ext-700-normal.woff2);unicode-range:U+0100-02AF}
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>walidacja</title><link rel="stylesheet" href="ruch.css"><style>@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-400-normal.woff2)}@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-ext-400-normal.woff2);unicode-range:U+0100-02AF}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-700-normal.woff2)}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-ext-700-normal.woff2);unicode-range:U+0100-02AF}
 *{box-sizing:border-box}html,body{margin:0;height:100%}body{font-family:A,sans-serif;background:#0B3D91;color:#fff;-webkit-font-smoothing:antialiased}
 .w{height:100%;padding:90px 120px;display:flex;flex-direction:column;justify-content:center}
-</style></head><body><div class="w" style="background:#0F1B2D;padding:70px 120px">
-  <div style="font-size:30px;font-weight:700;color:#7FE0A8;margin-bottom:12px">Sprawdzenie na żywym pliku z otwarteaed.pl</div>
-  <div style="font-size:60px;font-weight:700;margin-bottom:40px">Zgodne ze schematem portalu dane.gov.pl</div>
-  <div style="flex:1;min-height:0;border-radius:16px;overflow:hidden;border:2px solid #2A3A55"><img src="../../docs/zrzuty/dowod_xsd_md5.jpg" alt="" style="width:100%;display:block"></div>
-</div></body></html>
+
+.term{flex:1;min-height:0;border-radius:16px;border:2px solid #2A3A55;background:#0B1422;padding:34px 40px;font:500 30px/1.55 ui-monospace,Menlo,monospace;color:#C9D6EE;overflow:hidden;position:relative}
+.term .k{color:#7FE0A8}.term .ok{color:#7FE0A8;font-weight:700}.term .h{color:#FFD166}
+.znaczek{position:absolute;right:40px;bottom:34px;background:#00843D;color:#fff;font:700 36px A,sans-serif;padding:18px 28px;border-radius:14px;opacity:0;transform:scale(.8);transition:all .5s cubic-bezier(.2,.8,.2,1)}.znaczek.on{opacity:1;transform:none}</style></head><body style="background:#0F1B2D"><div class="w" style="background:#0F1B2D;padding:70px 120px">
+  <div class="wej" style="--d:.1s;font-size:30px;font-weight:700;color:#7FE0A8;margin-bottom:12px">Sprawdzenie na żywym pliku z otwarteaed.pl</div>
+  <div class="wej" style="--d:.25s;font-size:60px;font-weight:700;margin-bottom:36px">Zgodne ze schematem portalu dane.gov.pl</div>
+  <div class="term pop" style="--d:.4s"><div id="ekran"></div><div class="znaczek" id="znak">✔ XSD 1.13 · ✔ MD5 się zgadza</div></div>
+</div>
+<script>
+const ekran = document.getElementById('ekran');
+const linia = (html) => { const d = document.createElement('div'); d.innerHTML = html; ekran.appendChild(d); return d; };
+window.wpisz = async (kroki) => { for (const k of kroki) { if (k.cmd) { const d = linia('<span class="k">$</span> <span></span>'); const s = d.lastChild; for (let i = 1; i <= k.cmd.length; i += 2) { s.textContent = k.cmd.slice(0, i); await new Promise(r => setTimeout(r, 14)); } s.textContent = k.cmd; await new Promise(r => setTimeout(r, 120)); } else linia(k.out); } };
+window.znak = () => document.getElementById('znak').classList.add('on');
+</script></body></html>

@@ -1,0 +1,59 @@
+1
+00:00:00,500 --> 00:00:05,420
+minuty od wadliwego pliku gminy do danych gotowych na dane.gov.pl.
+
+2
+00:00:06,500 --> 00:00:13,880
+krążenia liczy się każda minuta. Defibrylatora może użyć każdy, jeśli wie, gdzie on jest.
+
+3
+00:00:14,390 --> 00:00:22,010
+dane o AED są rozproszone w OpenStreetMap, a w plikach gmin, w API miast, każde w innym formacie.
+
+4
+00:00:22,820 --> 00:00:29,140
+AED to hub danych. Zbiera dane z siedmiu źródeł i sprowadza je do jednego wzorca. Dodaje
+
+5
+00:00:29,490 --> 00:00:37,510
+adres i kod TERYT z rejestru PRG. Łączy duplikaty i co dwie godziny publikuje jeden zbiór dla całej Polski.
+
+6
+00:00:38,500 --> 00:00:49,140
+zaprojektowaliśmy wzorcowy zakres danych trzydzieści dziewięć pól i dwa proste szablony dla gmin ze współrzędnymi i dla gminy, która ma tylko adresy.
+
+7
+00:00:50,500 --> 00:00:58,640
+to na prawdziwym pliku z dane.gov.pl. Marki zapisały cały wiersz w jednej kolumnie i zamieniły osie współrzędnych. Kreator
+
+8
+00:00:58,990 --> 00:01:08,510
+sam rozpoznaje plik, odwraca osie w siedmiu z ośmiu rekordów i oznacza szkołę, której punkt leży dwieście dziewięćdziesiąt trzy kilometry dalej — w Krośnie.
+
+9
+00:01:09,500 --> 00:01:13,580
+pobiera gotowe pliki CSV, XML i MD5.
+
+10
+00:01:14,500 --> 00:01:23,100
+jest tylko podgląd. Plik XML przechodzi walidację oficjalnym schematem portalu dane.gov.pl, a suma MD5 się zgadza.
+
+11
+00:01:25,000 --> 00:01:30,780
+może pobierać dane automatycznie, a przed każdą publikacją hub sam sprawdza wynik.
+
+12
+00:01:32,000 --> 00:01:40,220
+jest jednak, żeby dysponenci chcieli publikować. Dziś robi to tylko pięć z dwóch tysięcy czterystu siedemdziesięciu dziewięciu gmin.
+
+13
+00:01:40,570 --> 00:01:45,150
+wskazuje trzysta pięćdziesiąt jeden gmin bez żadnego AED w zbiorze. Do tego
+
+14
+00:01:45,500 --> 00:01:48,020
+odznaka, posty i naklejki.
+
+15
+00:01:51,400 --> 00:01:59,100
+AED. Jeden otwarty zbiór danych o defibrylatorach dla całej Polski, bo każda minuta ma adres.
