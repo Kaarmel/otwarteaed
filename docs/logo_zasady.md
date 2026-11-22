@@ -47,3 +47,16 @@ Podgląd wariantów: `kampania/logo/propozycje_v2.html` (obraz: `propozycje_v2.j
 | Zieleń jasna | #00A651 | akcenty graficzne, status „24/7 / brak danych” na mapie |
 | Granat danych | #0B3D91 | napis, strona, dokumenty |
 | Grafit | #1A1A1A | wersja jednobarwna |
+
+## Rewizja 3: zielony znaczek, połączenie B i D
+
+Podgląd: `kampania/logo/propozycje_v3.html` (obraz: `propozycje_v3.jpg`).
+
+1. **Klasyczny (B).** Zielony sygnet, zwykły zielony średnik. Najczytelniejszy w każdym rozmiarze.
+2. **Średnik-serce w napisie (D).** Średnik narysowany z serca i błyskawicy, w grubości liter i na linii pisma. Koncept widać w samym napisie.
+3. **Sygnet z krzyżem AED (B).** Krzyż ze znaku AED w rogu sygnetu: najmocniejsze skojarzenie z defibrylatorem.
+4. **Średnik-serce i AED w zieleni (D).** „otwarte” w granacie to dane, „AED” w zieleni to ratunek.
+
+**Rekomendacja:**
+- **Logo główne:** wariant 2 albo 4. Koncept jest w napisie, a to największa wartość w kryterium „logotyp i hasło: kreatywne”.
+- **Małe rozmiary** (favicon, druk poniżej 30 mm): sygnet z wariantu 1 i zwykły średnik. W 16 px średnik z serca nie jest czytelny, a księga znaku może to wprost dopuścić.
