@@ -51,12 +51,12 @@ Zrobione podczas HackNation 2026:
 - **Wzorcowy zakres danych** w XLSX.
 - **Strony:** otwarteaed.pl i gdzieaed.pl, dostępność w Lighthouse 100/100.
 - **Kampania:** logo (komplet plików SVG, PNG, PDF i EPS w RGB i CMYK), księga znaku, materiały dla dysponentów, białe plamy z pismami do gmin, naklejki.
-- **Jakość kodu:** 82 testy automatycznych; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
+- **Jakość kodu:** 82 testy automatyczne; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
 
 
 Cel: przekazać ministerstwu gotowy mechanizm, który zbiera dane o AED w jednym zbiorze na dane.gov.pl, i kampanię, która przekona dysponentów do publikowania potwierdzonych danych.
 
-**Idea stage:** „Work in progress”, jak w drafcie.
+**Idea stage:** New Idea.
 
 ## Cover image
 
