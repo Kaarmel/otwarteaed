@@ -95,6 +95,14 @@ Nic nie trafia na nasz serwer.
   - jakość plików od dysponentów.
 - **Zasada:** zachęcamy, nie zmuszamy. Dane potwierdza dysponent, więc kampania nie zachęca do zgłaszania cudzych urządzeń. Propozycja dla PSP i OSP jest w `docs/propozycja_psp_osp.md`.
 
+### 4a. Białe plamy: od czego zacząć kampanię
+
+Hub porównuje zbiór z listą wszystkich 2479 gmin z rejestru PRG.
+
+- **Wynik:** 351 gmin nie ma w zbiorze ani jednego AED, a tylko 5 gmin publikuje dane o swoich AED.
+- **Na otwarteaed.pl:** lista z filtrem województwa, a przy każdej gminie gotowe pismo do wysłania przez ePUAP.
+- **Uwaga:** brak AED w zbiorze nie znaczy, że AED nie ma, tylko że nikt go nie opublikował.
+
 ### 5. Dodatkowo: gdzieaed.pl
 
 Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
@@ -133,6 +141,13 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 
 ## Aktualność
 
+- **Kontrola przed publikacją:** zanim cokolwiek trafi na stronę, wynik musi przejść:
+  - schemat portalu i sumę MD5;
+  - spójność plików;
+  - porównanie z poprzednią wersją.
+- **Autonaprawa:** jeśli kontrola nie przejdzie, hub przebudowuje zbiór z ostatnich sprawdzonych plików. Jeśli i to się nie uda, zostaje ostatnia dobra wersja.
+- **Warszawa:** API Warszawy odrzuca serwery GitHub, więc dane pobieramy tunelem przez serwer w Polsce.
+
 - **Co 2 godziny** automat (GitHub Actions, `.github/workflows/aktualizacja.yml`) pobiera:
   - świeże dane OpenStreetMap (Overpass);
   - najnowsze zasoby gmin z dane.gov.pl;
@@ -142,7 +157,7 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 
 ## Weryfikowalność
 
-- **75 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
+- **81 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
   - wykrywanie profilu;
   - CSV z Marek;
   - przeliczenie PL-1992;

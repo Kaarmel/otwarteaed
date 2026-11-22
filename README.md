@@ -12,7 +12,7 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 | Wymaganie (treść zadania) | Gdzie |
 |---|---|
 | Szczegółowy opis i tytuł projektu | [docs/opis_projektu.md](docs/opis_projektu.md) |
-| Prezentacja: zrzuty ekranu jako dowody wymagań technicznych, kroki użytkownika, ograniczenia | [docs/prezentacja.pdf](docs/prezentacja.pdf): wymagania na slajdzie 2, dowody na slajdach 5–10, kroki użytkownika na 14, ograniczenia na 16 |
+| Prezentacja: zrzuty ekranu jako dowody wymagań technicznych, kroki użytkownika, ograniczenia | [docs/prezentacja.pdf](docs/prezentacja.pdf): wymagania na slajdzie 2, dowody na slajdach 5–11, kroki użytkownika na 16, ograniczenia na 18 |
 | Prototyp rozwiązania | https://otwarteaed.pl, https://gdzieaed.pl; kod w tym repozytorium |
 | Wzorcowy zakres danych (XLSX) | [otwarteaed/dane/wzorcowy_zakres_danych.xlsx](otwarteaed/dane/wzorcowy_zakres_danych.xlsx); szablony w [otwarteaed/dane/szablony/](otwarteaed/dane/szablony/) |
 | Kod źródłowy | to repozytorium (`hub/`, `otwarteaed/`, `public/`, `test/`) |
@@ -20,8 +20,8 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 | Księga znaku (PDF) | [kampania/ksiega_znaku.pdf](kampania/ksiega_znaku.pdf) |
 | Dane w formatach odczytywalnych maszynowo | CSV UTF-8, XLSX, GeoJSON, XML, JSON w [otwarteaed/dane/](otwarteaed/dane/) |
 | Zgodność z zasadami działania dane.gov.pl | [otwarteaed/dane/dane_gov_pl.xml](otwarteaed/dane/dane_gov_pl.xml) i plik `.md5`; XML jest walidowany oficjalnym XSD 1.13 w testach |
-| WCAG, responsywność, UX | Lighthouse (dostępność) 100/100 na obu stronach; zrzuty 390 px na slajdzie 10 |
-| Zakres wykorzystania AI (regulamin zadania, §2 pkt 8) | [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md), slajd 17 |
+| WCAG, responsywność, UX | Lighthouse (dostępność) 100/100 na obu stronach; zrzuty 390 px na slajdzie 11 |
+| Zakres wykorzystania AI (regulamin zadania, §2 pkt 8) | [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md), slajd 19 |
 | Nazwa akcji, hasło, logotyp; zachęta dla dysponentów | „otwarte AED”, „Każda minuta ma adres.”; [kampania/dla_dysponentow/](kampania/dla_dysponentow/): odznaka, posty, list, plan kampanii z miernikami; [kampania/naklejki.pdf](kampania/naklejki.pdf) |
 | Ograniczenia | [docs/ograniczenia.md](docs/ograniczenia.md) |
 
@@ -41,7 +41,7 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 Wymagania: Node.js 22 lub nowszy, `xmllint` (dla testu XSD). Bez instalowania pakietów npm.
 
 ```sh
-npm test                                   # 75 testów, także na prawdziwych plikach z dane.gov.pl
+npm test                                   # 81 testów, także na prawdziwych plikach z dane.gov.pl
 node hub/zbierz.mjs --offline --bez-zapytan # przebieg na zamrożonych danych z wejscie/ → otwarteaed/dane/
 node hub/zbierz.mjs                        # najnowsze zasoby z dane.gov.pl i nowe adresy z PRG
 npm run strony                             # buduje dist/otwarteaed i dist/gdzieaed
