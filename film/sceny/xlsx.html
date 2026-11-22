@@ -1,8 +1,62 @@
 <!doctype html><html lang="pl"><head><meta charset="utf-8"><title>wzorcowy zakres</title><link rel="stylesheet" href="ruch.css"><style>@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-400-normal.woff2)}@font-face{font-family:A;font-weight:400;src:url(../../otwarteaed/fonts/atkinson-latin-ext-400-normal.woff2);unicode-range:U+0100-02AF}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-700-normal.woff2)}@font-face{font-family:A;font-weight:700;src:url(../../otwarteaed/fonts/atkinson-latin-ext-700-normal.woff2);unicode-range:U+0100-02AF}
 *{box-sizing:border-box}html,body{margin:0;height:100%}body{font-family:A,sans-serif;background:#0B3D91;color:#fff;-webkit-font-smoothing:antialiased}
 .w{height:100%;padding:90px 120px;display:flex;flex-direction:column;justify-content:center}
-</style></head><body style="background:#F2F4F7"><div class="w" style="background:#F2F4F7;color:#10213F;padding:70px 120px">
-  <div class="wej" style="--d:.1s;font-size:30px;font-weight:700;color:#00753A;margin-bottom:12px">wzorcowy_zakres_danych.xlsx · otwarty w Excelu</div>
-  <div class="wej" style="--d:.25s;font-size:64px;font-weight:700;color:#0B3D91;margin-bottom:36px">39 pól, słowniki wartości, 2 szablony dla gmin</div>
-  <div class="pop" style="--d:.45s;flex:1;min-height:0;border-radius:16px;overflow:hidden;border:2px solid #C9D3E0;box-shadow:0 20px 50px rgba(11,61,145,.15);background:#fff"><img class="kb" src="../../docs/zrzuty/dowod_xlsx_wzorcowy.jpg" alt="" style="--d:.6s;--t:7.5s;width:100%;display:block"></div>
-</div></body></html>
+
+.okno{background:#fff;border-radius:14px;box-shadow:0 24px 60px rgba(11,61,145,.22);overflow:hidden;border:1px solid #C9D3E0;font-family:Arial,Helvetica,sans-serif}
+.pasek{background:#1F6B43;color:#fff;font-size:22px;padding:12px 18px;display:flex;align-items:center;gap:16px}.pasek b{font-weight:700}
+.kropki i{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.55);margin-right:7px}
+.arkusz{border-collapse:collapse;width:100%;font-size:21px;color:#1A1A1A}
+.arkusz th{background:#F3F4F6;color:#6B7280;font-weight:400;font-size:17px;border:1px solid #E2E5EA;padding:3px 8px}
+.arkusz td{border:1px solid #E2E5EA;padding:7px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:560px}
+.arkusz td.nr,.arkusz th.nr{background:#F3F4F6;color:#6B7280;font-size:17px;text-align:center;width:44px;padding:3px 6px}
+.nagl td{font-weight:700;background:#E6F4EC}.nagl td.wym{background:#00843D;color:#fff}.wymk{background:#F1FAF4;font-weight:700}
+.znaczek{display:block;font-size:13px;font-weight:700;opacity:.9;letter-spacing:.02em}
+.zakladki{display:flex;gap:4px;background:#F3F4F6;padding:6px 10px;font-size:18px;color:#4B5563}.zakladki span{padding:6px 16px;border-radius:6px 6px 0 0}.zakladki .akt{background:#fff;color:#1F6B43;font-weight:700;border-bottom:3px solid #1F6B43}
+.wr{opacity:0;transform:translateX(-24px)}body.start .wr{animation:wej .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.15s + var(--d))}
+#zakres{position:absolute;left:120px;right:120px;top:300px;transition:transform .8s cubic-bezier(.65,0,.35,1),opacity .6s}
+body.f2 #zakres{transform:translateY(-30px) scale(.94);opacity:0}
+.szablony{position:absolute;left:120px;right:120px;top:360px;display:grid;grid-template-columns:1fr 1fr;gap:40px;pointer-events:none}
+.szab{opacity:0;transform:translateY(120px);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s,box-shadow .35s,scale .35s}
+body.f2 .szab{opacity:1;transform:none}body.f2 .szab:nth-child(2){transition-delay:.15s}
+.szab h3{margin:0 0 12px;font:700 40px A,sans-serif;color:#0B3D91}.szab h3 small{display:block;font:400 22px A,sans-serif;color:#4A5568;margin-top:4px}
+.szab.akc{scale:1.04}.szab.akc .okno{box-shadow:0 0 0 6px #00843D,0 30px 70px rgba(0,132,61,.35)}.szab.przyg{opacity:.45!important}
+.szab{min-width:0}.szab .arkusz{table-layout:fixed}.szab .arkusz td{font-size:23px;padding:12px 14px;max-width:none}.szab h3{font-size:46px}.szab .arkusz td.nr,.szab .arkusz th.nr{width:54px}
+</style></head><body style="background:#F2F4F7"><div class="w0" style="position:relative;height:100%;background:#F2F4F7;color:#10213F">
+  <div style="position:absolute;left:120px;top:84px;right:120px">
+    <div class="wej" style="--d:.05s;font-size:30px;font-weight:700;color:#00753A;margin-bottom:10px">Wzorcowy zakres danych · plik XLSX do pobrania z otwarteaed.pl</div>
+    <div class="wej" style="--d:.15s;font-size:64px;font-weight:700;color:#0B3D91">39 pól, słowniki wartości i 2 szablony dla gmin</div>
+  </div>
+  <div id="zakres"><div class="pop" style="--d:.25s">
+<div class="okno">
+  <div class="pasek"><span class="kropki"><i></i><i></i><i></i></span><b>wzorcowy_zakres_danych.xlsx</b></div>
+  <table class="arkusz"><thead><tr><th class="nr"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead><tbody>
+  <tr class="nagl"><td class="nr">1</td><td class="">Pole</td><td class="">Grupa</td><td class="">Opis</td><td class="">Typ</td><td class="">Wymagane</td></tr>
+  <tr class="wr" style="--d:0.00s"><td class="nr">2</td><td class="">aed_id</td><td class="">Identyfikacja</td><td class="">Stały identyfikator AED w zbiorze otwarte AED (nadaje hub).</td><td class="">tekst</td><td class="">tak</td></tr><tr class="wr" style="--d:0.05s"><td class="nr">3</td><td class="">zrodla</td><td class="">Identyfikacja</td><td class="">Identyfikatory rekordów źródłowych, z których powstał rekord (rozdzielone średnikiem).</td><td class="">lista</td><td class="">tak</td></tr><tr class="wr" style="--d:0.10s"><td class="nr">4</td><td class="">liczba_zrodel</td><td class="">Identyfikacja</td><td class="">Ile źródeł potwierdza ten AED.</td><td class="">liczba</td><td class="">nie</td></tr><tr class="wr" style="--d:0.15s"><td class="nr">5</td><td class="">potwierdzenie</td><td class="">Identyfikacja</td><td class="">Kto potwierdza dane: dysponent (urząd, właściciel), społeczność (OSM) lub brak.</td><td class="">slownik</td><td class="">nie</td></tr><tr class="wr" style="--d:0.20s"><td class="nr">6</td><td class="">szerokosc</td><td class="">Położenie</td><td class="">Szerokość geograficzna WGS84, kropka dziesiętna, 6 miejsc.</td><td class="">liczba</td><td class="">tak</td></tr><tr class="wr" style="--d:0.25s"><td class="nr">7</td><td class="">dlugosc</td><td class="">Położenie</td><td class="">Długość geograficzna WGS84, kropka dziesiętna, 6 miejsc.</td><td class="">liczba</td><td class="">tak</td></tr><tr class="wr" style="--d:0.30s"><td class="nr">8</td><td class="">lokalizacja_opis</td><td class="">Położenie</td><td class="">Gdzie dokładnie jest urządzenie: piętro, ściana, kapsuła.</td><td class="">tekst</td><td class="">nie</td></tr><tr class="wr" style="--d:0.35s"><td class="nr">9</td><td class="">wewnatrz</td><td class="">Położenie</td><td class="">Czy AED jest wewnątrz budynku.</td><td class="">slownik</td><td class="">nie</td></tr><tr class="wr" style="--d:0.40s"><td class="nr">10</td><td class="">poziom</td><td class="">Położenie</td><td class="">Kondygnacja (0 = parter).</td><td class="">tekst</td><td class="">nie</td></tr><tr class="wr" style="--d:0.45s"><td class="nr">11</td><td class="">ulica</td><td class="">Adres</td><td class="">Ulica (z PRG, gdy dostępna).</td><td class="">tekst</td><td class="">nie</td></tr><tr class="wr" style="--d:0.50s"><td class="nr">12</td><td class="">numer</td><td class="">Adres</td><td class="">Numer porządkowy budynku.</td><td class="">tekst</td><td class="">nie</td></tr><tr class="wr" style="--d:0.55s"><td class="nr">13</td><td class="">kod_pocztowy</td><td class="">Adres</td><td class="">Kod pocztowy.</td><td class="">tekst</td><td class="">nie</td></tr>
+  </tbody></table>
+  <div class="zakladki"><span class="akt">Pola</span><span class="">Słowniki</span><span class="">Szablony</span><span class="">Przykład</span></div>
+</div></div></div>
+  <div class="szablony">
+    <div class="szab" id="sA"><h3>Mam współrzędne<small>szablon_mam_wspolrzedne.xlsx</small></h3>
+<div class="okno">
+  <div class="pasek"><span class="kropki"><i></i><i></i><i></i></span><b>szablon_mam_wspolrzedne.xlsx</b></div>
+  <table class="arkusz"><thead><tr><th class="nr"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody>
+  <tr class="nagl"><td class="nr">1</td><td class="wym">szerokosc<span class="znaczek">wymagane</span></td><td class="wym">dlugosc<span class="znaczek">wymagane</span></td><td class="wym">nazwa_obiektu<span class="znaczek">wymagane</span></td><td class="">lokalizacja_opis</td></tr>
+  <tr class="wr" style="--d:0.00s"><td class="nr">2</td><td class="wymk">50.150947</td><td class="wymk">21.962414</td><td class="wymk">Urząd Miejski w Głogowie Małopolskim</td><td class="">W kapsule na ścianie ratusza, przy wejściu głównym</td></tr>
+  </tbody></table>
+  <div class="zakladki"><span class="akt">Mam współrzędne</span><span class="">Opis pól</span></div>
+</div></div>
+    <div class="szab" id="sB"><h3>Mam tylko adresy<small>szablon_mam_adresy.xlsx</small></h3>
+<div class="okno">
+  <div class="pasek"><span class="kropki"><i></i><i></i><i></i></span><b>szablon_mam_adresy.xlsx</b></div>
+  <table class="arkusz"><thead><tr><th class="nr"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody>
+  <tr class="nagl"><td class="nr">1</td><td class="wym">numer<span class="znaczek">wymagane</span></td><td class="wym">miejscowosc<span class="znaczek">wymagane</span></td><td class="wym">nazwa_obiektu<span class="znaczek">wymagane</span></td><td class="">szerokosc</td></tr>
+  <tr class="wr" style="--d:0.00s"><td class="nr">2</td><td class="wymk">1A</td><td class="wymk">Głogów Małopolski</td><td class="wymk">Urząd Miejski w Głogowie Małopolskim</td><td class="">50.150947</td></tr>
+  </tbody></table>
+  <div class="zakladki"><span class="akt">Mam tylko adresy</span><span class="">Opis pól</span></div>
+</div></div>
+  </div>
+</div>
+<script>
+window.faza2 = () => document.body.classList.add('f2');
+window.szablon = (id) => { for (const e of document.querySelectorAll('.szab')) { e.classList.toggle('akc', e.id === id); e.classList.toggle('przyg', e.id !== id); } };
+</script></body></html>

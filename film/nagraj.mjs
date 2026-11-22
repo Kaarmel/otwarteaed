@@ -151,8 +151,11 @@ await o(36.7); await kamera(".przemiana", 1.15, 1000, 0.02, 2000);
 // 3 — wzorcowy zakres (38.3–50 s)
 await o(38.3); start("wzorzec", 38.3); await rozdzial("3 · Wzorcowy zakres danych"); await kamera("#wzorzec", 1.0, 1100, 0.02, 1200);
 await o(38.8); await napis("Wzorcowy zakres dla dysponentów: 39 pól, 2 proste szablony");
-await o(39.8); await kamera("#wzorzec .akcje", 1.6, 900, 0.04, 2500);
-await o(41.9); await napis(""); await przejdz(scena("xlsx.html"), false); await rozdzial("3 · Wzorcowy zakres danych");
+await o(39.0); await kamera("#wzorzec .akcje", 1.6, 700, 0.04, 1500);
+await o(40.4); await napis(""); await przejdz(scena("xlsx.html"), false); await rozdzial("3 · Wzorcowy zakres danych");
+await o(43.68); await wywolaj("faza2");
+await o(45.48); await wywolaj("szablon", "sA");
+await o(47.519999999999996); await wywolaj("szablon", "sB");
 
 // 4 — demo na prawdziwym pliku (50.2–74 s): kursor, klik, kamera na wyniki
 await o(50.0); start("demo", 50.0); await przejdz(STRONA + "/", true, "#kreator", 1.0); await rozdzial("4 · Demo na prawdziwym pliku");
@@ -162,7 +165,8 @@ await o(51.0); await kamera("#przyklad", 1.5, 1000, 0.02, 2000);
 await o(51.4); await kursor("start");
 await o(52.2); await kursor("#przyklad");
 await o(53.4); await klik();
-await o(54.3); await kursor(""); await kamera("#k1", 1.0, 900, 0.01, 3000);
+await o(54.3); await kursor(""); await kamera(".przemiana > div:first-child", 1.7, 1100, 0.04, 2200); await napis("Oryginał z dane.gov.pl: cały wiersz w jednej kolumnie, osie zamienione");
+await o(56.9); await kamera(".przemiana", 1.15, 900, 0.02, 1500);
 await o(58.5); await kamera("#k2", 1.0, 900, 0.01, 800); await napis("Kreator sam rozpoznaje plik: Urząd Miasta Marki (93%)");
 await o(59.2); await kamera("#rozpoznano", 1.7, 800, 0.03, 1500);
 await o(60.6); await kamera("#k3", 1.0, 800, 0.01, 600); await napis("Naprawione osie w 7 z 8 rekordów");
