@@ -196,11 +196,11 @@ await o(95.2); await napis("Tylko 5 z 2479 gmin publikuje dane o AED");
 await o(96.2); await kamera("#biale-plamy + p", 1.55, 900, 0.03, 3500);
 await o(100.3); await kamera(".plamy", 1.25, 1000, 0.02, 4000); await napis("351 gmin bez żadnego AED w zbiorze: od nich zaczynamy");
 await o(104.5); start("materialy", 104.5); await napis(""); await przejdz(scena("materialy.html"), false); await rozdzial("6 · Kampania dla dysponentów");
-await o(106.4); await wywolaj("akcent", "m1");
-await o(107.1); await wywolaj("akcent", "m2");
-await o(107.8); await wywolaj("akcent", "m3");
-await o(108.7); await wywolaj("akcent", "m5");
-await o(109.6); await wywolaj("akcent", "m4");
+await o(105.6); await wywolaj("akcent", "m5");
+await o(106.3); await wywolaj("akcent", "m1");
+await o(106.7); await wywolaj("akcent", "m2");
+await o(107.1); await wywolaj("akcent", "m3");
+await o(107.9); start("karta", 107.9); await przejdz(scena("karta.html"), false); await rozdzial("Dla mieszkańców · gdzieaed.pl");
 
 // 7 — zakończenie (111.1–120 s)
 await o(111.1); start("koniec", 111.1); await przejdz(scena("koniec.html"), false);
