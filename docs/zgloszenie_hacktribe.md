@@ -53,11 +53,10 @@ Zrobione podczas HackNation 2026:
 - **Kampania:** logo (komplet plików SVG, PNG, PDF i EPS w RGB i CMYK), księga znaku, materiały dla dysponentów, białe plamy z pismami do gmin, naklejki.
 - **Jakość kodu:** 82 testy automatycznych; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
 
-Przed wydarzeniem powstał wstępny szkic mapy. Jest w `docs/archiwum/` i nie jest używany: cały hub napisaliśmy od nowa w trakcie wydarzenia.
 
 Cel: przekazać ministerstwu gotowy mechanizm, który zbiera dane o AED w jednym zbiorze na dane.gov.pl, i kampanię, która przekona dysponentów do publikowania potwierdzonych danych.
 
-**Idea stage:** proponuję „Work in progress”, bo przed wydarzeniem istniał szkic mapy.
+**Idea stage:** „Work in progress”, jak w drafcie.
 
 ## Cover image
 

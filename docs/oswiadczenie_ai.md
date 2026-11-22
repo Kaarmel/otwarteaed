@@ -7,7 +7,6 @@ Rozwiązanie powstało przy wsparciu narzędzi AI. Jego zakres, decyzje i weryfi
 | **Claude Code (model Claude Opus 5.5, Anthropic)** | Rozpoznanie źródeł danych i dokumentacji dane.gov.pl, projekt architektury, kod (harvester, kreator, strony), testy automatyczne, teksty dokumentacji. Kod powstał od zera w trakcie wydarzenia. |
 | **Antigravity (Google)** | Szkice koncepcji logo w kilku wariantach, każdy z innym kierunkiem twórczym; wybrany kierunek przerysowano jako wektor SVG. Niezależny przegląd zgodności zgłoszenia z treścią zadania. |
 | **ElevenLabs** | Film demonstracyjny: usunięcie szumu z nagrania głosu autora (Voice Isolator), transkrypcja z czasami słów do montażu (Scribe), podkład muzyczny (Music, licencja komercyjna planu Starter). Lektorem jest autor, jego prawdziwy głos. |
-| **Codex (OpenAI)** | Wstępny szkic sprzed wydarzenia (`docs/archiwum/`). Nie został użyty w rozwiązaniu, cały kod napisano od nowa. |
 
 **Co zrobił człowiek:**
 - wybór problemu i koncepcji;
