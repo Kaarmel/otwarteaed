@@ -10,11 +10,10 @@ a{color:var(--granat);text-underline-offset:.18em}
 a:hover{color:var(--granat-ciemny)}
 :focus-visible{outline:3px solid var(--zielen);outline-offset:2px}
 .pomin{position:absolute;left:-999px}.pomin:focus{left:1rem;top:1rem;background:#fff;padding:.5rem 1rem;z-index:9}
-.naglowek{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,5vw,4rem);border-bottom:1px solid var(--linia)}
+.naglowek{border-bottom:1px solid #C9D3E0;background:#fff}
 .marka{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--granat);font-weight:700;font-size:1.35rem;letter-spacing:-.01em}
 .marka b{color:var(--zielen);font-weight:700}
-nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
-nav a{text-decoration:none;font-size:.95rem;color:var(--tekst)}nav a:hover{color:var(--granat);text-decoration:underline}
+
 main>section{min-width:0;padding:clamp(2.5rem,6vw,4.5rem) clamp(1rem,5vw,4rem);max-width:1180px;margin:0 auto}
 main>section+section{border-top:1px solid var(--linia)}
 h1{font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:1.06;letter-spacing:-.02em;color:var(--granat);margin:0 0 1rem;max-width:18ch}
@@ -104,3 +103,72 @@ pre.kod{background:var(--tlo);border:1px solid var(--linia);border-radius:8px;pa
 .filtry label{display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:700}
 .filtry select,.filtry input{min-height:44px;padding:6px 10px;border:1px solid var(--linia);border-radius:8px;font:inherit;font-weight:400}
 .plamy{width:100%;border-collapse:collapse}.plamy th,.plamy td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linia)}
+
+/* ===== Wygląd 2026-11-22: układ jak w serwisach administracji (bez znaków państwowych) ===== */
+:root{--tlo-pas:#F2F4F7;--ramka:#C9D3E0;--naglowek-tekst:#10213F}
+body{color:#1B2433}
+h1,h2,h3{color:var(--naglowek-tekst)}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.01em}
+.naglowek-gora,.menu{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.naglowek-gora{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid #E3E8EF}
+.naglowek-akcje{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:center}
+.link-zewn{font-weight:700;text-decoration:none;color:var(--granat)}.link-zewn:hover{text-decoration:underline}
+.menu{display:flex;flex-wrap:wrap;gap:.25rem 2rem;padding-top:.85rem;padding-bottom:.85rem}
+.menu a{font-weight:700;color:var(--granat);text-decoration:none;font-size:1rem;min-height:32px;display:inline-flex;align-items:center}
+.menu a:hover{text-decoration:underline}
+.marka{font-size:1.5rem}
+main>section.baner-tlo,main>section.liczby-pas,main>section.zadania-pas{max-width:none;border-top:0}
+.baner-tlo{padding:1.75rem clamp(1rem,4vw,2.5rem) 0!important}
+.baner{max-width:1240px;margin:0 auto;border-radius:12px;background:linear-gradient(120deg,#0B3D91 0%,#0A4FB8 100%);color:#fff;padding:clamp(1.75rem,4vw,3.25rem);display:grid;gap:2rem;align-items:center}
+.baner h1{color:#fff;font-size:clamp(2.4rem,5.5vw,4rem);max-width:none;margin:.25rem 0 1rem}
+.baner-nad{margin:0;font-weight:700;color:#BFD1F2;letter-spacing:.02em}
+.baner-lead{font-size:1.2rem;color:#E6EEFB;max-width:56ch;margin:0}
+.baner-lead strong{color:#fff}
+.baner .akcje{margin:1.5rem 0 0}
+.przycisk.bialy{background:#fff;color:var(--granat);border-color:#fff}.przycisk.bialy:hover{background:#E6EEFB}
+.przycisk.obrys{background:transparent;color:#fff;border-color:#fff}.przycisk.obrys:hover{background:rgb(255 255 255 / .12)}
+.baner-karta{border:1px solid rgb(255 255 255 / .55);border-radius:10px;padding:1.4rem 1.5rem;background:rgb(255 255 255 / .06)}
+.baner-karta h2{color:#fff;font-size:1.35rem;margin:.2rem 0 .75rem}
+.baner-karta-nad{margin:0;font-weight:700;color:#BFD1F2}
+.baner-karta ul{margin:0 0 1.1rem;padding-left:1.2rem;color:#E6EEFB}.baner-karta li{margin:.3rem 0}
+.baner-karta-pod{margin:.9rem 0 0;font-size:.9rem;color:#BFD1F2}
+.baner :focus-visible{outline-color:#fff}
+@media (min-width:980px){.baner{grid-template-columns:1.6fr 1fr}}
+.liczby-pas{padding:1.25rem clamp(1rem,4vw,2.5rem) 0!important}
+.liczby-pas .liczby{max-width:1240px;margin:0 auto;border-top:0;padding:1rem 0 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
+.liczby dd small{font-size:1rem;color:var(--szary);font-weight:700}
+.zadania-pas{background:var(--tlo-pas);margin-top:2rem!important;padding:2.5rem clamp(1rem,4vw,2.5rem)!important}
+.zadania-pas>*{max-width:1240px;margin-left:auto;margin-right:auto}
+.zadania{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem;margin-top:1.25rem}
+.zadania a{display:flex;flex-direction:column;gap:.4rem;background:#fff;border:1px solid var(--ramka);border-radius:6px;padding:1.15rem 1.25rem 1.3rem;text-decoration:none;min-height:110px}
+.zadania a b{color:var(--granat);font-size:1.1rem;line-height:1.3}
+.zadania a span{color:#4A5568;font-size:.97rem;line-height:1.45}
+.zadania a:hover,.zadania a:focus-visible{border-color:var(--granat);box-shadow:0 0 0 3px rgb(11 61 145 / .12)}
+.zadania a:hover b{text-decoration:underline}
+main>section:not(.baner-tlo):not(.liczby-pas):not(.zadania-pas):not(.kreator){max-width:calc(1240px + 2 * clamp(1rem,4vw,2.5rem));padding-left:clamp(1rem,4vw,2.5rem);padding-right:clamp(1rem,4vw,2.5rem)}
+.kreator{padding-left:clamp(1rem,4vw,2.5rem)!important;padding-right:clamp(1rem,4vw,2.5rem)!important}
+.kreator>*{max-width:1240px}
+.etapy{list-style:none;padding:0;margin:1.25rem 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem;counter-reset:e}
+.etapy li{counter-increment:e;border:1px solid var(--ramka);border-radius:8px;padding:1.15rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;background:#fff}
+.etapy li::before{content:counter(e);width:2.1rem;height:2.1rem;border-radius:50%;background:var(--granat);color:#fff;font-weight:700;display:grid;place-items:center;margin-bottom:.35rem}
+.etapy b{font-size:1.15rem;color:var(--naglowek-tekst)}.etapy span{color:#4A5568;font-size:.97rem}
+.zgodnosc{list-style:none;padding:0;margin:.5rem 0 1.5rem;display:grid;gap:.5rem;max-width:900px}
+.zgodnosc li{padding-left:2rem;position:relative}
+.zgodnosc li::before{content:"";position:absolute;left:0;top:.2rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--zielen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/1.3rem no-repeat}
+.znak{display:grid;gap:1rem;margin:1.25rem 0 2rem;align-items:center}
+.znak-plansza{border:1px solid var(--ramka);border-radius:10px;padding:1.75rem;display:grid;place-items:center;background:#fff}
+.znak-plansza img{width:100%;max-width:360px;height:auto}
+.znak-plansza.ciemna{background:var(--granat);border-color:var(--granat)}
+.haslo{font-size:1.9rem;font-weight:700;color:var(--granat);margin:0 0 .5rem;line-height:1.15}
+@media (min-width:980px){.znak{grid-template-columns:1fr 1fr 1.2fr}}
+.faq{max-width:900px;display:grid;gap:.5rem}
+.faq details{margin:0;border:1px solid var(--ramka);border-radius:8px;padding:.25rem 1rem;background:#fff}
+.faq details[open]{padding-bottom:.75rem}
+.faq p{margin:.25rem 0 0}
+.stopka{background:#10213F;color:#D5DEEC;border-top:0;padding:2.5rem clamp(1rem,4vw,2.5rem)}
+.stopka a{color:#fff}
+.stopka-siatka{max-width:1240px;margin:0 auto;display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.stopka-marka{font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 .5rem}.stopka-marka b{color:var(--zielen)}
+.stopka-tytul{font-weight:700;color:#fff;margin:0 0 .5rem}
+.stopka ul{list-style:none;padding:0;margin:0}.stopka li{margin:.3rem 0}
+.kreator{background:var(--tlo-pas)}

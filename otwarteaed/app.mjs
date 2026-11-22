@@ -34,8 +34,8 @@ fetch("dane/gminy_aed.json").then((r) => r.json()).then(({ gminy }) => {
   const pokaz = () => {
     const w = $("#bpWoj").value, q = $("#bpSzukaj").value.trim().toLowerCase();
     const lista = plamy.filter((g) => (!w || g[4] === w) && (!q || g[1].toLowerCase().includes(q)));
-    $("#bpTab").innerHTML = lista.slice(0, 40).map((g) => `<tr><td>${esc(g[1])} <small>(${esc(g[2])})</small></td><td>${esc(g[3])}</td><td>${esc(g[4])}</td><td><a href="pismo.html?teryt=${esc(g[0])}">Pismo do gminy</a></td></tr>`).join("");
-    $("#bpInfo").textContent = lista.length > 40 ? `Pokazano 40 z ${fmt.format(lista.length)}. Zawęź województwem albo nazwą.` : `Gmin na liście: ${fmt.format(lista.length)}.`;
+    $("#bpTab").innerHTML = lista.slice(0, 12).map((g) => `<tr><td>${esc(g[1])} <small>(${esc(g[2])})</small></td><td>${esc(g[3])}</td><td>${esc(g[4])}</td><td><a href="pismo.html?teryt=${esc(g[0])}">Pismo do gminy</a></td></tr>`).join("");
+    $("#bpInfo").textContent = lista.length > 12 ? `Pokazano 12 z ${fmt.format(lista.length)}. Zawęź województwem albo nazwą albo pobierz całą listę.` : `Gmin na liście: ${fmt.format(lista.length)}.`;
   };
   $("#bpWoj").addEventListener("change", pokaz); $("#bpSzukaj").addEventListener("input", pokaz); pokaz();
 }).catch(() => {});
