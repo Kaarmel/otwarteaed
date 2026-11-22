@@ -41,7 +41,7 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 Wymagania: Node.js 22 lub nowszy, `xmllint` (dla testu XSD). Bez instalowania pakietów npm.
 
 ```sh
-npm test                                   # 81 testów, także na prawdziwych plikach z dane.gov.pl
+npm test                                   # 82 testów, także na prawdziwych plikach z dane.gov.pl
 node hub/zbierz.mjs --offline --bez-zapytan # przebieg na zamrożonych danych z wejscie/ → otwarteaed/dane/
 node hub/zbierz.mjs                        # najnowsze zasoby z dane.gov.pl i nowe adresy z PRG
 npm run strony                             # buduje dist/otwarteaed i dist/gdzieaed
@@ -61,6 +61,12 @@ Jak dodać nowe źródło danych (także plik z datą w nazwie): [docs/jak_dodac
 | `public/` | strona gdzieaed.pl (mapa) |
 | `kampania/` | logo, księga znaku, naklejki, materiały dla dysponentów |
 | `docs/` | opis, prezentacja, ograniczenia, oświadczenie o AI, propozycja PSP/OSP |
+
+## Przygotowane przed hackathonem
+
+- Rozeznanie źródeł danych o AED (zbiory na dane.gov.pl, OpenStreetMap, serwisy miast) i wstępny szkic mapy przygotowany z Codex (OpenAI). Logi i zadania tego szkicu są w `docs/archiwum/`.
+- Hub danych (`hub/`), kreator dla gmin, wzorcowy zakres danych, plik XML dla dane.gov.pl, logo i kampania powstały w trakcie wydarzenia (pierwszy commit: 21.11.2026, 13:16).
+- Zakres użycia AI: [docs/oswiadczenie_ai.md](docs/oswiadczenie_ai.md).
 
 ## Licencje danych
 
