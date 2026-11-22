@@ -157,7 +157,7 @@ Strona dla mieszkańców, firm i służb, działająca na tych samych danych:
 
 ## Weryfikowalność
 
-- **81 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
+- **82 testów automatycznych** (`npm test`), także na prawdziwych plikach z dane.gov.pl:
   - wykrywanie profilu;
   - CSV z Marek;
   - przeliczenie PL-1992;
