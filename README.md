@@ -37,14 +37,14 @@
   <summary>Spis treści</summary>
   <ol>
     <li><a href="#o-projekcie">O projekcie</a></li>
-    <li><a href="#wymagania-zadania-i-gdzie-sa-spelnione">Wymagania zadania i gdzie są spełnione</a></li>
-    <li><a href="#jak-sprawdzic-w-2-minuty">Jak sprawdzić w 2 minuty</a></li>
+    <li><a href="#wymagania-zadania-i-gdzie-są-spełnione">Wymagania zadania i gdzie są spełnione</a></li>
+    <li><a href="#jak-sprawdzić-w-2-minuty">Jak sprawdzić w 2 minuty</a></li>
     <li><a href="#zbudowane-z">Zbudowane z</a></li>
     <li><a href="#uruchomienie-lokalne">Uruchomienie lokalne</a></li>
     <li><a href="#struktura">Struktura</a></li>
     <li><a href="#co-dalej">Co dalej</a></li>
     <li><a href="#licencje">Licencje</a></li>
-    <li><a href="#podziekowania">Podziękowania</a></li>
+    <li><a href="#podziękowania">Podziękowania</a></li>
   </ol>
 </details>
 
