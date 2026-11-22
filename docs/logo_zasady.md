@@ -60,3 +60,22 @@ Podgląd: `kampania/logo/propozycje_v3.html` (obraz: `propozycje_v3.jpg`).
 **Rekomendacja:**
 - **Logo główne:** wariant 2 albo 4. Koncept jest w napisie, a to największa wartość w kryterium „logotyp i hasło: kreatywne”.
 - **Małe rozmiary** (favicon, druk poniżej 30 mm): sygnet z wariantu 1 i zwykły średnik. W 16 px średnik z serca nie jest czytelny, a księga znaku może to wprost dopuścić.
+
+## Rewizja 4: logo 4D i wersje sygnetu
+
+Podgląd: `kampania/logo/propozycje_v4.html`.
+
+**Napis:** „otwarte” w granacie, średnik z serca i błyskawicy (podniesiony do linii pisma), „AED” w zieleni AED.
+
+**Sygnet** (biały rysunek w zielonym kwadracie):
+
+| Wersja | Rysunek | Uwagi |
+|---|---|---|
+| S1 | serce nad błyskawicą | średnik, obecny |
+| S2 | średnik jak w napisie | spójny z napisem |
+| S3 | błyskawica wycięta w sercu | najbliżej znaku AED |
+| S4 | serce w konturze z błyskawicą | lżejszy, gorzej czytelny w 16 px |
+| S5 | pinezka mapy z sercem i błyskawicą | łączy AED z hasłem „Każda minuta ma adres” |
+| S6 | S1 w większej skali | najczytelniejszy w 16 px |
+
+**Rekomendacja: S5.** Napis mówi „dane” (średnik), sygnet mówi „adres” (pinezka) i „AED” (serce z błyskawicą). Hasło, nazwa i znak tworzą jedną historię, a pinezka jest czytelna nawet w 16 px.
