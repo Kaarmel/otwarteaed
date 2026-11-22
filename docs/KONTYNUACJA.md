@@ -1,5 +1,12 @@
 # Kontynuacja pracy — stan na 21.11.2026, 16:50
 
+> **Aktualizacja 22.11.2026, 03:00**
+> - **Logo:** nowe logo w wersji 2 („serce dominuje”, zieleń AED #00843D) jest wszędzie.
+> - **Komplet plików logo:** `grafiki/` (README, RGB i CMYK). Zasady wyboru wariantu: `docs/logo_zasady.md`.
+> - **Film:** `film/out/otwarte-aed-film.mp4` (2:00, bez głosu). Tekst lektora: `film/lektor.srt`.
+> - **Okładka HackTribe:** `docs/zgloszenie/okladka_800x600.jpg`.
+> - **Teksty formularza:** `docs/zgloszenie_hacktribe.md`.
+
 Plik dla nowego czatu: tu jest wszystko, czego potrzeba, żeby kontynuować bez zgadywania.
 
 ## Cel i ocena

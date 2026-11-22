@@ -50,14 +50,22 @@ Zrobione podczas HackNation 2026:
 - **Kreator dla gmin** z przykładem na prawdziwym pliku Marek.
 - **Wzorcowy zakres danych** w XLSX.
 - **Strony:** otwarteaed.pl i gdzieaed.pl, dostępność w Lighthouse 100/100.
-- **Kampania:** logo, księga znaku, materiały dla dysponentów, naklejki.
-- **Jakość kodu:** 76 testów automatycznych; aktualizacja co 2 godziny przez GitHub Actions.
+- **Kampania:** logo (komplet plików SVG, PNG, PDF i EPS w RGB i CMYK), księga znaku, materiały dla dysponentów, białe plamy z pismami do gmin, naklejki.
+- **Jakość kodu:** 81 testów automatycznych; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
 
 Przed wydarzeniem powstał wstępny szkic mapy. Jest w `docs/archiwum/` i nie jest używany: cały hub napisaliśmy od nowa w trakcie wydarzenia.
 
 Cel: przekazać ministerstwu gotowy mechanizm, który zbiera dane o AED w jednym zbiorze na dane.gov.pl, i kampanię, która przekona dysponentów do publikowania potwierdzonych danych.
 
 **Idea stage:** proponuję „Work in progress”, bo przed wydarzeniem istniał szkic mapy.
+
+## Cover image
+
+`docs/zgloszenie/okladka_800x600.jpg` (4:3, zalecane 800×600).
+
+## Your video presentation
+
+Link do filmu na YouTube z widocznością „Niepubliczny” (Listed). Plik: `film/out/otwarte-aed-film-glos.mp4` (po nagraniu głosu, zob. `film/scenariusz.md`).
 
 ## Website
 
@@ -72,7 +80,7 @@ Uwaga: jury musi mieć dostęp do repozytorium. Przed oceną trzeba je upubliczn
 ## [Opcjonalne] Instrukcje jak otworzyć projekt
 
 1. Otwórz https://otwarteaed.pl i kliknij „Wypróbuj na prawdziwym pliku Marek z dane.gov.pl”. Kreator rozpozna plik gminy, naprawi zamienione osie, doda adresy i TERYT z PRG i przygotuje CSV, XML i MD5.
-2. Wszystkie materiały zgłoszenia są na https://otwarteaed.pl/materialy/: prezentacja, wzorcowy zakres danych XLSX, logo SVG/PNG/JPG/PDF, księga znaku, kampania i oświadczenie o AI.
+2. Wszystkie materiały zgłoszenia są na https://otwarteaed.pl/materialy/: prezentacja, wzorcowy zakres danych XLSX, logo SVG/PNG/JPG/PDF i komplet plików ZIP (RGB i CMYK), księga znaku, kampania i oświadczenie o AI.
 3. Plik dla dane.gov.pl: https://otwarteaed.pl/dane/dane_gov_pl.xml (+ .md5). Walidacja:
    `xmllint --noout --schema otwarte_dane_latest.xsd dane_gov_pl.xml`.
 4. Kod lokalnie (Node 22, bez instalowania pakietów): `npm test`, potem `node hub/zbierz.mjs --offline --bez-zapytan`, potem `npm run strony`.
@@ -80,7 +88,7 @@ Uwaga: jury musi mieć dostęp do repozytorium. Przed oceną trzeba je upubliczn
 
 ## [Opcjonalne] Prezentacja
 
-`docs/prezentacja.pdf` (4,3 MB, limit 10 MB).
+`docs/prezentacja.pdf` (4,9 MB, limit 10 MB).
 
 ## [Opcjonalne] Dodatkowe pole na materiały
 
