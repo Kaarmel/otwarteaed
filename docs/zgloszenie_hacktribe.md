@@ -51,7 +51,7 @@ Zrobione podczas HackNation 2026:
 - **Wzorcowy zakres danych** w XLSX.
 - **Strony:** otwarteaed.pl i gdzieaed.pl, dostępność w Lighthouse 100/100.
 - **Kampania:** logo (komplet plików SVG, PNG, PDF i EPS w RGB i CMYK), księga znaku, materiały dla dysponentów, białe plamy z pismami do gmin, naklejki.
-- **Jakość kodu:** 82 testów automatycznych; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
+- **Jakość kodu:** 82 testy automatycznych; aktualizacja co 2 godziny przez GitHub Actions, z walidacją i autonaprawą przed każdą publikacją.
 
 Przed wydarzeniem powstał wstępny szkic mapy. Jest w `docs/archiwum/` i nie jest używany: cały hub napisaliśmy od nowa w trakcie wydarzenia.
 

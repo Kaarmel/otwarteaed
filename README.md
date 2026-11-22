@@ -41,7 +41,7 @@ Hub danych o defibrylatorach AED dla portalu dane.gov.pl. Zbiera dane z wielu ro
 Wymagania: Node.js 22 lub nowszy, `xmllint` (dla testu XSD). Bez instalowania pakietów npm.
 
 ```sh
-npm test                                   # 82 testów, także na prawdziwych plikach z dane.gov.pl
+npm test                                   # 82 testy, także na prawdziwych plikach z dane.gov.pl
 node hub/zbierz.mjs --offline --bez-zapytan # przebieg na zamrożonych danych z wejscie/ → otwarteaed/dane/
 node hub/zbierz.mjs                        # najnowsze zasoby z dane.gov.pl i nowe adresy z PRG
 npm run strony                             # buduje dist/otwarteaed i dist/gdzieaed
