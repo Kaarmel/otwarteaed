@@ -100,7 +100,7 @@
   <h2 id="h-dane">Jeden zbiór dla całej Polski, gotowy dla dane.gov.pl</h2>
   <ul class="zgodnosc">
     <li><strong>XML zgodny ze schematem portalu</strong> (XSD 1.13) i plik MD5: portal pobiera dane sam, gdy zmieni się suma.</li>
-    <li><strong>CSV UTF-8 z datą w nazwie</strong>, stałe identyfikatory zasobów, historia wersji, licencje i atrybucja każdego źródła.</li>
+    <li><strong>CSV UTF-8 z datą w nazwie</strong>, stałe identyfikatory zasobów, historia wersji, licencje i atrybucja każdego źródła. Format według RFC 4180 i standardu technicznego dane.gov.pl: przecinek, CRLF, jeden wiersz nagłówka, brak wartości = pusta komórka, bez całkowicie pustych kolumn.</li>
     <li><strong>Kontrola przed każdą publikacją:</strong> schemat, suma MD5, spójność plików i porównanie z poprzednią wersją.</li>
   </ul>
   <p>Stan na <span data-l="data">…</span>. Dane odświeżane automatycznie co 2 godziny. Format główny to CSV UTF-8.</p>

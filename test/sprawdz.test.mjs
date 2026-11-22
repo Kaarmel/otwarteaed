@@ -9,7 +9,7 @@ import { zapewnijXSD, XSD } from "./pomoc.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DANE = join(ROOT, "otwarteaed/dane");
-const PLIKI = ["dane_gov_pl.xml", "dane_gov_pl.md5", "aed.csv", "aed.geojson", "aed_mapa.json", "aed.xlsx", "jakosc.json"];
+const PLIKI = ["dane_gov_pl.xml", "dane_gov_pl.md5", "aed.csv", "aed_dysponenci.csv", "aed.geojson", "aed_mapa.json", "aed.xlsx", "jakosc.json"];
 const kopia = () => { const d = mkdtempSync(join(tmpdir(), "spr-")); for (const f of PLIKI) copyFileSync(join(DANE, f), join(d, f)); return d; };
 const sprawdz = (kat, ...dod) => { try { execFileSync("node", ["hub/sprawdz.mjs", "--katalog", kat, "--xsd", fileURLToPath(XSD), ...dod], { cwd: ROOT, stdio: "pipe" }); return 0; } catch (e) { return e.status; } };
 

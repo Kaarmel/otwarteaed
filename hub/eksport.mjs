@@ -18,8 +18,11 @@ export function arkuszeWzorcowe(schemat, przyklad) {
 
 const WSP = new Set(["szerokosc", "dlugosc"]);
 const r6 = (x) => Number(x.toFixed(6));
+// Zastępcze znaki braku danych ze źródeł („-”, „n/a”…) zapisujemy jako pustą komórkę: w CSV (RFC 4180, W3C Tabular Data) brak wartości = puste pole.
+const ZASTEPCZE = new Set(["-", "–", "—", "n/a", "N/A", "null", "NULL", "None", "none", "?"]);
+export const czyZastepcza = (v) => typeof v === "string" && ZASTEPCZE.has(v.trim());
 function komorka(p, v) {
-  if (v === null || v === undefined) return "";
+  if (v === null || v === undefined || czyZastepcza(v)) return "";
   if (typeof v === "number") return String(WSP.has(p) ? r6(v) : v);
   if (Array.isArray(v)) v = v.join(";");
   else if (typeof v === "object") v = JSON.stringify(v);
@@ -28,14 +31,20 @@ function komorka(p, v) {
   if (/^[=+\-@\t\r]/.test(v) && /[^\d\s+;,.()\/-]/.test(v)) v = "'" + v;
   return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
 }
+// CSV według RFC 4180 i standardu technicznego dane.gov.pl: przecinek, cudzysłowy, końce linii CRLF, jeden wiersz nagłówka.
 export function doCSV(rekordy, pola) {
-  return [pola.join(","), ...rekordy.map((r) => pola.map((p) => komorka(p, r[p])).join(","))].join("\n") + "\n";
+  return [pola.join(","), ...rekordy.map((r) => pola.map((p) => komorka(p, r[p])).join(","))].join("\r\n") + "\r\n";
+}
+// Standard techniczny dane.gov.pl (rozdz. 4.2): niedopuszczalne są całkowicie puste kolumny. Publikujemy tylko pola z choć jedną wartością;
+// pełny model (39 pól) opisuje wzorcowy_zakres_danych.xlsx.
+export function polaZDanymi(rekordy, pola) {
+  return pola.filter((p) => rekordy.some((r) => komorka(p, r[p]) !== ""));
 }
 
 export function doGeoJSON(aed, pola) {
   return { type: "FeatureCollection", features: aed.map((a) => ({ type: "Feature",
     geometry: a.szerokosc === null || a.szerokosc === undefined ? null : { type: "Point", coordinates: [r6(a.dlugosc), r6(a.szerokosc)] },
-    properties: Object.fromEntries(pola.filter((p) => !WSP.has(p)).map((p) => [p, a[p] ?? null])) })) };
+    properties: Object.fromEntries(pola.filter((p) => !WSP.has(p)).map((p) => [p, czyZastepcza(a[p]) ? null : a[p] ?? null])) })) };
 }
 
 const KOD = { brak_danych: 0, "24/7": 1, godziny: 2, ograniczony: 3 };
@@ -57,7 +66,7 @@ export function doXML({ dataDate, bazaUrl, historia = [dataDate], zrodla = [] })
   const atrybucje = zrodla.map((z) => `${z.atrybucja} (${z.licencja})`).join("; ");
   const glowne = daty.map((d) => zasob({ extIdent: `otwarteaed_aed_csv_${d8(d)}`, url: `${bazaUrl}aed_${d}.csv`,
     tytul: `Defibrylatory AED w Polsce — zbiór zintegrowany ${d}`, tytulEn: `AED defibrillators in Poland — integrated dataset ${d}`,
-    opis: `Scalony zbiór AED z wielu źródeł (dysponenci, gminy, OpenStreetMap) w jednolitym wzorcowym zakresie danych, stan na ${d}. CSV UTF-8.`,
+    opis: `Scalony zbiór AED z wielu źródeł (dysponenci, gminy, OpenStreetMap) w jednolitym wzorcowym zakresie danych, stan na ${d}. CSV UTF-8 zgodny z RFC 4180 (przecinek, CRLF), brak wartości = pusta komórka. Kolumny bez żadnej wartości są pomijane; pełny model 39 pól: wzorcowy_zakres_danych.xlsx.`,
     opisEn: `Merged AED dataset from many sources in a single model schema, as of ${d}. CSV UTF-8.` }, d)).join("");
   const dodatkowe = [
     ["obs", "aed_obserwacje.csv", "Wszystkie rekordy źródłowe z pochodzeniem", "All source records with provenance", "Każdy rekord każdego źródła po normalizacji, z surowym oryginałem i listą przekształceń."],
@@ -69,7 +78,7 @@ export function doXML({ dataDate, bazaUrl, historia = [dataDate], zrodla = [] })
     "Nationwide dataset of AED locations merged from many sources into a single model schema, with PRG addresses, deduplication, provenance and quality score.")}<url>https://otwarteaed.pl</url><updateFrequency>daily</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><responsibilities>Zbiór agregowany automatycznie z otwartych źródeł; nie jest urzędową ewidencją AED. Przekształcenia: normalizacja do wzorcowego zakresu danych, naprawa osi i formatów, adresy z PRG (GUGiK), scalenie duplikatów z zachowaniem pochodzenia. W nagłym wypadku dzwoń 112.</responsibilities><dbOrCopyrighted>Źródła: ${x(atrybucje)}. Zbiór zawiera dane OpenStreetMap udostępnione na licencji Open Database License (ODbL) 1.0: https://opendatacommons.org/licenses/odbl/1-0/ — wymagane oznaczenie „© współtwórcy OpenStreetMap” i udostępnianie baz pochodnych na tych samych warunkach. Dane gmin zachowują swoje licencje (CC0 1.0, CC BY 4.0), wskazane przy każdym rekordzie w polu licencja.</dbOrCopyrighted></conditions><resources>${glowne}${dodatkowe}</resources><tags>${tagi}</tags>${flagi(false)}</dataset>`;
   const zbior2 = `<dataset status="published"><extIdent>otwarteaed_aed_dysponenci</extIdent>${pl_en("title", "Defibrylatory AED — dane od dysponentów (otwarte AED)", "AED defibrillators — data from operators (otwarte AED)")}${pl_en("description",
     "Rekordy AED pochodzące wyłącznie od dysponentów (urzędy, instytucje, właściciele urządzeń), bez danych OpenStreetMap, w wzorcowym zakresie danych.",
-    "AED records from operators only (public bodies, owners), without OpenStreetMap data, in the model schema.")}<url>https://otwarteaed.pl</url><updateFrequency>daily</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><dbOrCopyrighted>Źródła: ${x(zrodla.filter((z) => !/ODbL/.test(z.licencja)).map((z) => z.atrybucja).join("; ") || "dysponenci AED")}.</dbOrCopyrighted><dbOrCopyrightedLicenseChosen>CC BY 4.0</dbOrCopyrightedLicenseChosen></conditions><resources>${zasob({ extIdent: `otwarteaed_dysp_${d8(dataDate)}`, url: `${bazaUrl}aed_dysponenci_${dataDate}.csv`, tytul: `AED od dysponentów ${dataDate}`, tytulEn: `AED from operators ${dataDate}`, opis: "CSV UTF-8, wzorcowy zakres danych.", opisEn: "CSV UTF-8, model schema." }, dataDate)}</resources><tags>${tagi}</tags>${flagi(false)}</dataset>`;
+    "AED records from operators only (public bodies, owners), without OpenStreetMap data, in the model schema.")}<url>https://otwarteaed.pl</url><updateFrequency>daily</updateFrequency><categories><category>HEAL</category></categories><conditions><source>true</source><modification>true</modification><dbOrCopyrighted>Źródła: ${x(zrodla.filter((z) => !/ODbL/.test(z.licencja)).map((z) => z.atrybucja).join("; ") || "dysponenci AED")}.</dbOrCopyrighted><dbOrCopyrightedLicenseChosen>CC BY 4.0</dbOrCopyrightedLicenseChosen></conditions><resources>${zasob({ extIdent: `otwarteaed_dysp_${d8(dataDate)}`, url: `${bazaUrl}aed_dysponenci_${dataDate}.csv`, tytul: `AED od dysponentów ${dataDate}`, tytulEn: `AED from operators ${dataDate}`, opis: "CSV UTF-8 zgodny z RFC 4180, wzorcowy zakres danych (kolumny bez wartości pominięte).", opisEn: "CSV UTF-8 (RFC 4180), model schema." }, dataDate)}</resources><tags>${tagi}</tags>${flagi(false)}</dataset>`;
   return `<?xml version="1.0" encoding="UTF-8"?>\n<p:datasets xmlns:p="urn:otwarte-dane:harvester:1.13">${zbior1}${zbior2}</p:datasets>\n`;
 }
 

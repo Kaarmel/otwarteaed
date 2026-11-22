@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { arkuszeWzorcowe, doCSV, doXML, doIndeksuMapy, doGeoJSON, doSzczegolow } from "../hub/eksport.mjs";
+import { arkuszeWzorcowe, doCSV, doXML, doIndeksuMapy, doGeoJSON, doSzczegolow, polaZDanymi } from "../hub/eksport.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace } from "../hub/jakosc.mjs";
 import { md5 } from "../hub/md5.mjs";
 import { writeFileSync, mkdtempSync } from "node:fs";
@@ -24,14 +24,22 @@ test("wzorcowy zakres danych ma arkusze Pola, Słowniki, Szablony, Przykład", (
 
 test("CSV: cytowanie RFC 4180, kropka dziesiętna, 6 miejsc, listy przez średnik", () => {
   const csv = doCSV([{ a: 'Szkoła, "Nr 1"', szerokosc: 50.15094671, c: ["x", "y"], d: null, e: 5.88 }], ["a", "szerokosc", "c", "d", "e"]);
-  assert.equal(csv, 'a,szerokosc,c,d,e\n"Szkoła, ""Nr 1""",50.150947,x;y,,5.88\n');
+  assert.equal(csv, 'a,szerokosc,c,d,e\r\n"Szkoła, ""Nr 1""",50.150947,x;y,,5.88\r\n');
 });
 
 test("CSV: neutralizacja formuł z danych zewnętrznych, telefony i liczby bez zmian", () => {
   const csv = doCSV([{ a: '=HYPERLINK("http://zly")', b: "@SUM(1)", c: "+48 17 772 09 09", d: "-5", e: "-cmd" }], ["a", "b", "c", "d", "e"]);
-  assert.equal(csv.split("\n")[1], '"\'=HYPERLINK(""http://zly"")",\'@SUM(1),+48 17 772 09 09,-5,\'-cmd');
+  assert.equal(csv.split("\r\n")[1], '"\'=HYPERLINK(""http://zly"")",\'@SUM(1),+48 17 772 09 09,-5,\'-cmd');
   const c2 = doCSV([{ a: "-1+cmd|' /C calc'!A0", b: '+1+HYPERLINK("x")', c: "+48 22 781 10 03; +48 22 228 73 77" }], ["a", "b", "c"]);
-  assert.equal(c2.split("\n")[1], "'-1+cmd|' /C calc'!A0,\"'+1+HYPERLINK(\"\"x\"\")\",+48 22 781 10 03; +48 22 228 73 77");
+  assert.equal(c2.split("\r\n")[1], "'-1+cmd|' /C calc'!A0,\"'+1+HYPERLINK(\"\"x\"\")\",+48 22 781 10 03; +48 22 228 73 77");
+});
+
+test("CSV zgodny ze standardem dane.gov.pl: bez całkowicie pustych kolumn, „-” jako pusta komórka, CRLF", () => {
+  const rek = [{ a: "x", b: null, c: "-" }, { a: "y", b: undefined, c: "n/a" }, { a: "z", b: "", c: "5" }];
+  assert.deepEqual(polaZDanymi(rek, ["a", "b", "c"]), ["a", "c"]);
+  assert.deepEqual(polaZDanymi([{ a: "x", c: "-" }], ["a", "c"]), ["a"]);
+  const csv = doCSV(rek, polaZDanymi(rek, ["a", "b", "c"]));
+  assert.equal(csv, "a,c\r\nx,\r\ny,\r\nz,5\r\n");
 });
 
 test("szczegóły dla mapy gdzieaed: podział po 2 ostatnich znakach aed_id", () => {

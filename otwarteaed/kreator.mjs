@@ -4,7 +4,7 @@ import { wykryjProfil } from "../hub/wykryj.mjs";
 import { normalizujWiersz } from "../hub/normalizuj.mjs";
 import { uzupelnijAdresy } from "../hub/adresy.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci } from "../hub/jakosc.mjs";
-import { doCSV, doXMLDysponenta } from "../hub/eksport.mjs";
+import { doCSV, doXMLDysponenta, polaZDanymi } from "../hub/eksport.mjs";
 import { md5 } from "../hub/md5.mjs";
 
 export const slug = (s) => String(s || "dysponent").toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -28,7 +28,8 @@ export async function przebiegKreatora({ bajty, nazwa, profile, schemat, dyspone
   const raport = raportJakosci(obserwacje, obserwacje, [profil], data);
   const pola = ["obs_id", ...schemat.pola.map((p) => p.nazwa).filter((p) => !POMIJANE.has(p))];
   const nazwaCSV = `aed_${s}_${data}.csv`;
-  const csv = doCSV(obserwacje.map((o) => ({ ...o, obs_id: o.obs_id })), pola);
+  const rekordy = obserwacje.map((o) => ({ ...o, obs_id: o.obs_id }));
+  const csv = doCSV(rekordy, polaZDanymi(rekordy, pola)); // bez całkowicie pustych kolumn (standard dane.gov.pl)
   const xml = doXMLDysponenta({ dysponent: { url: "https://example.gov.pl/", ...dysponent }, dataDate: data, nazwaCSV, slug: s });
   const profilJSON = { id: s, nazwa: dysponent?.nazwa, rodzaj: "zrodlo", potwierdzenie: "dysponent", licencja: profil.licencja, atrybucja: dysponent?.nazwa,
     url_zrodla: dysponent?.url, pobierz: { url: (dysponent?.url || "") + nazwaCSV.replace(data, "{RRRR}-{MM}-{DD}") }, id_kolumna: profil.id_kolumna,

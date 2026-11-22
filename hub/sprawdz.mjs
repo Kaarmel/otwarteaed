@@ -37,6 +37,16 @@ try {
   const csv = parsujCSV(czytaj("aed.csv").toString(), ",");
   wymagaj(csv[0]?.includes("aed_id") && csv[0]?.includes("szerokosc"), "aed.csv bez nagłówka wzorca");
   wymagaj(csv.length - 1 === jak.aed, `aed.csv: ${csv.length - 1} wierszy, raport: ${jak.aed}`);
+  // Standard techniczny dane.gov.pl (CSV): RFC 4180 (CRLF), równa liczba komórek, bez pustych nagłówków i całkowicie pustych kolumn.
+  for (const plik of ["aed.csv", "aed_dysponenci.csv"]) {
+    const tekst = czytaj(plik).toString();
+    const t = parsujCSV(tekst, ",");
+    wymagaj(/\r\n/.test(tekst.slice(0, 5000)) && !/[^\r]\n/.test(tekst.slice(0, 5000)), `${plik}: końce linii nie są CRLF (RFC 4180)`);
+    wymagaj(t.every((w) => w.length === t[0].length), `${plik}: wiersze mają różną liczbę komórek`);
+    wymagaj(t[0].every((n) => n.trim()), `${plik}: pusty nagłówek kolumny`);
+    const puste = t[0].filter((_, i) => t.slice(1).every((w) => !String(w[i] ?? "").trim()));
+    wymagaj(!puste.length, `${plik}: całkowicie puste kolumny: ${puste.join(", ")}`);
+  }
   const ids = new Set(csv.slice(1).map((w) => w[0]));
   wymagaj(ids.size === csv.length - 1, "powtórzone aed_id w aed.csv");
   const geo = JSON.parse(czytaj("aed.geojson"));

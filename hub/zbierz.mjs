@@ -6,13 +6,13 @@ import { pobierzNajnowszy } from "./pobierz.mjs";
 import { createHash } from "node:crypto";
 import { join, dirname, isAbsolute } from "node:path";
 import { fileURLToPath } from "node:url";
-import { czytajPlik } from "./czytaj.mjs";
+import { parsujCSV, czytajPlik } from "./czytaj.mjs";
 import { wykryjProfil } from "./wykryj.mjs";
 import { normalizujWiersz } from "./normalizuj.mjs";
 import { uzupelnijAdresy, ATRYBUCJA_PRG } from "./adresy.mjs";
 import { scal, zachowajIdentyfikatory } from "./scal.mjs";
 import { ocenJakosc, oznaczWspolneWspolrzedne, oznaczOdstajace, raportJakosci, OPISY, pokrycieGmin } from "./jakosc.mjs";
-import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow } from "./eksport.mjs";
+import { doCSV, doGeoJSON, doIndeksuMapy, doXML, doXLSX, arkuszeWzorcowe, doSzczegolow, polaZDanymi, czyZastepcza } from "./eksport.mjs";
 import { md5 } from "./md5.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -130,12 +130,14 @@ for (const a of aed) { Object.assign(a, ocenJakosc(a)); a.data_pobrania = DATA; 
 
 const POLA = schemat.pola.map((p) => p.nazwa);
 const POLA_OBS = ["obs_id", "zrodlo", ...POLA.filter((p) => !["aed_id", "zrodla", "liczba_zrodel", "konflikty"].includes(p)), "przeksztalcenia", "surowe"];
-const aedCSV = doCSV(aed, POLA);
+const POLA_AED = polaZDanymi(aed, POLA); // bez całkowicie pustych kolumn (standard techniczny dane.gov.pl)
+const aedCSV = doCSV(aed, POLA_AED);
 zapisz("aed.csv", aedCSV);
 zapisz(`aed_${DATA}.csv`, aedCSV);
-zapisz("aed_obserwacje.csv", doCSV(obserwacje, POLA_OBS));
+const POLA_OBS_D = polaZDanymi(obserwacje, POLA_OBS);
+zapisz("aed_obserwacje.csv", doCSV(obserwacje, POLA_OBS_D));
 const dysp = obserwacje.filter((o) => o.potwierdzenie === "dysponent");
-const dyspCSV = doCSV(dysp, POLA_OBS.filter((p) => p !== "surowe"));
+const dyspCSV = doCSV(dysp, polaZDanymi(dysp, POLA_OBS.filter((p) => p !== "surowe")));
 zapisz("aed_dysponenci.csv", dyspCSV);
 zapisz(`aed_dysponenci_${DATA}.csv`, dyspCSV);
 zapisz("aed.geojson", JSON.stringify(doGeoJSON(aed, POLA)));
@@ -154,6 +156,14 @@ const zrodlaJSON = { data: DATA, zrodla: [...zrodlaInfo, { id: "prg", nazwa: "PR
   uwaga: "Licencje zachowane dla każdego rekordu (pole licencja). Zbiór zintegrowany zawiera dane OpenStreetMap na ODbL 1.0 — całość nie jest CC0." };
 zapisz("zrodla.json", JSON.stringify(zrodlaJSON, null, 1));
 
+// Archiwalne pliki z datą (historia zasobów na dane.gov.pl) też w formacie zgodnym ze standardem: te same dane, bez pustych kolumn, CRLF.
+for (const f of readdirSync(wyj).filter((n) => /^aed(_dysponenci)?_\d{4}-\d{2}-\d{2}\.csv$/.test(n))) {
+  const t = parsujCSV(readFileSync(join(wyj, f), "utf8"), ",");
+  if (t.length < 2) continue;
+  const rek = t.slice(1).map((w) => Object.fromEntries(t[0].map((n, i) => [n, w[i] ?? ""])));
+  const tresc = doCSV(rek, polaZDanymi(rek, t[0]));
+  if (tresc !== readFileSync(join(wyj, f), "utf8")) writeFileSync(join(wyj, f), tresc);
+}
 const historiaPlik = join(wyj, "historia.json");
 const historia = [...new Set([...(existsSync(historiaPlik) ? JSON.parse(readFileSync(historiaPlik, "utf8")) : []), DATA])].sort();
 zapisz("historia.json", JSON.stringify(historia));
@@ -161,10 +171,10 @@ const xml = doXML({ dataDate: DATA, bazaUrl: BAZA_URL, historia, zrodla: zrodlaI
 zapisz("dane_gov_pl.xml", xml);
 zapisz("dane_gov_pl.md5", md5(xml) + "\n");
 
-const tabela = (pola, rek) => [pola, ...rek.map((r) => pola.map((p) => { const v = r[p]; return Array.isArray(v) ? v.join(";") : v && typeof v === "object" ? JSON.stringify(v) : v ?? null; }))];
+const tabela = (pola, rek) => [pola, ...rek.map((r) => pola.map((p) => { const v = r[p]; return Array.isArray(v) ? v.join(";") : v && typeof v === "object" ? JSON.stringify(v) : czyZastepcza(v) ? null : v ?? null; }))];
 zapisz("aed.xlsx", await doXLSX([
-  { nazwa: "AED", wiersze: tabela(POLA, aed) },
-  { nazwa: "Obserwacje", wiersze: tabela(POLA_OBS.filter((p) => p !== "surowe"), obserwacje) },
+  { nazwa: "AED", wiersze: tabela(POLA_AED, aed) },
+  { nazwa: "Obserwacje", wiersze: tabela(POLA_OBS_D.filter((p) => p !== "surowe"), obserwacje) },
   { nazwa: "Źródła", wiersze: tabela(["id", "nazwa", "potwierdzenie", "licencja", "atrybucja", "url_zrodla", "data_danych", "data_pobrania", "rekordow", "format", "kodowanie", "zgodnosc_profilu", "sha256_wejscia"], zrodlaInfo) },
   { nazwa: "Jakość", wiersze: [["Źródło", "Obserwacji", "Średnia ocena", "Komunikat"], ...Object.entries(raport.zrodla).map(([id, z]) => [z.nazwa, z.obserwacji, z.srednia_ocena, z.komunikat]),
     [], ["Flaga", "Opis", "Waga"], ...Object.entries(OPISY).map(([f, o]) => [f, o, raport.wagi_flag[f]])] },
